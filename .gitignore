@@ -32,3 +32,4 @@ doc/*.out
 doc/manual.lab
 *.DS_Store
 doc/*.xml
+maketest.g

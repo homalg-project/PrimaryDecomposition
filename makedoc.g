@@ -2,18 +2,24 @@ LoadPackage( "AutoDoc" );
 
 AutoDoc( "PrimaryDecomposition" :
         
-        scaffold := true,
-                    
+        scaffold := rec( entities := [ "homalg", "GAP4" ],
+                         ),
+        
         autodoc := true,
-
-        EntityList :=
-                    [ "<!ENTITY see '<Alt Only=\"LaTeX\">$\\to$</Alt><Alt Not=\"LaTeX\">--&gt;</Alt>'>",
-                      "<!ENTITY GAP4 '<Package>GAP4</Package>'>",
-                      "<!ENTITY Singular '<Package>Singular</Package>'>",
-                      "<!ENTITY homalg '<Package>homalg</Package>'>",
-                      ],
-       
+        
+        maketest := rec( folder := ".",
+                         commands :=
+                         [ "LoadPackage( \"PrimaryDecomposition\" );",
+                           "LoadPackage( \"IO_ForHomalg\" );",
+                           "HOMALG_IO.show_banners := false;",
+                           "HOMALG_IO.suppress_PID := true;",
+                           "HOMALG_IO.use_common_stream := true;",
+                           "HOMALG.SuppressParityInViewObjForCommutativeStructureObjects := true;",
+                           ],
+                         ),
+        
         Bibliography := "PrimaryDecomposition.bib"
+        
 );
 
 QUIT;

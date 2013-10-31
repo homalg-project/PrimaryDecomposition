@@ -7,7 +7,7 @@ Q := HomalgFieldOfRationalsInSingular( );
 A := Q * "x,y,z";
 #! Q[x,y,z]
 I := LeftSubmodule( "x^3-x, y*x^2-y,y^2-x^2,z-x*y", A );
-#! <A torsion-free (left) ideal given by 4 generators>
+#! <A torsion-free ideal given by 4 generators>
 R := A / I;
 #! Q[x,y,z]/( y*z-x, x*z-y, y^2-z^2, x*y-z, x^2-z^2, z^3-z )
 bas := BasisOverCoefficientsRing( R );

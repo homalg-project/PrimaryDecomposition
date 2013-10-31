@@ -20,7 +20,7 @@
 ####################################
 
 #! @Arguments R
-#! @Returns a matrix
+#! @Returns a &homalg; matrix
 #! @Description
 #!  Computes a basis of the ring <A>R</A>,
 #!  provided it is free of finite rank over its coefficients ring.
@@ -29,7 +29,7 @@ DeclareAttribute( "BasisOverCoefficientsRing",
 #! @InsertSystem BasisOverCoefficientsRing
 
 #! @Arguments r
-#! @Returns a matrix
+#! @Returns a &homalg; matrix
 #! @Description
 #!  Computes a representation matrix of the ring element <A>r</A>,
 #!  provided it is free of finite rank over its coefficients ring.
