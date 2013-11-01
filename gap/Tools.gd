@@ -11,36 +11,34 @@
 
 #! @Chapter Tools
 
+####################################
+#
 #! @Section Attributes
-
-####################################
-#
-# attributes:
 #
 ####################################
 
-#! @Arguments R
-#! @Returns a &homalg; matrix
 #! @Description
 #!  Computes a basis of the ring <A>R</A>,
 #!  provided it is free of finite rank over its coefficients ring.
+#! @Arguments R
+#! @Returns a &homalg; matrix
 DeclareAttribute( "BasisOverCoefficientsRing",
         IsHomalgRing );
 #! @InsertSystem BasisOverCoefficientsRing
 
-#! @Arguments r
-#! @Returns a &homalg; matrix
 #! @Description
 #!  Computes a representation matrix of the ring element <A>r</A>,
 #!  provided it is free of finite rank over its coefficients ring.
+#! @Arguments r
+#! @Returns a &homalg; matrix
 DeclareAttribute( "RepresentationOverCoefficientsRing",
         IsHomalgRingElement );
 
-#! @Arguments R
-#! @Returns a list
 #! @Description
 #!  Computes the FGLM data of the ring <A>R</A> (see <Cite Key="SJ"/>),
 #!  provided it is free of finite rank over its coefficients ring.
+#! @Arguments R
+#! @Returns a list
 DeclareAttribute( "FGLMdata",
         IsHomalgRing );
 
