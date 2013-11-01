@@ -5,7 +5,7 @@ doc: doc/manual.six
 doc/manual.six: makedoc.g \
 		PackageInfo.g \
 		doc/PrimaryDecomposition.bib \
-		gap/*.gd gap/*.gi examples/*.g
+		gap/*.gd gap/*.gi examples/*.g examples/doc/*.g
 	        gap makedoc.g
 
 clean:
