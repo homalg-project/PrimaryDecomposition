@@ -22,4 +22,7 @@ AutoDoc( "PrimaryDecomposition" :
         
 );
 
+# Create VERSION file for "make towww"
+PrintTo( "VERSION", PackageInfo( "PrimaryDecomposition" )[1].Version );
+
 QUIT;
