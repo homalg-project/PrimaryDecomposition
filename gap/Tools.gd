@@ -60,7 +60,7 @@ DeclareAttribute( "MinimalPolynomial",
 
 ####################################
 #
-# global functions and operations:
+#! @Section Operations
 #
 ####################################
 
