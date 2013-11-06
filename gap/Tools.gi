@@ -96,3 +96,79 @@ InstallMethod( FGLMdata,
     return List( Indeterminates( R ), RepresentationOverCoefficientsRing );
     
 end );
+
+##
+InstallMethod( MinimalPolynomial,
+	[ IsHomalgRingElement ],
+        
+  function( r )
+    
+    return MinimalPolynomial( r, "t" );
+    
+end );
+    
+####################################
+#
+# methods for operations:
+#
+####################################
+
+##
+InstallMethod( MinimalPolynomial,
+	[ IsHomalgRingElement, IsHomalgRingElement ],
+        
+  function( r, t )
+    local M, k, m, n, c, e, KT, T, p, i, f;
+    
+    M :=RepresentationOverCoefficientsRing(r);
+    
+    k :=HomalgRing(M);
+    
+    c := NrColumns( M );
+    
+    n := HomalgMatrix( [1], 1, c, k );
+    
+    m := n * M;
+    
+    while IsZero(DecideZeroRows( m, BasisOfRows( n ) ) ) = false do
+        n := UnionOfRows( n, m );
+        m := m * M;
+    od;
+    
+    n := UnionOfRows(n, m);
+    
+    e := SyzygiesGeneratorsOfRows( n );
+    e := HomalgRing( t ) * e;
+    e := EntriesOfHomalgMatrix( e );
+    
+    return Sum( Reversed( [ 1 .. Length( e ) ] ), i -> e[i] * t^(i - 1) );
+    
+end );
+
+##
+InstallMethod( MinimalPolynomial,
+	[ IsHomalgRingElement, IsString ],
+        
+  function( r, t )
+    local R, u, kt;
+    
+    R := HomalgRing( r );
+    
+    if not IsBound( R!.UnivariatePolynomialRingOverCoefficientRing ) then
+        R!.UnivariatePolynomialRingOverCoefficientRing := rec( );
+    fi;
+    
+    u := R!.UnivariatePolynomialRingOverCoefficientRing;
+    
+    if IsBound( u.(t) ) then
+        kt := u.(t);
+    else
+        kt := CoefficientsRing( R ) * t;
+        u.(t) := kt;
+    fi;
+    
+    t := Indeterminates( kt )[1];
+    
+    return MinimalPolynomial( r, t );
+    
+end );

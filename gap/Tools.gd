@@ -46,11 +46,30 @@ DeclareAttribute( "FGLMdata",
         IsHomalgRing );
 #! @InsertSystem FGLMdata
 
+#! @Description
+#!  Computes the minimal polynomial of an element <A>r</A>
+#!  of an ring <A>R</A> of finite rank by computing the representation matrix <A>M</A>
+#!  and finding the first linear dependence among the vectors
+#!  <M> e=(1,0,0,0), eM, eM^2, ... </M>.
+#! @Arguments r
+#! @Returns a matrix
+#! @Group MinimalPolynomial
+DeclareAttribute( "MinimalPolynomial",
+	IsHomalgRingElement );
+#! @InsertSystem MinimalPolynomial
+
 ####################################
 #
 # global functions and operations:
 #
 ####################################
 
-# basic operations:
+#! @Arguments r, str
+#! @Group MinimalPolynomial
+DeclareOperation( "MinimalPolynomial",
+	[ IsHomalgRingElement, IsString ] );
 
+#! @Arguments r, t
+#! @Group MinimalPolynomial
+DeclareOperation( "MinimalPolynomial",
+	[ IsHomalgRingElement, IsHomalgRingElement ] );
