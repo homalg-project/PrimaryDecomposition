@@ -75,6 +75,7 @@ Dependencies := rec(
                    [ "AutoDoc", ">= 2013.10.29" ],
                    [ "RingsForHomalg", ">= 2013.08.22" ],
                    [ "GaussForHomalg", ">= 2013.06.26" ],
+                   [ "MatricesForHomalg", ">= 2013.10.25" ],
                    [ "GradedModules", "2013.09.30" ],
                    [ "GAPDoc", ">= 1.1" ]
                    ],
