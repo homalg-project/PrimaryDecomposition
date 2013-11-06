@@ -33,6 +33,7 @@ DeclareAttribute( "BasisOverCoefficientsRing",
 #! @Returns a &homalg; matrix
 DeclareAttribute( "RepresentationOverCoefficientsRing",
         IsHomalgRingElement );
+#! @InsertSystem RepresentationOverCoefficientsRing
 
 #! @Description
 #!  Computes the FGLM data of the ring <A>R</A> (see <Cite Key="SJ"/>),
