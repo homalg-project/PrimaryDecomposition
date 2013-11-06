@@ -1,3 +1,6 @@
+SHELL := /bin/bash
+PATH := ~/bin:$(PATH)
+
 all: doc test
 
 doc: doc/manual.six
