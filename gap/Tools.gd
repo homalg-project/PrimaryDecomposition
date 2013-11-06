@@ -37,6 +37,8 @@ DeclareAttribute( "RepresentationOverCoefficientsRing",
 #! @Description
 #!  Computes the FGLM data of the ring <A>R</A> (see <Cite Key="SJ"/>),
 #!  provided it is free of finite rank over its coefficients ring.
+#!  The FGLM data of such a ring consists of the representationmatrices
+#!  of all basiselements of <A>R</A> computed by BasisOverCoefficientsRing.
 #! @Arguments R
 #! @Returns a list
 DeclareAttribute( "FGLMdata",
