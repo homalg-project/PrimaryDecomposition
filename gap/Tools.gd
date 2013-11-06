@@ -43,6 +43,7 @@ DeclareAttribute( "RepresentationOverCoefficientsRing",
 #! @Returns a list
 DeclareAttribute( "FGLMdata",
         IsHomalgRing );
+#! @InsertSystem FGLMdata
 
 ####################################
 #
