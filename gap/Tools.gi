@@ -117,7 +117,13 @@ end );
 #
 ####################################
 
-##
+#! @Chunk MinimalPolynomial_ring_element
+#!  The installed method computes the representation matrix <M>M</M>
+#!  of the ring element <A>r</A> and finds the first linear dependency
+#!  among the vectors <M> e, eM, eM^2, ... </M>, where <M>e</M>
+#!  is the identity of the ring.
+#! @EndChunk
+
 InstallMethod( MinimalPolynomial,
         "for two ring elements",
 	[ IsHomalgRingElement, IsHomalgRingElement ],
