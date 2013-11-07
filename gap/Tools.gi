@@ -17,6 +17,7 @@
 
 ##
 InstallMethod( BasisOverCoefficientsRing,
+        "for a residue class ring",
         [ IsHomalgResidueClassRingRep ],
         
   function( R )
@@ -53,6 +54,7 @@ end );
 
 ##
 InstallMethod( RepresentationOverCoefficientsRing,
+        "for a ring element",
         [ IsHomalgRingElement ],
         
   function( r )
@@ -89,6 +91,7 @@ end );
 
 ##
 InstallMethod( FGLMdata,
+        "for a residue class ring",
         [ IsHomalgResidueClassRingRep ],
         
   function( R )
@@ -99,6 +102,7 @@ end );
 
 ##
 InstallMethod( MinimalPolynomial,
+        "for a ring element",
 	[ IsHomalgRingElement ],
         
   function( r )
@@ -115,6 +119,7 @@ end );
 
 ##
 InstallMethod( MinimalPolynomial,
+        "for two ring elements",
 	[ IsHomalgRingElement, IsHomalgRingElement ],
         
   function( r, t )
@@ -147,6 +152,7 @@ end );
 
 ##
 InstallMethod( MinimalPolynomial,
+        "for a ring element and a string",
 	[ IsHomalgRingElement, IsString ],
         
   function( r, t )
