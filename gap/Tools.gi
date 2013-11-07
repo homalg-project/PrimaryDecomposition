@@ -125,9 +125,9 @@ InstallMethod( MinimalPolynomial,
   function( r, t )
     local M, k, m, n, c, e, KT, T, p, i, f;
     
-    M :=RepresentationOverCoefficientsRing(r);
+    M := RepresentationOverCoefficientsRing( r );
     
-    k :=HomalgRing(M);
+    k := HomalgRing( M );
     
     c := NrColumns( M );
     
@@ -140,12 +140,12 @@ InstallMethod( MinimalPolynomial,
     
     m := n * M;
     
-    while IsZero(DecideZeroRows( m, BasisOfRows( n ) ) ) = false do
+    while not IsZero( DecideZeroRows( m, n ) ) do
         n := UnionOfRows( n, m );
         m := m * M;
     od;
     
-    n := UnionOfRows(n, m);
+    n := UnionOfRows( n, m );
     
     e := SyzygiesGeneratorsOfRows( n );
     e := HomalgRing( t ) * e;
