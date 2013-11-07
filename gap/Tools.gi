@@ -131,7 +131,12 @@ InstallMethod( MinimalPolynomial,
     
     c := NrColumns( M );
     
-    n := HomalgMatrix( [1], 1, c, k );
+    ## this relies on the convention that the identity of
+    ## the algebra is the first basis vector
+    n := CertainRows( HomalgIdentityMatrix( c, k ), [ 1 ] );
+    
+    #n := HomalgInitialMatrix( 1, c, k );
+    #SetMatElm( n, 1, 1, One( k ) );
     
     m := n * M;
     
