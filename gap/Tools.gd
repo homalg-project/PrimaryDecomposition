@@ -57,6 +57,13 @@ DeclareAttribute( "MinimalPolynomial",
 	IsHomalgRingElement );
 #! @InsertSystem MinimalPolynomial
 
+#! @Description
+#!  Computes the irreducible factors of the square free part of the univariate polynomial <A>p</A>.
+#! @Arguments p
+#! @Returns a list
+DeclareAttribute( "SquareFreeFactors",
+	IsHomalgRingElement );
+
 ####################################
 #
 #! @Section Operations

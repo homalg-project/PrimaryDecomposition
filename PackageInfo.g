@@ -7,7 +7,7 @@ Subtitle := "Tools for primary decomposition",
 Version := Maximum( [
                    "2013.10.27", ## Mohamed's version
                    ## this line prevents merge conflicts
-                   "2013.10.26", ## Eva Maria's version
+                   "2013.11.02", ## Eva Maria's version
                    ] ),
 
 # this avoids git-merge conflicts

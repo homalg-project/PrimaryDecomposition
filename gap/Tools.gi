@@ -111,6 +111,26 @@ InstallMethod( MinimalPolynomial,
     
 end );
     
+##
+InstallMethod( SquareFreeFactors,
+        "for a ring element",
+	[ IsHomalgRingElement ],
+        
+  function( r )
+    local rad;
+    
+    rad := RadicalDecomposition( LeftSubmodule( r ) );
+    rad := List( rad, MatrixOfSubobjectGenerators );
+    
+    rad := List( rad, m -> MatElm( m, 1, 1 ) );
+    
+    Assert( 8, Set( List( rad, IsIrreducibleHomalgRingElement ) ) = [ true ] );
+    Perform( rad, function( r ) SetIsIrreducibleHomalgRingElement( r, true ); end );
+    
+    return rad;
+    
+end );
+    
 ####################################
 #
 # methods for operations:
