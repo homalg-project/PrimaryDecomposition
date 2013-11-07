@@ -123,7 +123,15 @@ InstallMethod( MinimalPolynomial,
 	[ IsHomalgRingElement, IsHomalgRingElement ],
         
   function( r, t )
-    local M, k, m, n, c, e, KT, T, p, i, f;
+    local R, bas, M, k, m, n, c, e;
+    
+    R := HomalgRing( r );
+    
+    bas := BasisOverCoefficientsRing( R );
+    
+    if not IsOne( MatElm( bas, 1, 1 ) ) then
+        Error( "the one of the algebra is not the first element of the basis\n" );
+    fi;
     
     M := RepresentationOverCoefficientsRing( r );
     
