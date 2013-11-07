@@ -217,3 +217,44 @@ InstallMethod( MinimalPolynomial,
     return MinimalPolynomial( r, t );
     
 end );
+
+##
+InstallMethod( Value,
+        "for two homalg ring elements",
+	[ IsHomalgRingElement, IsHomalgRingElement ],
+        
+  function( p, v )
+    local R, t, coeffs, A, z;
+    
+    R := HomalgRing( p );
+    
+    if HasRelativeIndeterminatesOfPolynomialRing( R ) then
+        t := RelativeIndeterminatesOfPolynomialRing( R );
+    else
+        t := Indeterminates( R );
+    fi;
+    
+    if not Length( t ) = 1 then
+        TryNextMethod( );
+    fi;
+    
+    coeffs := CoefficientsOfUnivariatePolynomial( p );
+
+    A := HomalgRing( v );
+    
+    coeffs := A * coeffs;
+    coeffs := EntriesOfHomalgMatrix( coeffs );
+    
+    z := Zero( A );
+    
+    return Sum( [ 0 .. Length( coeffs ) - 1 ],
+                function( i )
+                  local a_i;
+                  a_i := coeffs[i + 1];
+                  if IsZero( a_i ) then
+                      return z;
+                  fi;
+                  return a_i * v^i;
+                end );
+    
+end );
