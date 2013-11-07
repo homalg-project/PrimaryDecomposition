@@ -11,6 +11,23 @@
 
 ####################################
 #
+# methods for properties:
+#
+####################################
+
+##
+InstallMethod( IsIrreducibleHomalgRingElement,
+        "for a ring element",
+	[ IsHomalgRingElement ],
+        
+  function( r )
+    
+    return IsPrimeModule( LeftSubmodule( r ) );
+    
+end );
+    
+####################################
+#
 # methods for attributes:
 #
 ####################################
@@ -258,3 +275,10 @@ InstallMethod( Value,
                 end );
     
 end );
+
+##
+InstallMethod( IsIrreducible,
+        "for a ring element",
+	[ IsHomalgRingElement ],
+        
+  IsIrreducibleHomalgRingElement );
