@@ -10,9 +10,9 @@ I := LeftSubmodule( "x^3-x, y*x^2-y,y^2-x^2,z-x*y", A );
 #! <A torsion-free ideal given by 4 generators>
 R := A / I;
 #! Q[x,y,z]/( x^3-x, x^2*y-y, -x^2+y^2, -x*y+z )
-r := HomalgRingElement( "x^2+xy+z", R );
+r := "x^2+x*y+z" / R;
 #! |[ x^2+x*y+z ]|
-s := HomalgRingElement( "xy+z", R );
+s := "x*y+z"/ R;
 #! |[ x*y+z ]|
 mu_r := MinimalPolynomial( r );
 #! t^3-2*t^2-3*t
