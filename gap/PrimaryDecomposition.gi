@@ -15,6 +15,45 @@
 #
 ####################################
 
+##
+InstallMethod( IsPrimeZeroDim, 
+	" for a zerodimensional homalg ideal",
+	[ IsHomalgObject ],
+	
+  function( I )
+     local R, ind, dI, mu, fac, i, RI, dRI, M;
+     
+     R := HomalgRing( I );
+     
+     ind := Indeterminates( R / I );
 
+     dI := NrRows( BasisOverCoefficientsRing( R / I ) );
 
+     mu := List( ind, MinimalPolynomial );
+
+     fac := List( mu, SquareFreeFactors );
+
+     for i in [1 .. Length(mu)] do
+       if Length( fac[i] ) > 1 then
+           return( [ false, [ ind[i] ] ]);
+   
+       elif ( Length( fac[i] ) = 1 and Degree(fac[1][1]) = dI ) then
+               return ( [ true , [ ] ] );
+      
+       fi;
+     od;
+     
+     RI := RadicalForHomalgIdeal( I );
+     
+     if not I=RI then
+         return ( [ false, [ ] ] );
+     fi;
+
+     dRI := NrRows( BasisOverCoefficientsRing( R / RI ) );  
+     
+     M := HomalgIdentityMatrix( Length( ind ), CoefficientsRing( R ) );
+
+     return(RI);
+
+end );
 
