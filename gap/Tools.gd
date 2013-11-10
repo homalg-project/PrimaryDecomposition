@@ -72,6 +72,7 @@ DeclareAttribute( "MinimalPolynomial",
 #! @Returns a list
 DeclareAttribute( "SquareFreeFactors",
 	IsHomalgRingElement );
+#! @InsertSystem SquareFreeFactors
 
 ####################################
 #
