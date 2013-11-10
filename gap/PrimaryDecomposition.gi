@@ -21,39 +21,39 @@ InstallMethod( IsPrimeZeroDim,
 	[ IsHomalgObject ],
 	
   function( I )
-     local R, ind, dI, mu, fac, i, RI, dRI, M;
-     
-     R := HomalgRing( I );
-     
-     ind := Indeterminates( R / I );
+    local R, ind, dI, mu, fac, i, RI, dRI, M;
+    
+    R := HomalgRing( I );
+    
+    ind := Indeterminates( R / I );
 
-     dI := NrRows( BasisOverCoefficientsRing( R / I ) );
+    dI := NrRows( BasisOverCoefficientsRing( R / I ) );
 
-     mu := List( ind, MinimalPolynomial );
+    mu := List( ind, MinimalPolynomial );
 
-     fac := List( mu, SquareFreeFactors );
+    fac := List( mu, SquareFreeFactors );
 
-     for i in [1 .. Length(mu)] do
-       if Length( fac[i] ) > 1 then
-           return( [ false, [ ind[i] ] ]);
+    for i in [1 .. Length(mu)] do
+      if Length( fac[i] ) > 1 then
+         return( [ false, [ ind[i] ] ]);
    
-       elif ( Length( fac[i] ) = 1 and Degree(fac[1][1]) = dI ) then
+      elif ( Length( fac[i] ) = 1 and Degree(fac[1][1]) = dI ) then
                return ( [ true , [ ] ] );
       
-       fi;
-     od;
-     
-     RI := RadicalForHomalgIdeal( I );
-     
-     if not I=RI then
-         return ( [ false, [ ] ] );
-     fi;
+      fi;
+    od;
+    
+    RI := RadicalForHomalgIdeal( I );
+    
+    if not I=RI then
+       return ( [ false, [ ] ] );
+    fi;
 
-     dRI := NrRows( BasisOverCoefficientsRing( R / RI ) );  
-     
-     M := HomalgIdentityMatrix( Length( ind ), CoefficientsRing( R ) );
+    dRI := NrRows( BasisOverCoefficientsRing( R / RI ) );
+    
+    M := HomalgIdentityMatrix( Length( ind ), CoefficientsRing( R ) );
 
-     return(RI);
+    return(RI);
 
 end );
 
@@ -63,7 +63,7 @@ InstallMethod ( IsPrimaryZeroDim,
 	[ IsHomalgObject ],
      function( I );
      
-        return IsPrime( RadicalForHomalgIdeal( I ) );
+       return IsPrime( RadicalForHomalgIdeal( I ) );
 
 end );
 
