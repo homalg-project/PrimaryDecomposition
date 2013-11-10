@@ -25,3 +25,12 @@ DeclareAttribute( "RadicalForHomalgIdeal",
 	IsHomalgObject ); 
 #! @InsertSystem RadicalForHomalgIdeal
 
+#! @Arguments mu
+#! @Returns a matrix
+#! @Description
+#!  Computes the embeddingmatrix for an monic univariate polynomial
+#!  over a homalg ring.
+DeclareAttribute( "PolynomialEmbeddingmatrix",
+        IsHomalgRingElement );
+#! @InsertSystem PolynomialEmbeddingmatrix
+
