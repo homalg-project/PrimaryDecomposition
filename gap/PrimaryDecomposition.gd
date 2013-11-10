@@ -24,3 +24,11 @@
 #! @Returns a LeftSubmodule
 DeclareAttribute( "IsPrimeZeroDim",
 	IsHomalgObject );
+
+#! @Description
+#!  Determines if the zerodimensional ideal <A>I</A> is a primaryideal.
+#! @Arguments I
+#! @Returns a LeftSubmodule
+DeclareAttribute( "IsPrimaryZeroDim",
+	IsHomalgObject );
+

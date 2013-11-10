@@ -57,3 +57,13 @@ InstallMethod( IsPrimeZeroDim,
 
 end );
 
+##
+InstallMethod ( IsPrimaryZeroDim,
+	"for a zerodimensional homalg ideal",
+	[ IsHomalgObject ],
+     function( I );
+     
+        return IsPrime( RadicalForHomalgIdeal( I ) );
+
+end );
+
