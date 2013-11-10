@@ -10,3 +10,4 @@
 #############################################################################
 
 ReadPackage( "PrimaryDecomposition", "gap/Tools.gd" );
+ReadPackage( "PrimaryDecomposition", "gap/RadicalComputation.gd" );
