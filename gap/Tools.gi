@@ -147,7 +147,25 @@ InstallMethod( SquareFreeFactors,
     return rad;
     
 end );
+
+##
+InstallMethod( SeparablePart,
+        "for a ring element",
+	[ IsHomalgRingElement ],
+
+  function( p )
+    local R;
     
+    R := CoefficientsRing( HomalgRing( p ) );
+    
+    if Characteristic( R ) = 0 or IsFinite( R ) then
+       return Product( SquareFreeFactors( p ) );
+    else
+       TryNextMethod( );
+    fi;
+    
+end );
+
 ####################################
 #
 # methods for operations:
