@@ -13,15 +13,6 @@
 
 ####################################
 #
-#! @Section Properties
-#
-####################################
-
-DeclareProperty( "IsIrreducibleHomalgRingElement",
-        IsHomalgRingElement );
-
-####################################
-#
 #! @Section Attributes
 #
 ####################################
@@ -72,6 +63,16 @@ DeclareAttribute( "MinimalPolynomial",
 #! @Returns a list
 DeclareAttribute( "SquareFreeFactors",
 	IsHomalgRingElement );
+#! @InsertSystem SquareFreeFactors
+
+#! @Description
+#!  Computes the separable part of a univariate polynomial <A>p</A>
+#!  over a perfect Field.
+#! @Arguments p
+#! @Returns a ring element
+DeclareAttribute( "SeparablePart",
+	IsHomalgRingElement );
+#! @InsertSystem SeparablePart
 
 ####################################
 #
