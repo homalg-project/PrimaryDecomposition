@@ -28,9 +28,8 @@ DeclareAttribute( "RadicalForHomalgIdeal",
 #! @Arguments mu
 #! @Returns a matrix
 #! @Description
-#!  Computes the embeddingmatrix for an monic univariate polynomial
-#!  over a homalg ring.
-DeclareAttribute( "PolynomialEmbeddingmatrix",
+#!  Computes the companion matrix of a monic univariate polynomial
+#!  over a univariate ring.
+DeclareAttribute( "CompanionMatrix",
         IsHomalgRingElement );
-#! @InsertSystem PolynomialEmbeddingmatrix
-
+#! @InsertSystem CompanionMatrix

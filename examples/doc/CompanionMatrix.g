@@ -1,4 +1,4 @@
-#! @System PolynomialEmbeddingmatrix
+#! @System CompanionMatrix
 #! @Example
 LoadPackage( "PrimaryDecomposition" );
 #! true
@@ -12,7 +12,7 @@ r := "x^2+x*y+z" / R;
 #! |[ x^2+x*y+z ]|
 mu := MinimalPolynomial( r );
 #! t^3-2*t^2-3*t
-M := PolynomialEmbeddingmatrix( mu );
+M := CompanionMatrix( mu );
 #! <An unevaluated non-zero 3 x 3 matrix over an external ring>
 Display( last );
 #! 2,3,0,

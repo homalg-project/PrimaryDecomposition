@@ -47,7 +47,8 @@ InstallMethod( RadicalForHomalgIdeal,
 end );
 
 ##
-InstallMethod( PolynomialEmbeddingmatrix,
+InstallMethod( CompanionMatrix,
+	"for a univariate polynomial",
         [ IsHomalgRingElement ],
         
   function( mu )
@@ -59,15 +60,15 @@ InstallMethod( PolynomialEmbeddingmatrix,
     
     m := NrColumns( mu );
     
-    mu := CertainColumns( -mu, Reversed( [ 1 .. m-1 ] ) );
+    mu := CertainColumns( -mu, Reversed( [ 1 .. m - 1 ] ) );
     
-    L := HomalgIdentityMatrix( m -2, R );
+    L := HomalgIdentityMatrix( m - 2, R );
     
-    e := HomalgZeroMatrix( m-2, 1, R );
+    e := HomalgZeroMatrix( m - 2, 1, R );
     
     L := UnionOfColumns( L, e );
     
-    return ( UnionOfRows( mu, L ) );
+    return UnionOfRows( mu, L );
     
 end );
 
