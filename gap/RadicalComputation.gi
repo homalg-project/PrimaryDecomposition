@@ -22,28 +22,28 @@ InstallMethod( RadicalForHomalgIdeal,
 	
   function( I )
     local A, ind, R, Sep, L, RI;
-
+    
     A := HomalgRing( I );
-
+    
     R := A / I ;
     
     ind := Indeterminates( R );
     
     Sep := List( ind, a -> SeparablePart( MinimalPolynomial( a ) ) );
-
+    
     #L := CoefficientsRing( HomalgRing( Sep[ 1 ] ) ) * Indeterminates( A );
     
     ind := List( ind, a -> a / A );
     
-    Sep := List( [1 .. Length( Sep )], i -> Value( Sep[i], ind[i] ));
-
+    Sep := List( [ 1 .. Length( Sep ) ], i -> Value( Sep[i], ind[i] ) );
+    
     RI := HomalgMatrix( Sep, Length( Sep ), 1, A );
     
     ## missing two steps for not perfect fields -> matrixmatrixembedding, fglmToGroebner
     ## then L <> A
     
-    return LeftSubmodule( BasisOfRows( RI * A) );
-
+    return LeftSubmodule( BasisOfRows( RI * A ) );
+    
 end );
 
 ##
@@ -71,4 +71,3 @@ InstallMethod( CompanionMatrix,
     return UnionOfRows( mu, L );
     
 end );
-
