@@ -23,7 +23,7 @@
 #! @Arguments I
 #! @Returns a LeftSubmodule
 DeclareAttribute( "IsPrimeZeroDim",
-	IsHomalgObject );
+	IsHomalgModule );
 
 #! @Description
 #!  Determines if the zerodimensional ideal <A>I</A> is a primaryideal.

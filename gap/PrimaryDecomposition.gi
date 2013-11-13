@@ -16,9 +16,9 @@
 ####################################
 
 ##
-InstallMethod( IsPrimeZeroDim, 
-	" for a zerodimensional homalg ideal",
-	[ IsHomalgObject ],
+InstallMethod( IsPrimeZeroDim,
+	"for a zero dimensional ideal",
+	[ IsFinitelyPresentedSubmoduleRep and ConstructedAsAnIdeal ],
 	
   function( I )
     local R, ind, dI, mu, fac, i, RI, dRI, M;
