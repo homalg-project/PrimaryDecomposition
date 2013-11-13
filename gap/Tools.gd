@@ -13,15 +13,6 @@
 
 ####################################
 #
-#! @Section Properties
-#
-####################################
-
-DeclareProperty( "IsIrreducibleHomalgRingElement",
-        IsHomalgRingElement );
-
-####################################
-#
 #! @Section Attributes
 #
 ####################################
