@@ -18,12 +18,12 @@
 ####################################
 
 #! @Description
-#!  Computes the radical of the zerodimensional ideal <A>I</A> of a homalg ring. 
+#!  Computes the radical of a zero dimensional ideal <A>I</A>. 
 #! @Arguments I
 #! @Returns a LeftSubmodule
-DeclareAttribute( "RadicalForHomalgIdeal",
-	IsHomalgObject ); 
-#! @InsertSystem RadicalForHomalgIdeal
+DeclareAttribute( "RadicalOfIdeal",
+	IsHomalgModule );
+#! @InsertSystem RadicalOfIdeal
 
 #! @Arguments mu
 #! @Returns a matrix

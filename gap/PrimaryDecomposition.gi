@@ -43,7 +43,7 @@ InstallMethod( IsPrimeZeroDim,
       fi;
     od;
     
-    RI := RadicalForHomalgIdeal( I );
+    RI := RadicalOfIdeal( I );
     
     if not I=RI then
        return ( [ false, [ ] ] );

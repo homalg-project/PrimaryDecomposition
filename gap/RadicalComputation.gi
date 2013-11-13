@@ -16,9 +16,9 @@
 ####################################
 
 ##
-InstallMethod( RadicalForHomalgIdeal, 
-	" for an homalg ideal",
-	[ IsHomalgObject ],
+InstallMethod( RadicalOfIdeal,
+	"for an ideal",
+	[ IsFinitelyPresentedSubmoduleRep and ConstructedAsAnIdeal ],
 	
   function( I )
     local A, ind, R, Sep, L, RI;
