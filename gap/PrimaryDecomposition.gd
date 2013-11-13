@@ -30,5 +30,5 @@ DeclareAttribute( "IsPrimeZeroDim",
 #! @Arguments I
 #! @Returns a LeftSubmodule
 DeclareAttribute( "IsPrimaryZeroDim",
-	IsHomalgObject );
+	IsHomalgModule );
 

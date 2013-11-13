@@ -60,10 +60,10 @@ end );
 ##
 InstallMethod ( IsPrimaryZeroDim,
 	"for a zerodimensional homalg ideal",
-	[ IsHomalgObject ],
-     function( I );
-     
-       return IsPrime( RadicalForHomalgIdeal( I ) );
-
+	[ IsFinitelyPresentedSubmoduleRep and ConstructedAsAnIdeal ],
+        
+  function( I );
+    
+    return IsPrimeZeroDim( RadicalOfIdeal( I ) );
+    
 end );
-
