@@ -21,7 +21,7 @@ InstallMethod( IsPrimeZeroDim,
 	[ IsFinitelyPresentedSubmoduleRep and ConstructedAsAnIdeal ],
 	
   function( I )
-    local R, C, indets, mu, sf_mu, degI, i, RadI, RmodRadI, degRadI, n,
+    local R, C, indets, mu, sf_mu, degI, i, RadI, n, RmodRadI, degRadI, e, L, iter, 
           z, lambda, w;
     
     R := HomalgRing( I );
@@ -68,16 +68,53 @@ InstallMethod( IsPrimeZeroDim,
     if not IsSubset( I, RadI ) then
         return false;
     fi;
+        
+    ## The last part of the algorithm computes witness elements
+    
+    n := Length( indets );
     
     RmodRadI := R / RadI;
     
-    ## The last part of the algorithm computes witness elements
-    
-    degRadI := NrRows( BasisOverCoefficientsRing( RmodRadI ) );  
+    degRadI := NrRows( BasisOverCoefficientsRing( RmodRadI ) );
     
     if IsFinite( C ) then
         
-        ;
+        e := HomalgIdentityMatrix( n, C );
+        
+        L := [];
+        
+        L := List( [ 1 .. n ], i -> CertainRows( e, [i] ) );
+        
+        iter := Iterator( e );
+        
+        lambda := NextIterator( iter );  ## The zero element will be left out.
+        
+        while true do
+        
+            lambda := NextIterator( iter );
+
+            if Position( L, lambda )= fail then
+                
+                lambda := ( ( R / I ) * lambda ) * indets;
+                
+                mu := MinimalPolynomial( lambda );
+            
+                if IsIrreducible( mu ) and Degree( mu ) = degRadI then
+                
+                    return true;
+                
+                elif not IsIrreducible( mu ) then
+                
+                    I!.WitnessOfExistenceOfZeroDivisor := lambda;
+                    return false;
+                
+                fi;
+                
+                Add( L , lambda);
+                
+            fi;
+                        
+        od;
         
     fi;
     
