@@ -21,26 +21,11 @@ InstallMethod( IsPrimeZeroDim,
 	[ IsFinitelyPresentedSubmoduleRep and ConstructedAsAnIdeal ],
 	
   function( I )
-    local R, ind, dI, mu, fac, i, RI, dRI, M;
+    local R, C, indets, mu, sf_mu, degI, i, RadI, RmodRadI, degRadI, n,
+          z, lambda, w;
     
     R := HomalgRing( I );
     
-    ind := Indeterminates( R / I );
-
-    dI := NrRows( BasisOverCoefficientsRing( R / I ) );
-
-    mu := List( ind, MinimalPolynomial );
-
-    fac := List( mu, SquareFreeFactors );
-
-    for i in [1 .. Length(mu)] do
-      if Length( fac[i] ) > 1 then
-         return( [ false, [ ind[i] ] ]);
-   
-      elif ( Length( fac[i] ) = 1 and Degree(fac[1][1]) = dI ) then
-               return ( [ true , [ ] ] );
-      
-      fi;
     C := CoefficientsRing( R );
     
     ## preliminary test for perfectness, should be replaced by IsPerfect
@@ -53,6 +38,14 @@ InstallMethod( IsPrimeZeroDim,
     ## of degree dim_C( R/I ) or reducible. In the first case this element proves
     ## that the ideal I is a prime ideal, in the second case the ideal I cannot be
     ## a prime ideal
+    
+    indets := Indeterminates( R / I );
+    
+    mu := List( indets, MinimalPolynomial );
+    
+    sf_mu := List( mu, SquareFreeFactors );
+    
+    degI := NrRows( BasisOverCoefficientsRing( R / I ) );
     
     for i in [ 1 .. Length( mu ) ] do
         if Length( sf_mu[i] ) > 1 then
@@ -67,21 +60,20 @@ InstallMethod( IsPrimeZeroDim,
         fi;
     od;
     
-    RI := RadicalOfIdeal( I );
     ## Now the algorithms asks if I is a radical ideal.
     ## If yes, it is a prime ideal. If not, then I cannot be a prime ideal.
     
-    if not I=RI then
-       return ( [ false, [ ] ] );
-    fi;
-
-    dRI := NrRows( BasisOverCoefficientsRing( R / RI ) );
+    RadI := RadicalOfIdeal( I );
     
-    M := HomalgIdentityMatrix( Length( ind ), CoefficientsRing( R ) );
-
-    return(RI);
-
+    if not IsSubset( I, RadI ) then
+        return false;
+    fi;
+    
+    RmodRadI := R / RadI;
+    
     ## The last part of the algorithm computes witness elements
+    
+    degRadI := NrRows( BasisOverCoefficientsRing( RmodRadI ) );  
     
 end );
 
