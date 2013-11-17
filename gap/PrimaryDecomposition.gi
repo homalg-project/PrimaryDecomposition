@@ -54,6 +54,17 @@ InstallMethod( IsPrimeZeroDim,
     ## that the ideal I is a prime ideal, in the second case the ideal I cannot be
     ## a prime ideal
     
+    for i in [ 1 .. Length( mu ) ] do
+        if Length( sf_mu[i] ) > 1 then
+            I!.WitnessOfExistenceOfZeroDivisor := indets[i];
+            return false;
+        elif Degree( sf_mu[i][1] ) < Degree( mu[i][1] ) then
+            I!.WitnessOfExistenceOfZeroDivisor := indets[i];
+            I!.WitnessForExistenceOfNilpotentElement := indets[i];
+            return false;
+        elif Degree( sf_mu[i][1] ) = degI then
+            return true;
+        fi;
     od;
     
     RI := RadicalOfIdeal( I );
