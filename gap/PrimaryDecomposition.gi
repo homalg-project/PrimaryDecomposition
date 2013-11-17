@@ -48,9 +48,17 @@ InstallMethod( IsPrimeZeroDim,
         TryNextMethod( );
     fi;
     
+    ## The first part of the algorithm computes the minimal polynomials of the 
+    ## indeterminates of R and determines if at least one of them is irreducible 
+    ## of degree dim_C( R/I ) or reducible. In the first case this element proves
+    ## that the ideal I is a prime ideal, in the second case the ideal I cannot be
+    ## a prime ideal
+    
     od;
     
     RI := RadicalOfIdeal( I );
+    ## Now the algorithms asks if I is a radical ideal.
+    ## If yes, it is a prime ideal. If not, then I cannot be a prime ideal.
     
     if not I=RI then
        return ( [ false, [ ] ] );
@@ -62,6 +70,8 @@ InstallMethod( IsPrimeZeroDim,
 
     return(RI);
 
+    ## The last part of the algorithm computes witness elements
+    
 end );
 
 ##
