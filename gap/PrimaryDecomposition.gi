@@ -79,10 +79,25 @@ end );
 
 ##
 InstallMethod ( IsPrimaryZeroDim,
-	"for a zerodimensional homalg ideal",
+	"for a zero dimensional ideal",
 	[ IsFinitelyPresentedSubmoduleRep and ConstructedAsAnIdeal ],
         
-  function( I );
+  function( I )
+    local bool, Rad;
+    
+    Rad := RadicalOfIdeal( I );
+    
+    bool := IsPrimeZeroDim( Rad );
+        
+    if IsBound( Rad!.WitnessOfExistenceOfZeroDivisor ) then
+        I!.WitnessOfExistenceOfZeroDivisor := Rad!.WitnessOfExistenceOfZeroDivisor;
+    fi;
+    
+    if IsBound( Rad!.WitnessForExistenceOfNilpotentElement ) then
+        I!.WitnessForExistenceOfNilpotentElement := Rad!.WitnessForExistenceOfNilpotentElement;
+    fi;
+    
+    return bool;
     
     return IsPrimeZeroDim( RadicalOfIdeal( I ) );
     
