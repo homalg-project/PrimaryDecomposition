@@ -41,6 +41,13 @@ InstallMethod( IsPrimeZeroDim,
                return ( [ true , [ ] ] );
       
       fi;
+    C := CoefficientsRing( R );
+    
+    ## preliminary test for perfectness, should be replaced by IsPerfect
+    if not IsPerfect( C ) then
+        TryNextMethod( );
+    fi;
+    
     od;
     
     RI := RadicalOfIdeal( I );
