@@ -166,6 +166,20 @@ InstallMethod( SeparablePart,
     
 end );
 
+InstallMethod( IsPerfect,
+        "for a ring",
+        [ IsHomalgRing ],
+  
+  function( R )
+
+    if Characteristic( R ) = 0 or IsFinite( R ) then
+        return true;
+    else
+        return false;
+    fi;
+
+end );
+
 ####################################
 #
 # methods for operations:
