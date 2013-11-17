@@ -32,3 +32,9 @@ DeclareAttribute( "IsPrimeZeroDim",
 DeclareAttribute( "IsPrimaryZeroDim",
 	IsHomalgModule );
 
+#! @Description
+#!  Computes the primary decomposition of a zerodimensional ideal.
+#! @Arguments I
+#! @Returns a list
+DeclareAttribute( "PrimaryDecompositionZeroDim",
+	IsHomalgObject );
