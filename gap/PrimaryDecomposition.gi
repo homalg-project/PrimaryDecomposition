@@ -75,6 +75,43 @@ InstallMethod( IsPrimeZeroDim,
     
     degRadI := NrRows( BasisOverCoefficientsRing( RmodRadI ) );  
     
+    if IsFinite( C ) then
+        
+        ;
+        
+    fi;
+    
+    n := Length( indets );
+    
+    z := Zero( RmodRadI );
+    
+    while true do
+        
+        ## lambda has to be changed each time
+        lambda := CertainRows( HomalgIdentityMatrix( n, C ), [ 1 ] );
+        lambda := EntriesOfHomalgMatrix( RmodRadI * lambda );
+        
+        w := z;
+        
+        for i in [ 1 .. n ] do
+             w := w + lambda[ i ] * ( indets[ i ] / RmodRadI );
+        od;
+        
+        mu := MinimalPolynomial( w );
+        
+        if IsIrreducible( mu ) and Degree( mu ) = degRadI then
+                
+            return true;
+            
+        elif not IsIrreducible( mu ) then
+            
+            I!.WitnessOfNonPrimeness := w / R;
+            return false;
+            
+        fi;
+        
+    od;
+    
 end );
 
 ##
