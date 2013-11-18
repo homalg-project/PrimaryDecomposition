@@ -22,7 +22,7 @@ InstallMethod( IsPrimeZeroDim,
 	
   function( I )
     local R, C, indets, mu, sf_mu, degI, i, RadI, n, RmodRadI, degRadI, e, L, iter, 
-          lambda, w, comb, l, W, Wext, z;
+          lambda, w, comb, bool, l, W, Wext, z;
     
     R := HomalgRing( I );
     
@@ -139,9 +139,9 @@ InstallMethod( IsPrimeZeroDim,
         
         ## the first part of this loop ensures that lambda is not contained in any
         ## n - 1 dimensional C-subspace spanned by elements of L. In this case
-        ## bool remains to be true.
+        ## bool remains to be 0.
                 
-        bool := true; 
+        bool := 0; 
         
         for i in comb do
             
@@ -150,7 +150,7 @@ InstallMethod( IsPrimeZeroDim,
             Wext := UnionOfRows( W, lambda);
             
             if RowRankOfMatrix( W ) = n - 1 and RowRankOfMatrix( Wext ) < n then
-                bool := false;
+                bool := 1;
             fi;
         od;
         
@@ -158,7 +158,7 @@ InstallMethod( IsPrimeZeroDim,
         ## polynomial and checks like in the first part of the algorithm, if it is
         ## irreducible of degree dim C ( R / RadI) or reducible.
         
-        if bool = true then        
+        if bool = 0 then        
         
             w := ( ( R / I ) * lambda ) * indets;
             
