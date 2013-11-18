@@ -21,8 +21,8 @@ InstallMethod( IsPrimeZeroDim,
 	[ IsFinitelyPresentedSubmoduleRep and ConstructedAsAnIdeal ],
 	
   function( I )
-    local R, C, indets, mu, sf_mu, degI, i, RadI, RmodRadI, degRadI, n,
-          z, lambda, w;
+    local R, C, indets, mu, sf_mu, degI, i, RadI, n, RmodRadI, degRadI, e, L, iter, 
+          lambda, w, comb, bool, l, W, Wext, z;
     
     R := HomalgRing( I );
     
@@ -37,7 +37,7 @@ InstallMethod( IsPrimeZeroDim,
     ## indeterminates of R and determines if at least one of them is irreducible 
     ## of degree dim_C( R/I ) or reducible. In the first case this element proves
     ## that the ideal I is a prime ideal, in the second case the ideal I cannot be
-    ## a prime ideal
+    ## a prime ideal.
     
     indets := Indeterminates( R / I );
     
@@ -68,48 +68,132 @@ InstallMethod( IsPrimeZeroDim,
     if not IsSubset( I, RadI ) then
         return false;
     fi;
-    
-    RmodRadI := R / RadI;
-    
-    ## The last part of the algorithm computes witness elements
-    
-    degRadI := NrRows( BasisOverCoefficientsRing( RmodRadI ) );  
-    
-    if IsFinite( C ) then
         
-        ;
-        
-    fi;
+    ## The last part of the algorithm computes witness elements. 
+    ## Splitted in two cases: The coefficients ring is finite or not.
+    ## Some values needed in both cases:
     
     n := Length( indets );
     
-    z := Zero( RmodRadI );
+    RmodRadI := R / RadI;
+    
+    degRadI := NrRows( BasisOverCoefficientsRing( RmodRadI ) );
+    
+    e := HomalgIdentityMatrix( n, C );
+        
+    L := [];
+        
+    L := List( [ 1 .. n ], i -> CertainRows( e, [i] ) );
+    
+    indets := HomalgMatrix( indets, Length( indets ), 1, R/I );
+    
+    ## First case: Coefficients ring is finite.
+    
+    if IsFinite( C ) then
+        
+        ## After initializing an iterator the algorithm repeats the loop until
+        ## a suitable element has fulfilled the asked properties.
+        
+        iter := Iterator( e );
+        
+        lambda := NextIterator( iter );  ## The zero element will be left out.
+        
+        while true do
+            
+            lambda := NextIterator( iter );
+
+            if Position( L, lambda )= fail then
+                
+                w := ( ( R / I ) * lambda ) * indets;
+                
+                mu := MinimalPolynomial( w );
+            
+                if IsIrreducible( mu ) and Degree( mu ) = degRadI then
+                
+                    return true;
+                
+                elif not IsIrreducible( mu ) then
+                
+                    I!.WitnessOfExistenceOfZeroDivisor := w;
+                    return false;
+                
+                fi;
+                
+                Add( L , lambda);
+                
+            fi;
+                        
+        od;
+        
+    fi;
+    
+    ## Second case: Coefficients ring is not finite.
+        
+    lambda := Iterated( L, \+ );
+    
+    l := Set( [ 1 .. Length( L ) ] );
+        
+    comb := Combinations( l, n - 1 );
     
     while true do
         
-        ## lambda has to be changed each time
-        lambda := CertainRows( HomalgIdentityMatrix( n, C ), [ 1 ] );
-        lambda := EntriesOfHomalgMatrix( RmodRadI * lambda );
+        ## the first part of this loop ensures that lambda is not contained in any
+        ## n - 1 dimensional C-subspace spanned by elements of L. In this case
+        ## bool remains to be 0.
+                
+        bool := 0; 
         
-        w := z;
-        
-        for i in [ 1 .. n ] do
-             w := w + lambda[ i ] * ( indets[ i ] / RmodRadI );
+        for i in comb do
+            
+            z := List( i, L[ i ] );
+            W := Iterated( z, UnionOfRows );
+            Wext := UnionOfRows( W, lambda);
+            
+            if RowRankOfMatrix( W ) = n - 1 and RowRankOfMatrix( Wext ) < n then
+                bool := 1;
+            fi;
         od;
         
-        mu := MinimalPolynomial( w );
+        ## after finding a suitable lambda the algorithm computes its minimal
+        ## polynomial and checks like in the first part of the algorithm, if it is
+        ## irreducible of degree dim C ( R / RadI) or reducible.
         
-        if IsIrreducible( mu ) and Degree( mu ) = degRadI then
+        if bool = 0 then        
+        
+            w := ( ( R / I ) * lambda ) * indets;
+            
+            mu := MinimalPolynomial( w );
+        
+            if IsIrreducible( mu ) and Degree( mu ) = degRadI then
+                    
+                return true;
                 
-            return true;
+            elif not IsIrreducible( mu ) then
+                
+                I!.WitnessOfExistenceOfZeroDivisor := w;
+                return false;
+                
+            fi;
             
-        elif not IsIrreducible( mu ) then
-            
-            I!.WitnessOfNonPrimeness := w / R;
-            return false;
-            
+            Add( L, lambda );
+        
         fi;
         
+        ## the last part of the loop creats a new lambda. It is not sure so far,
+        ## if lambda is suitable. That will be tested in the beginning of the loop.
+        
+        lambda := HomalgZeroMatrix( 1, n, C );
+        
+        l := Set( [ 1 .. Length( L ) ] );
+        
+        comb := Combinations( l, n );
+        
+        z := Random( [ 1 .. Length( comb ) ] );
+        
+        l := Iterated( List( comb[ z ], i -> L[i] ), UnionOfRows );
+        
+        comb := Combinations( l, n - 1 );
+
     od;
     
 end );
