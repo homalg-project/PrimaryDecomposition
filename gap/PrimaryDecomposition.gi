@@ -90,14 +90,14 @@ InstallMethod( IsPrimeZeroDim,
         lambda := NextIterator( iter );  ## The zero element will be left out.
         
         while true do
-        
+            
             lambda := NextIterator( iter );
 
             if Position( L, lambda )= fail then
                 
-                lambda := ( ( R / I ) * lambda ) * indets;
+                w := ( ( R / I ) * lambda ) * indets;
                 
-                mu := MinimalPolynomial( lambda );
+                mu := MinimalPolynomial( w );
             
                 if IsIrreducible( mu ) and Degree( mu ) = degRadI then
                 
@@ -105,7 +105,7 @@ InstallMethod( IsPrimeZeroDim,
                 
                 elif not IsIrreducible( mu ) then
                 
-                    I!.WitnessOfExistenceOfZeroDivisor := lambda;
+                    I!.WitnessOfExistenceOfZeroDivisor := w;
                     return false;
                 
                 fi;
