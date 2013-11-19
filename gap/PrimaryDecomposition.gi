@@ -22,7 +22,7 @@ InstallMethod( IsPrimeZeroDim,
 	
   function( I )
     local R, C, indets, mu, sf_mu, degI, i, RadI, n, RmodRadI, degRadI, e, L, iter, 
-          lambda, w, comb, bool, l, W, Wext, z;
+          lambda, z, w, comb, bool, l, W, Wext;
     
     R := HomalgRing( I );
     
@@ -51,7 +51,7 @@ InstallMethod( IsPrimeZeroDim,
         if Length( sf_mu[i] ) > 1 then
             I!.WitnessOfExistenceOfZeroDivisor := indets[i];
             return false;
-        elif Degree( sf_mu[i][1] ) < Degree( mu[i][1] ) then
+        elif Degree( sf_mu[i][1] ) < Degree( mu[i] ) then
             I!.WitnessOfExistenceOfZeroDivisor := indets[i];
             I!.WitnessForExistenceOfNilpotentElement := indets[i];
             return false;
@@ -256,17 +256,15 @@ InstallMethod( PrimaryDecompositionZeroDim,
     RR := R / I;
     
     bas := BasisOverCoefficientsRing( RR );
-    bas := EntriesOfHomalgMatrix( bas );
-    bas := HomalgMatrix( bas, 1, Length( bas ), HomalgRing( bas[ 1 ] ) );
     
     a := a / RR;
     
     for i in [ 1 .. Length( fac ) ] do
         N[ i ] := RepresentationOverCoefficientsRing( Value( fac[ i ] , a ) );
-        W[ i ] := bas * (SyzygiesOfColumns( N[i] ) * RR);
+        W[ i ] := SyzygiesOfRows( N[i] ) * RR;
     od;
     
-    J := Iterated( W, UnionOfColumns );
+    J := Iterated( W, UnionOfRows );
     
     M := [ ];
     
@@ -274,9 +272,17 @@ InstallMethod( PrimaryDecompositionZeroDim,
     j[ 1 ] := 0;
     
     for i in [ 1 .. Length( fac ) ] do
-        j[ i + 1 ] := j[ i ] + NrColumns( W[ i ] );
-        M[ i ] := UnionOfColumns( CertainColumns( J , [ 1 .. j[i] ] ), CertainColumns( J, [ j[ i + 1 ] + 1 .. NrColumns( J ) ] ) );
-        ## M[ i ] := PrimaryDecompositionZeroDim( LeftSubmodule( BasisOfColumns( M[ i ] ) ) );
+        
+        j[ i + 1 ] := j[ i ] + NrRows( W[ i ] );
+        M[ i ] := UnionOfRows( CertainRows( J , [ 1 .. j[i] ] ), CertainRows( J, [ j[ i + 1 ] + 1 .. NrRows( J ) ] ) );
+        # M[ i ] := IdealBasisToGroebner( ( M[ i ] ) );
+        
+        M[ i ] := UnionOfRows( MatrixOfGenerators( I ) * R, ( M[ i ] * bas ) * R );
+        M[ i ] := LeftSubmodule( BasisOfRows( M[ i ] ) );
+        
+        if not IsOne( M[ i ] ) then
+            Append( Decomp, PrimaryDecompositionZeroDim( M[ i ] ) );
+        fi;
     od;
     
     return Decomp;
