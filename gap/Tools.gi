@@ -314,3 +314,32 @@ InstallMethod( IsIrreducible,
 	[ IsHomalgRingElement ],
         
   IsIrreducibleHomalgRingElement );
+
+##
+InstallMethod( IsNotContainedInAnyHyperplane,
+	"for two matrices",
+	[ IsHomalgMatrix, IsHomalgMatrix ],
+
+  function( lambda, L )
+    local n, l, comb, i, W;
+    
+    n := NrColumns( L );
+    
+    l := Set( [ 1 .. NrRows( L ) ] );
+    
+    comb := Combinations( l, n - 1 );
+    
+    for i in comb do
+        
+        W := CertainRows( L, i );
+        
+        if RowRankOfMatrix( W ) = n - 1 and IsZero( DecideZeroRows( lambda, W ) ) then
+            return false;
+        fi;
+    
+    od;
+    
+    return true;
+
+end );
+
