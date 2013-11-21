@@ -25,6 +25,10 @@ InstallMethod( RadicalOfIdeal,
     
     A := HomalgRing( I );
     
+    if not IsPerfect( CoefficientsRing( A ) ) then
+        TryNextMethod( );
+    fi;
+    
     R := A / I ;
     
     indets := Indeterminates( R );
