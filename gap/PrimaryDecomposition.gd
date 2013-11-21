@@ -24,6 +24,7 @@
 #! @Returns a LeftSubmodule
 DeclareAttribute( "IsPrimeZeroDim",
 	IsHomalgModule );
+#! @InsertSystem IsPrimeZeroDim
 
 #! @Description
 #!  Determines if the zerodimensional ideal <A>I</A> is a primaryideal.
@@ -31,6 +32,7 @@ DeclareAttribute( "IsPrimeZeroDim",
 #! @Returns a LeftSubmodule
 DeclareAttribute( "IsPrimaryZeroDim",
 	IsHomalgModule );
+#! @InsertSystem IsPrimaryZeroDim
 
 #! @Description
 #!  Computes the primary decomposition of a zerodimensional ideal.
@@ -38,3 +40,5 @@ DeclareAttribute( "IsPrimaryZeroDim",
 #! @Returns a list
 DeclareAttribute( "PrimaryDecompositionZeroDim",
 	IsHomalgObject );
+#! @InsertSystem PrimaryDecompositionZeroDim
+
