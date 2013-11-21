@@ -73,19 +73,16 @@ InstallMethod( IsPrimeZeroDim,
         
     ## The last part of the algorithm computes witness elements. 
     ## Splitted in two cases: The coefficients ring is finite or not.
-    ## Some values needed in both cases:
     
-    n := Length( indets );
+    ## Some values needed in both cases:
     
     RmodRadI := A / RadI;
     
     degRadI := NrRows( BasisOverCoefficientsRing( RmodRadI ) );
     
+    n := Length( indets );
+    
     e := HomalgIdentityMatrix( n, C );
-        
-    L := [];
-        
-    L := List( [ 1 .. n ], i -> CertainRows( e, [i] ) );
     
     indets := HomalgMatrix( indets, Length( indets ), 1, R );
     
@@ -95,6 +92,8 @@ InstallMethod( IsPrimeZeroDim,
         
         ## After initializing an iterator the algorithm repeats the loop until
         ## a suitable element has fulfilled the asked properties.
+        L := [];
+        L := List( [ 1 .. n ], i -> CertainRows( e, [i] ) );
         
         iter := Iterator( e );
         
@@ -130,72 +129,29 @@ InstallMethod( IsPrimeZeroDim,
     fi;
     
     ## Second case: Coefficients ring is not finite.
-        
-    lambda := Iterated( L, \+ );
-    
-    l := Set( [ 1 .. Length( L ) ] );
-        
-    comb := Combinations( l, n - 1 );
+    L := e;
     
     while true do
         
-        ## the first part of this loop ensures that lambda is not contained in any
-        ## n - 1 dimensional C-subspace spanned by elements of L. In this case
-        ## bool remains to be 0.
-                
-        bool := 0; 
+        lambda := GeneratorOfAnElementNotContainedInAnyHyperplane( L );
         
-        for i in comb do
+        w := ( R * lambda ) * indets;
             
-            z := List( i, L[ i ] );
-            W := Iterated( z, UnionOfRows );
-            Wext := UnionOfRows( W, lambda);
+        mu := MinimalPolynomial( w );
+        
+        if IsIrreducible( mu ) and Degree( mu ) = degRadI then
             
-            if RowRankOfMatrix( W ) = n - 1 and RowRankOfMatrix( Wext ) < n then
-                bool := 1;
-            fi;
-        od;
-        
-        ## after finding a suitable lambda the algorithm computes its minimal
-        ## polynomial and checks like in the first part of the algorithm, if it is
-        ## irreducible of degree dim C ( R / RadI) or reducible.
-        
-        if bool = 0 then        
-        
-            w := ( ( R / I ) * lambda ) * indets;
+            return true;
             
-            mu := MinimalPolynomial( w );
+        elif not IsIrreducible( mu ) then
         
-            if IsIrreducible( mu ) and Degree( mu ) = degRadI then
-                    
-                return true;
-                
-            elif not IsIrreducible( mu ) then
-                
-                I!.WitnessOfExistenceOfZeroDivisor := w;
-                return false;
-                
-            fi;
-            
-            Add( L, lambda );
+            I!.AZeroDivisor := w;
+            return false;
         
         fi;
         
-        ## the last part of the loop creats a new lambda. It is not sure so far,
-        ## if lambda is suitable. That will be tested in the beginning of the loop.
+        Add( L, lambda );
         
-        lambda := HomalgZeroMatrix( 1, n, C );
-        
-        l := Set( [ 1 .. Length( L ) ] );
-        
-        comb := Combinations( l, n );
-        
-        z := Random( [ 1 .. Length( comb ) ] );
-        
-        l := Iterated( List( comb[ z ], i -> L[i] ), UnionOfRows );
-        
-        comb := Combinations( l, n - 1 );
-
     od;
     
 end );
