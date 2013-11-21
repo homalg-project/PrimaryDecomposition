@@ -168,7 +168,7 @@ InstallMethod ( IsPrimaryZeroDim,
     
     bool := IsPrimeZeroDim( Rad );
         
-    if IsBound( Rad!.ZeroDivisor ) then
+    if IsBound( Rad!.AZeroDivisor ) then
         I!.AZeroDivisor := Rad!.AZeroDivisor;
     fi;
     
