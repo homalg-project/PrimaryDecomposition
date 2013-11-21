@@ -19,7 +19,7 @@
 
 #! @Description
 #!  Determines if the zerodimensional ideal <A>I</A> is a primeideal 
-#!  and returns eventually an element, which proofs that <A>I</A> is not prime.
+#!  and eventually saves an element, which proofs that <A>I</A> is not prime.
 #! @Arguments I
 #! @Returns a LeftSubmodule
 DeclareAttribute( "IsPrimeZeroDim",

@@ -209,7 +209,7 @@ InstallMethod( PrimaryDecompositionZeroDim,
         
     a := I!.AZeroDivisor / R;
     
-    ## Now the algorithm computes the pairwise coprime factors mu_i of the minimal
+    ## Now the algorithm computes the pairwise coprime factors of the minimal
     ## polynomial of a.
     
     fac := PrimaryDecomposition( LeftSubmodule( MinimalPolynomial( a ) ) );
@@ -236,6 +236,10 @@ InstallMethod( PrimaryDecompositionZeroDim,
     fac := List( [ 1 .. Length( fac ) ], i -> MatrixOfSubobjectGenerators( fac[i][1] ) );
     fac := List( [ 1 .. Length( fac ) ], i -> MatElm( fac[i], 1 ,1 ) );
     
+    ## Computation of the ring elements obtained by evaluating the factors of
+    ## the minimal polynomial for the element a, their representation matrices 
+    ## and their kernels.
+    
     N := [ ];
     W := [ ];
         
@@ -248,6 +252,11 @@ InstallMethod( PrimaryDecompositionZeroDim,
         W[i] := R * SyzygiesOfRows( N[i] ) * bas;
     od;
     
+    ## Computing the Ideals M[i]. The Generators for M[ i ]: 
+    ## all kernels W[j] without the ith and the generators of the ideal I.
+    ## At least compute inductively the primary decompositions of the M[i] and
+    ## return the union of them as the primary decomposition of the ideal I.
+        
     J := Iterated( W, UnionOfRows );
     
     M := [ ];
