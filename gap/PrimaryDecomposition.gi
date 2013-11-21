@@ -21,12 +21,12 @@ InstallMethod( IsPrimeZeroDim,
 	[ IsFinitelyPresentedSubmoduleRep and ConstructedAsAnIdeal ],
 	
   function( I )
-    local R, C, indets, mu, sf_mu, degI, i, RadI, n, RmodRadI, degRadI, e, L, iter, 
+    local A, C, R, indets, mu, sf_mu, degI, i, RadI, n, RmodRadI, degRadI, e, L, iter, 
           lambda, z, w, comb, bool, l, W, Wext;
     
-    R := HomalgRing( I );
+    A := HomalgRing( I );
     
-    C := CoefficientsRing( R );
+    C := CoefficientsRing( A );
     
     ## preliminary test for perfectness, should be replaced by IsPerfect
     if not IsPerfect( C ) then
@@ -39,21 +39,23 @@ InstallMethod( IsPrimeZeroDim,
     ## that the ideal I is a prime ideal, in the second case the ideal I cannot be
     ## a prime ideal.
     
-    indets := Indeterminates( R / I );
+    R := A / I;
+    
+    indets := Indeterminates( R );
     
     mu := List( indets, MinimalPolynomial );
     
     sf_mu := List( mu, SquareFreeFactors );
     
-    degI := NrRows( BasisOverCoefficientsRing( R / I ) );
+    degI := NrRows( BasisOverCoefficientsRing( R ) );
     
     for i in [ 1 .. Length( mu ) ] do
         if Length( sf_mu[i] ) > 1 then
-            I!.WitnessOfExistenceOfZeroDivisor := indets[i];
+            I!.AZeroDivisor := indets[i];
             return false;
         elif Degree( sf_mu[i][1] ) < Degree( mu[i] ) then
-            I!.WitnessOfExistenceOfZeroDivisor := indets[i];
-            I!.WitnessForExistenceOfNilpotentElement := indets[i];
+            I!.AZeroDivisor := indets[i];
+            I!.ANilpotentElement := indets[i];
             return false;
         elif Degree( sf_mu[i][1] ) = degI then
             return true;
@@ -75,7 +77,7 @@ InstallMethod( IsPrimeZeroDim,
     
     n := Length( indets );
     
-    RmodRadI := R / RadI;
+    RmodRadI := A / RadI;
     
     degRadI := NrRows( BasisOverCoefficientsRing( RmodRadI ) );
     
@@ -85,7 +87,7 @@ InstallMethod( IsPrimeZeroDim,
         
     L := List( [ 1 .. n ], i -> CertainRows( e, [i] ) );
     
-    indets := HomalgMatrix( indets, Length( indets ), 1, R/I );
+    indets := HomalgMatrix( indets, Length( indets ), 1, R );
     
     ## First case: Coefficients ring is finite.
     
@@ -104,7 +106,7 @@ InstallMethod( IsPrimeZeroDim,
 
             if Position( L, lambda )= fail then
                 
-                w := ( ( R / I ) * lambda ) * indets;
+                w := ( R * lambda ) * indets;
                 
                 mu := MinimalPolynomial( w );
             
@@ -114,7 +116,7 @@ InstallMethod( IsPrimeZeroDim,
                 
                 elif not IsIrreducible( mu ) then
                 
-                    I!.WitnessOfExistenceOfZeroDivisor := w;
+                    I!.AZeroDivisor := w;
                     return false;
                 
                 fi;
@@ -210,12 +212,12 @@ InstallMethod ( IsPrimaryZeroDim,
     
     bool := IsPrimeZeroDim( Rad );
         
-    if IsBound( Rad!.WitnessOfExistenceOfZeroDivisor ) then
-        I!.WitnessOfExistenceOfZeroDivisor := Rad!.WitnessOfExistenceOfZeroDivisor;
+    if IsBound( Rad!.ZeroDivisor ) then
+        I!.AZeroDivisor := Rad!.AZeroDivisor;
     fi;
     
-    if IsBound( Rad!.WitnessForExistenceOfNilpotentElement ) then
-        I!.WitnessForExistenceOfNilpotentElement := Rad!.WitnessForExistenceOfNilpotentElement;
+    if IsBound( Rad!.ANilpotentElement ) then
+        I!.ANilpotentElement := Rad!.ANilpotentElement;
     fi;
     
     return bool;
@@ -227,7 +229,7 @@ InstallMethod( PrimaryDecompositionZeroDim,
         [ IsHomalgObject ],
 
   function( I )
-    local Decomp, Rad, a, fac, N, W, i, R, RR, bas, J, j, M;
+    local Decomp, Rad, a, fac, N, W, i, A, R, bas, J, j, M;
     
     Decomp := []; 
     
@@ -241,8 +243,8 @@ InstallMethod( PrimaryDecompositionZeroDim,
     ## If the ideal I is not primary, then the algorithmus asks if IsPrimaryZeroDim has
     ## found a zerodivisor. If yes, then it decomposes the ideal.
     
-    if IsBound( I!.WitnessOfExistenceOfZeroDivisor ) then
-        a := I!.WitnessOfExistenceOfZeroDivisor;
+    if IsBound( I!.AZeroDivisor ) then
+        a := I!.AZeroDivisor;
     fi;
     
     fac := PrimaryDecomposition( LeftSubmodule( MinimalPolynomial( a ) ) );
@@ -252,16 +254,16 @@ InstallMethod( PrimaryDecompositionZeroDim,
     N := [ ];
     W := [ ];
     
-    R := HomalgRing( I );
-    RR := R / I;
+    A := HomalgRing( I );
+    R := A / I;
     
-    bas := BasisOverCoefficientsRing( RR );
+    bas := BasisOverCoefficientsRing( R );
     
-    a := a / RR;
+    a := a / R;
     
     for i in [ 1 .. Length( fac ) ] do
         N[ i ] := RepresentationOverCoefficientsRing( Value( fac[ i ] , a ) );
-        W[ i ] := SyzygiesOfRows( N[i] ) * RR;
+        W[ i ] := SyzygiesOfRows( N[i] ) * R;
     od;
     
     J := Iterated( W, UnionOfRows );
@@ -277,8 +279,8 @@ InstallMethod( PrimaryDecompositionZeroDim,
         M[ i ] := UnionOfRows( CertainRows( J , [ 1 .. j[i] ] ), CertainRows( J, [ j[ i + 1 ] + 1 .. NrRows( J ) ] ) );
         # M[ i ] := IdealBasisToGroebner( ( M[ i ] ) );
         
-        M[ i ] := UnionOfRows( MatrixOfGenerators( I ) * R, ( M[ i ] * bas ) * R );
         M[ i ] := LeftSubmodule( BasisOfRows( M[ i ] ) );
+        M[ i ] := UnionOfRows( A * MatrixOfGenerators( I ), A *( M[ i ] * bas ) );
         
         if not IsOne( M[ i ] ) then
             Append( Decomp, PrimaryDecompositionZeroDim( M[ i ] ) );
