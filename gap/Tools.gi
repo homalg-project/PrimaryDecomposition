@@ -343,3 +343,23 @@ InstallMethod( IsNotContainedInAnyHyperplane,
 
 end );
 
+##
+InstallMethod( GeneratorOfAnElementNotContainedInAnyHyperplane,
+	"for a matrix",
+	[ IsHomalgMatrix ],
+
+  function( L )
+    local lambda;
+    
+    while true do
+    
+        lambda := Iterated( List( [ 1 .. NrRows( L ) ], i -> Random( [ -10 .. 10 ] ) * CertainRows( L, [i]) ), \+ );
+        
+        if IsNotContainedInAnyHyperplane( lambda, L ) then
+            return lambda;
+        fi;
+        
+    od;
+    
+end );
+
