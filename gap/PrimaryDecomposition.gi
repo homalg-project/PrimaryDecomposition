@@ -185,41 +185,47 @@ InstallMethod( PrimaryDecompositionZeroDim,
         [ IsHomalgObject ],
 
   function( I )
-    local Decomp, Rad, a, fac, N, W, i, A, R, bas, J, j, M;
+    local Decomp, A, R, a, fac, N, W, bas, i, J, M, j;
     
-    Decomp := []; 
+    Decomp := [ ]; 
     
     ## If I is already primary, then the algorithmus returns I itself.
     
     if IsPrimaryZeroDim( I ) then
-        Decomp[ 1 ] := I;
+        Decomp[1] := I;
         return Decomp;
     fi;
     
-    ## If the ideal I is not primary, then the algorithmus asks if IsPrimaryZeroDim has
-    ## found a zerodivisor. If yes, then it decomposes the ideal.
+    ## If the ideal I is not primary, then the algorithmus should have found a 
+    ## zerodivisor. If not, something went terribly wrong.
     
-    if IsBound( I!.AZeroDivisor ) then
-        a := I!.AZeroDivisor;
+    if not IsBound( I!.AZeroDivisor ) then
+        Error( "IsPrimaryZeroDim couldn't find a zero divisor" );
     fi;
     
+    A := HomalgRing( I );
+    
+    R := A / I;
+        
+    a := I!.AZeroDivisor / R;
+    
+    ## Now the algorithm computes the pairwise coprime factors mu_i of the minimal
+    ## polynomial of a.
+    
     fac := PrimaryDecomposition( LeftSubmodule( MinimalPolynomial( a ) ) );
-    fac := List( [ 1 .. Length( fac ) ], i -> MatrixOfSubobjectGenerators( fac[ i ][ 1 ]) );
-    fac := List( [ 1 .. Length( fac ) ], i -> MatElm( fac[ i ], 1 ,1 ) );
+    fac := List( [ 1 .. Length( fac ) ], i -> MatrixOfSubobjectGenerators( fac[i][1]) );
+    fac := List( [ 1 .. Length( fac ) ], i -> MatElm( fac[i], 1 ,1 ) );
     
     N := [ ];
     W := [ ];
-    
-    A := HomalgRing( I );
-    R := A / I;
-    
+        
     bas := BasisOverCoefficientsRing( R );
     
     a := a / R;
     
     for i in [ 1 .. Length( fac ) ] do
-        N[ i ] := RepresentationOverCoefficientsRing( Value( fac[ i ] , a ) );
-        W[ i ] := SyzygiesOfRows( N[i] ) * R;
+        N[i] := RepresentationOverCoefficientsRing( Value( fac[i] , a ) );
+        W[i] := R * SyzygiesOfRows( N[i] ) * bas;
     od;
     
     J := Iterated( W, UnionOfRows );
@@ -227,20 +233,19 @@ InstallMethod( PrimaryDecompositionZeroDim,
     M := [ ];
     
     j := [ ];
-    j[ 1 ] := 0;
+    j[1] := 0;
     
     for i in [ 1 .. Length( fac ) ] do
         
-        j[ i + 1 ] := j[ i ] + NrRows( W[ i ] );
-        M[ i ] := UnionOfRows( CertainRows( J , [ 1 .. j[i] ] ), CertainRows( J, [ j[ i + 1 ] + 1 .. NrRows( J ) ] ) );
-        # M[ i ] := IdealBasisToGroebner( ( M[ i ] ) );
+        j[i + 1] := j[i] + NrRows( W[i] );
         
-        M[ i ] := LeftSubmodule( BasisOfRows( M[ i ] ) );
-        M[ i ] := UnionOfRows( A * MatrixOfGenerators( I ), A *( M[ i ] * bas ) );
+        M[i] := UnionOfRows( CertainRows( J , [ 1 .. j[i] ] ), CertainRows( J, [ j[i + 1] + 1 .. NrRows( J ) ] ) );
         
-        if not IsOne( M[ i ] ) then
-            Append( Decomp, PrimaryDecompositionZeroDim( M[ i ] ) );
-        fi;
+        M[i] := UnionOfRows( A * MatrixOfGenerators( I ), A * M[i] );
+        
+        M[i] := LeftSubmodule( BasisOfRows( M[i] ) );
+        
+        Append( Decomp, PrimaryDecompositionZeroDim( M[i] ) );
     od;
     
     return Decomp;
