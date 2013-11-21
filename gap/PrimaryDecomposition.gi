@@ -185,7 +185,7 @@ InstallMethod( PrimaryDecompositionZeroDim,
         [ IsHomalgObject ],
 
   function( I )
-    local Decomp, A, R, a, fac, N, W, bas, i, J, M, j;
+    local Decomp, A, R, a, fac, ListOfNonLinearFactors, factor, N, W, bas, i, J, M, j;
     
     Decomp := [ ]; 
     
@@ -213,7 +213,27 @@ InstallMethod( PrimaryDecompositionZeroDim,
     ## polynomial of a.
     
     fac := PrimaryDecomposition( LeftSubmodule( MinimalPolynomial( a ) ) );
-    fac := List( [ 1 .. Length( fac ) ], i -> MatrixOfSubobjectGenerators( fac[i][1]) );
+    
+    ## If there are factors of the minimal polynomial of degree higher than one,
+    ## they got recorded in a list, to simplify the complete primary decomposition
+    ## afterwards.
+    ListOfNonLinearFactors := [];
+    
+    for i in [ 1 .. Length( fac ) ] do
+        factor := MatElm( MatrixOfSubobjectGenerators( fac[i][2] ), 1, 1 );
+        if Degree( factor ) > 1 then
+            
+            ListOfNonLinearFactors[i] := fac[i][2];
+            
+            
+        fi;
+    od;
+    
+    if Length( ListOfNonLinearFactors ) > 0 then
+        I!.ListOfNonLinearFactors:= ListOfNonLinearFactors;
+    fi;
+    
+    fac := List( [ 1 .. Length( fac ) ], i -> MatrixOfSubobjectGenerators( fac[i][1] ) );
     fac := List( [ 1 .. Length( fac ) ], i -> MatElm( fac[i], 1 ,1 ) );
     
     N := [ ];
