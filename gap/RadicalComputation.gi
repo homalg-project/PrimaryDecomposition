@@ -21,21 +21,25 @@ InstallMethod( RadicalOfIdeal,
 	[ IsFinitelyPresentedSubmoduleRep and ConstructedAsAnIdeal ],
 	
   function( I )
-    local A, ind, R, Sep, L, RI;
+    local A, R, indets, Sep, L, RI;
     
     A := HomalgRing( I );
     
+    if not IsPerfect( CoefficientsRing( A ) ) then
+        TryNextMethod( );
+    fi;
+    
     R := A / I ;
     
-    ind := Indeterminates( R );
+    indets := Indeterminates( R );
     
-    Sep := List( ind, a -> SeparablePart( MinimalPolynomial( a ) ) );
+    Sep := List( indets, a -> SeparablePart( MinimalPolynomial( a ) ) );
     
-    #L := CoefficientsRing( HomalgRing( Sep[ 1 ] ) ) * Indeterminates( A );
+    #for the non perfect fields: L := CoefficientsRing( HomalgRing( Sep[ 1 ] ) ) * Indeterminates( A );
     
-    ind := List( ind, a -> a / A );
+    indets := List( indets, a -> a / A );
     
-    Sep := List( [ 1 .. Length( Sep ) ], i -> Value( Sep[i], ind[i] ) );
+    Sep := List( [ 1 .. Length( Sep ) ], i -> Value( Sep[i], indets[i] ) );
     
     RI := HomalgMatrix( Sep, Length( Sep ), 1, A );
     

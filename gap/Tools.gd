@@ -89,3 +89,22 @@ DeclareOperation( "MinimalPolynomial",
 #! @Group MinimalPolynomial
 DeclareOperation( "MinimalPolynomial",
 	[ IsHomalgRingElement, IsHomalgRingElement ] );
+
+#! @Description
+#!  Determines if lambda is contained in any <M>n - 1 </M> dimensional subspace
+#!  spanned by the rows of L.
+#! @Arguments lambda, L
+#! @Returns a matrix
+DeclareOperation( "IsNotContainedInAnyHyperplane",
+	[IsHomalgMatrix, IsHomalgMatrix ] );
+#! @InsertSystem IsNotContainedInAnyHyperplane
+	
+#! @Description
+#!  Generates an element, which is not contained in any <M>n - 1 </M> dimensional 
+#!  subspace spanned by the rows of L
+#! @Arguments L
+#! @Returns a value
+DeclareOperation( "GeneratorOfAnElementNotContainedInAnyHyperplane",
+	[ IsHomalgMatrix ] );
+#! @InsertSystem GeneratorOfAnElementNotContainedInAnyHyperplane
+

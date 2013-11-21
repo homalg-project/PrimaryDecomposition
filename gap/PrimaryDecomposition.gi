@@ -21,12 +21,12 @@ InstallMethod( IsPrimeZeroDim,
 	[ IsFinitelyPresentedSubmoduleRep and ConstructedAsAnIdeal ],
 	
   function( I )
-    local R, C, indets, mu, sf_mu, degI, i, RadI, n, RmodRadI, degRadI, e, L, iter, 
+    local A, C, R, indets, mu, sf_mu, degI, i, RadI, n, RmodRadI, degRadI, e, L, iter, 
           lambda, z, w, comb, bool, l, W, Wext;
     
-    R := HomalgRing( I );
+    A := HomalgRing( I );
     
-    C := CoefficientsRing( R );
+    C := CoefficientsRing( A );
     
     ## preliminary test for perfectness, should be replaced by IsPerfect
     if not IsPerfect( C ) then
@@ -39,21 +39,23 @@ InstallMethod( IsPrimeZeroDim,
     ## that the ideal I is a prime ideal, in the second case the ideal I cannot be
     ## a prime ideal.
     
-    indets := Indeterminates( R / I );
+    R := A / I;
+    
+    indets := Indeterminates( R );
     
     mu := List( indets, MinimalPolynomial );
     
     sf_mu := List( mu, SquareFreeFactors );
     
-    degI := NrRows( BasisOverCoefficientsRing( R / I ) );
+    degI := NrRows( BasisOverCoefficientsRing( R ) );
     
     for i in [ 1 .. Length( mu ) ] do
         if Length( sf_mu[i] ) > 1 then
-            I!.WitnessOfExistenceOfZeroDivisor := indets[i];
+            I!.AZeroDivisor := indets[i];
             return false;
         elif Degree( sf_mu[i][1] ) < Degree( mu[i] ) then
-            I!.WitnessOfExistenceOfZeroDivisor := indets[i];
-            I!.WitnessForExistenceOfNilpotentElement := indets[i];
+            I!.AZeroDivisor := indets[i];
+            I!.ANilpotentElement := indets[i];
             return false;
         elif Degree( sf_mu[i][1] ) = degI then
             return true;
@@ -71,21 +73,18 @@ InstallMethod( IsPrimeZeroDim,
         
     ## The last part of the algorithm computes witness elements. 
     ## Splitted in two cases: The coefficients ring is finite or not.
+    
     ## Some values needed in both cases:
     
-    n := Length( indets );
-    
-    RmodRadI := R / RadI;
+    RmodRadI := A / RadI;
     
     degRadI := NrRows( BasisOverCoefficientsRing( RmodRadI ) );
     
-    e := HomalgIdentityMatrix( n, C );
-        
-    L := [];
-        
-    L := List( [ 1 .. n ], i -> CertainRows( e, [i] ) );
+    n := Length( indets );
     
-    indets := HomalgMatrix( indets, Length( indets ), 1, R/I );
+    e := HomalgIdentityMatrix( n, C );
+    
+    indets := HomalgMatrix( indets, Length( indets ), 1, R );
     
     ## First case: Coefficients ring is finite.
     
@@ -93,6 +92,8 @@ InstallMethod( IsPrimeZeroDim,
         
         ## After initializing an iterator the algorithm repeats the loop until
         ## a suitable element has fulfilled the asked properties.
+        L := [];
+        L := List( [ 1 .. n ], i -> CertainRows( e, [i] ) );
         
         iter := Iterator( e );
         
@@ -104,7 +105,7 @@ InstallMethod( IsPrimeZeroDim,
 
             if Position( L, lambda )= fail then
                 
-                w := ( ( R / I ) * lambda ) * indets;
+                w := ( R * lambda ) * indets;
                 
                 mu := MinimalPolynomial( w );
             
@@ -114,7 +115,7 @@ InstallMethod( IsPrimeZeroDim,
                 
                 elif not IsIrreducible( mu ) then
                 
-                    I!.WitnessOfExistenceOfZeroDivisor := w;
+                    I!.AZeroDivisor := w;
                     return false;
                 
                 fi;
@@ -128,72 +129,29 @@ InstallMethod( IsPrimeZeroDim,
     fi;
     
     ## Second case: Coefficients ring is not finite.
-        
-    lambda := Iterated( L, \+ );
-    
-    l := Set( [ 1 .. Length( L ) ] );
-        
-    comb := Combinations( l, n - 1 );
+    L := e;
     
     while true do
         
-        ## the first part of this loop ensures that lambda is not contained in any
-        ## n - 1 dimensional C-subspace spanned by elements of L. In this case
-        ## bool remains to be 0.
-                
-        bool := 0; 
+        lambda := GeneratorOfAnElementNotContainedInAnyHyperplane( L );
         
-        for i in comb do
+        w := ( R * lambda ) * indets;
             
-            z := List( i, L[ i ] );
-            W := Iterated( z, UnionOfRows );
-            Wext := UnionOfRows( W, lambda);
+        mu := MinimalPolynomial( w );
+        
+        if IsIrreducible( mu ) and Degree( mu ) = degRadI then
             
-            if RowRankOfMatrix( W ) = n - 1 and RowRankOfMatrix( Wext ) < n then
-                bool := 1;
-            fi;
-        od;
-        
-        ## after finding a suitable lambda the algorithm computes its minimal
-        ## polynomial and checks like in the first part of the algorithm, if it is
-        ## irreducible of degree dim C ( R / RadI) or reducible.
-        
-        if bool = 0 then        
-        
-            w := ( ( R / I ) * lambda ) * indets;
+            return true;
             
-            mu := MinimalPolynomial( w );
+        elif not IsIrreducible( mu ) then
         
-            if IsIrreducible( mu ) and Degree( mu ) = degRadI then
-                    
-                return true;
-                
-            elif not IsIrreducible( mu ) then
-                
-                I!.WitnessOfExistenceOfZeroDivisor := w;
-                return false;
-                
-            fi;
-            
-            Add( L, lambda );
+            I!.AZeroDivisor := w;
+            return false;
         
         fi;
         
-        ## the last part of the loop creats a new lambda. It is not sure so far,
-        ## if lambda is suitable. That will be tested in the beginning of the loop.
+        Add( L, lambda );
         
-        lambda := HomalgZeroMatrix( 1, n, C );
-        
-        l := Set( [ 1 .. Length( L ) ] );
-        
-        comb := Combinations( l, n );
-        
-        z := Random( [ 1 .. Length( comb ) ] );
-        
-        l := Iterated( List( comb[ z ], i -> L[i] ), UnionOfRows );
-        
-        comb := Combinations( l, n - 1 );
-
     od;
     
 end );
@@ -210,12 +168,12 @@ InstallMethod ( IsPrimaryZeroDim,
     
     bool := IsPrimeZeroDim( Rad );
         
-    if IsBound( Rad!.WitnessOfExistenceOfZeroDivisor ) then
-        I!.WitnessOfExistenceOfZeroDivisor := Rad!.WitnessOfExistenceOfZeroDivisor;
+    if IsBound( Rad!.AZeroDivisor ) then
+        I!.AZeroDivisor := Rad!.AZeroDivisor;
     fi;
     
-    if IsBound( Rad!.WitnessForExistenceOfNilpotentElement ) then
-        I!.WitnessForExistenceOfNilpotentElement := Rad!.WitnessForExistenceOfNilpotentElement;
+    if IsBound( Rad!.ANilpotentElement ) then
+        I!.ANilpotentElement := Rad!.ANilpotentElement;
     fi;
     
     return bool;
@@ -227,62 +185,96 @@ InstallMethod( PrimaryDecompositionZeroDim,
         [ IsHomalgObject ],
 
   function( I )
-    local Decomp, Rad, a, fac, N, W, i, R, RR, bas, J, j, M;
+    local Decomp, A, R, a, fac, ListOfNonLinearFactors, factor, N, W, bas, i, J, M, j;
     
-    Decomp := []; 
+    Decomp := [ ]; 
     
     ## If I is already primary, then the algorithmus returns I itself.
     
     if IsPrimaryZeroDim( I ) then
-        Decomp[ 1 ] := I;
+        Decomp[1] := I;
         return Decomp;
     fi;
     
-    ## If the ideal I is not primary, then the algorithmus asks if IsPrimaryZeroDim has
-    ## found a zerodivisor. If yes, then it decomposes the ideal.
+    ## If the ideal I is not primary, then the algorithmus should have found a 
+    ## zerodivisor. If not, something went terribly wrong.
     
-    if IsBound( I!.WitnessOfExistenceOfZeroDivisor ) then
-        a := I!.WitnessOfExistenceOfZeroDivisor;
+    if not IsBound( I!.AZeroDivisor ) then
+        Error( "IsPrimaryZeroDim couldn't find a zero divisor" );
     fi;
     
+    A := HomalgRing( I );
+    
+    R := A / I;
+        
+    a := I!.AZeroDivisor / R;
+    
+    ## Now the algorithm computes the pairwise coprime factors of the minimal
+    ## polynomial of a.
+    
     fac := PrimaryDecomposition( LeftSubmodule( MinimalPolynomial( a ) ) );
-    fac := List( [ 1 .. Length( fac ) ], i -> MatrixOfSubobjectGenerators( fac[ i ][ 1 ]) );
-    fac := List( [ 1 .. Length( fac ) ], i -> MatElm( fac[ i ], 1 ,1 ) );
+    
+    ## If there are factors of the minimal polynomial of degree higher than one,
+    ## they got recorded in a list, to simplify the complete primary decomposition
+    ## afterwards.
+    ListOfNonLinearFactors := [];
+    
+    for i in [ 1 .. Length( fac ) ] do
+        factor := MatElm( MatrixOfSubobjectGenerators( fac[i][2] ), 1, 1 );
+        if Degree( factor ) > 1 then
+            
+            ListOfNonLinearFactors[i] := fac[i][2];
+            
+            
+        fi;
+    od;
+    
+    if Length( ListOfNonLinearFactors ) > 0 then
+        I!.ListOfNonLinearFactors:= ListOfNonLinearFactors;
+    fi;
+    
+    fac := List( [ 1 .. Length( fac ) ], i -> MatrixOfSubobjectGenerators( fac[i][1] ) );
+    fac := List( [ 1 .. Length( fac ) ], i -> MatElm( fac[i], 1 ,1 ) );
+    
+    ## Computation of the ring elements obtained by evaluating the factors of
+    ## the minimal polynomial for the element a, their representation matrices 
+    ## and their kernels.
     
     N := [ ];
     W := [ ];
+        
+    bas := BasisOverCoefficientsRing( R );
     
-    R := HomalgRing( I );
-    RR := R / I;
-    
-    bas := BasisOverCoefficientsRing( RR );
-    
-    a := a / RR;
+    a := a / R;
     
     for i in [ 1 .. Length( fac ) ] do
-        N[ i ] := RepresentationOverCoefficientsRing( Value( fac[ i ] , a ) );
-        W[ i ] := SyzygiesOfRows( N[i] ) * RR;
+        N[i] := RepresentationOverCoefficientsRing( Value( fac[i] , a ) );
+        W[i] := R * SyzygiesOfRows( N[i] ) * bas;
     od;
     
+    ## Computing the Ideals M[i]. The Generators for M[ i ]: 
+    ## all kernels W[j] without the ith and the generators of the ideal I.
+    ## At least compute inductively the primary decompositions of the M[i] and
+    ## return the union of them as the primary decomposition of the ideal I.
+        
     J := Iterated( W, UnionOfRows );
     
     M := [ ];
     
     j := [ ];
-    j[ 1 ] := 0;
+    j[1] := 0;
     
     for i in [ 1 .. Length( fac ) ] do
         
-        j[ i + 1 ] := j[ i ] + NrRows( W[ i ] );
-        M[ i ] := UnionOfRows( CertainRows( J , [ 1 .. j[i] ] ), CertainRows( J, [ j[ i + 1 ] + 1 .. NrRows( J ) ] ) );
-        # M[ i ] := IdealBasisToGroebner( ( M[ i ] ) );
+        j[i + 1] := j[i] + NrRows( W[i] );
         
-        M[ i ] := UnionOfRows( MatrixOfGenerators( I ) * R, ( M[ i ] * bas ) * R );
-        M[ i ] := LeftSubmodule( BasisOfRows( M[ i ] ) );
+        M[i] := UnionOfRows( CertainRows( J , [ 1 .. j[i] ] ), CertainRows( J, [ j[i + 1] + 1 .. NrRows( J ) ] ) );
         
-        if not IsOne( M[ i ] ) then
-            Append( Decomp, PrimaryDecompositionZeroDim( M[ i ] ) );
-        fi;
+        M[i] := UnionOfRows( A * MatrixOfGenerators( I ), A * M[i] );
+        
+        M[i] := LeftSubmodule( BasisOfRows( M[i] ) );
+        
+        Append( Decomp, PrimaryDecompositionZeroDim( M[i] ) );
     od;
     
     return Decomp;
