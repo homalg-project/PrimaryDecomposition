@@ -18,7 +18,7 @@
 ####################################
 
 #! @Description
-#!  Determines if the zerodimensional ideal <A>I</A> is a primeideal 
+#!  Determines if the zerodimensional ideal <A>I</A> is a prime ideal 
 #!  and eventually saves an element, which proofs that <A>I</A> is not prime.
 #! @Arguments I
 #! @Returns a LeftSubmodule
@@ -27,7 +27,7 @@ DeclareProperty( "IsPrimeZeroDim",
 #! @InsertSystem IsPrimeZeroDim
 
 #! @Description
-#!  Determines if the zerodimensional ideal <A>I</A> is a primaryideal.
+#!  Determines if the zerodimensional ideal <A>I</A> is a primary ideal.
 #! @Arguments I
 #! @Returns a LeftSubmodule
 DeclareProperty( "IsPrimaryZeroDim",
