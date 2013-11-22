@@ -71,8 +71,10 @@ InstallMethod( IsPrimeZeroDim,
         return false;
     fi;
         
-    ## The last part of the algorithm computes witness elements. 
-    ## Splitted in two cases: The coefficients ring is finite or not.
+    ## The last part of the algorithm iterates over ring elements until
+    ## the minimal polynomial of the element is either irreducible of degree 
+    ## degRadI or reducible.
+    ## It is splitted into two cases: Finite and infinite coefficient fields.
     
     ## Some values needed in both cases:
     
@@ -87,11 +89,10 @@ InstallMethod( IsPrimeZeroDim,
     indets := HomalgMatrix( indets, Length( indets ), 1, R );
     
     ## First case: Coefficients ring is finite.
+    ## The iteration goes over all ring elements.
     
     if IsFinite( C ) then
         
-        ## After initializing an iterator the algorithm repeats the loop until
-        ## a suitable element has fulfilled the asked properties.
         L := [];
         L := List( [ 1 .. n ], i -> CertainRows( e, [i] ) );
         
@@ -128,9 +129,11 @@ InstallMethod( IsPrimeZeroDim,
         
     fi;
     
-    ## Second case: Coefficients ring is not finite.
+    ## Second case: Coefficients field is not finite.
+    ## The iteration goes over elements, whose coefficients of the basis do 
+    ## not lie in any hyperplane of the vectorspace over the coeffient field. 
     L := e;
-    
+     
     while true do
         
         lambda := GeneratorOfAnElementNotContainedInAnyHyperplane( L );

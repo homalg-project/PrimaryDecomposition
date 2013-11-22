@@ -144,7 +144,7 @@ InstallMethod( SquareFreeFactors,
     Assert( 8, Set( List( rad, IsIrreducibleHomalgRingElement ) ) = [ true ] );
     Perform( rad, function( r ) SetIsIrreducibleHomalgRingElement( r, true ); end );
     
-    return rad;
+    return SortedList( rad );
     
 end );
 
