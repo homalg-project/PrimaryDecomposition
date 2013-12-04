@@ -198,6 +198,62 @@ InstallMethod( BasisCoefficientsOfRingElement,
     return ( e * M );
     
 end );
+
+##
+InstallMethod( IdealBasisOverCoefficientRing,
+        [ IsHomalgMatrix ],
+        
+  function( G )
+    local R, M, W, n, T, k, bool, N, j, bas;  
+    
+    R := HomalgRing( G );
+    
+    M := FGLMdata( R );
+        
+    W := List( [ 1 .. NrRows( G ) ], i -> BasisCoefficientsOfRingElement( MatElm( G, i, 1 ) / R ) );
+    W := Iterated( W, UnionOfRows );
+    
+    n := Length( M );
+    
+    T := List( [ 1 .. NrRows( W ) ], i -> CertainRows( W, [ i ] ) );
+    
+    for k in [ 1 .. n ] do
+        
+        bool := 1;
+        
+        while bool = 1 do
+            
+            bool := 0;
+            
+            N := List( [ 1 .. Length( T ) ], i ->  T[i] * M[k] );
+            
+            T := [ ];
+            
+            for j in N do
+            
+                if  not IsZero( DecideZeroRows( j, W ) ) then
+                    
+                    Add( T, j );
+                    
+                    bool := 1;
+                    
+                    W := UnionOfRows( W, j );
+                
+                fi;
+                
+            od;
+            
+        od;
+        
+        T := List( [ 1 .. NrRows( W ) ], i -> CertainRows( W, [ i ] ) );
+        
+    od;
+    
+    bas := BasisOverCoefficientsRing( R );
+    
+    return Iterated( List( [ 1 .. NrRows( W ) ], i ->  R * CertainRows( W, [ i ] ) * bas ), UnionOfRows );
+    
+end );
 ####################################
 #
 # methods for operations:
