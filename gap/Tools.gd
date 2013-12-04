@@ -90,6 +90,14 @@ DeclareAttribute( "BasisCoefficientsOfRingElement",
 DeclareOperation( "IdealBasisOverCoefficientRing", 
 	[ IsHomalgMatrix ] );
 
+#! @Arguments M
+#! @Returns a list
+#! @Description
+#!  Computes the coefficients of the basis representation,
+#!  provided the ring is free of finite rang over its coefficients ring.
+DeclareAttribute( "IdealBasisToGroebner", 
+	IsHomalgMatrix);
+
 ####################################
 #
 #! @Section Operations

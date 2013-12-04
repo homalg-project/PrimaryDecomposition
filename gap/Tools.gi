@@ -260,6 +260,98 @@ InstallMethod( IdealBasisOverCoefficientRing,
     return Iterated( List( [ 1 .. NrRows( W ) ], i ->  R * CertainRows( W, [ i ] ) * bas ), UnionOfRows );
     
 end );
+
+##
+InstallMethod( IdealBasisToGroebner, 
+	[ IsHomalgMatrix],
+
+  function( M )
+    local R, C, Ech, pos, bas, A, el, GJ, d, j, I, S, GI, i, lambda;
+    
+    R := HomalgRing( M );
+    
+    if IsZero( M ) then
+        return MatrixOfGenerators( DefiningIdeal( R ) );
+    fi;
+    
+    ## Computes the coefficients with respect to the basis of R.
+    C := List( [ 1 .. NrRows( M ) ], i -> BasisCoefficientsOfRingElement( MatElm( M, i, 1 ) ) );
+    C := Iterated( C, UnionOfRows );
+    
+    ## Reverse order of columns of the matrix instead of reverse order of basis
+    Ech := CertainColumns( C, [ NrColumns( C ), NrColumns( C ) - 1 .. 1 ] );
+    Ech := BasisOfRowModule( Ech );
+    
+    C := CertainColumns( Ech, [ NrColumns( Ech ), NrColumns( Ech ) - 1 .. 1 ]);
+    
+    pos := PositionOfFirstNonZeroEntryPerRow( Ech );
+       
+    bas := BasisOverCoefficientsRing( R );
+    
+    A := AmbientRing( R );
+    
+    el := [ Zero( A ) ];
+    
+    # GJ := [];
+    GJ := HomalgZeroMatrix( 0, 1, A );
+    
+    d := NrRows( Ech );
+    
+    for j in [ d, d - 1 .. 1 ] do
+    
+        I := LeftSubmodule( el, A );
+        
+        S := A / I;
+        
+        if not IsZero( MatElm( bas, NrRows( bas ) + 1 - pos[ j ] , 1 ) / S ) then
+        
+            if IsZero( el[1] ) then
+                el[1] := MatElm( bas, NrRows( bas ) + 1 - pos[ j ] , 1 ) / A;
+            else
+                Add( el, MatElm( bas, NrRows( bas ) + 1 - pos[ j ], 1 ) / A );
+            fi;
+            
+            # Add( GJ, MatElm( R * CertainRows( C, [j] ) * bas, 1, 1 ) / A );
+            GJ := UnionOfRows( GJ, ( A * CertainRows( C, [j]) ) * ( A * bas ) );
+        fi;
+        
+    od;
+    
+    I := LeftSubmodule( el, A );
+        
+    S := A / I;
+        
+    GI := BasisOfRows( MatrixOfGenerators( DefiningIdeal( R ) ) );
+    
+    C := List( [ 1 .. NrRows( GI ) ], i -> Coefficients( MatElm( GI, i, 1 ) )!.monomials[1] );
+    
+    for i in [ 1 .. NrRows( GI ) ] do
+        
+        if not IsZero( C[i] / S ) then
+            
+            lambda := BasisCoefficientsOfRingElement( ( MatElm( GI, i, 1 ) - C[i] ) / R  );
+            d := NrColumns( lambda );
+            
+            lambda := CertainColumns( lambda, [d, d - 1 .. 1 ] );
+            
+            lambda := DecideZeroRows( lambda, Ech );
+            
+            lambda := CertainColumns( lambda, [d, d - 1 .. 1 ] );
+            
+            lambda := C[i] + ( MatElm( R * lambda * bas, 1, 1 ) /A );
+            
+            # Add( GJ, lambda);
+            lambda := HomalgMatrix( [lambda], 1, 1, A );
+            GJ := UnionOfRows( GJ, lambda );
+            
+        fi;
+        
+    od;
+    
+    return GJ;
+    
+end );
+
 ####################################
 #
 # methods for operations:
