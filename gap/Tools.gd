@@ -74,6 +74,14 @@ DeclareAttribute( "SeparablePart",
 	IsHomalgRingElement );
 #! @InsertSystem SeparablePart
 
+#! @Arguments r
+#! @Returns a matrix
+#! @Description
+#!  Computes the coefficients of the basis representation,
+#!  provided the ring is free of finite rang over its coefficients ring.
+DeclareAttribute( "BasisCoefficientsOfRingElement", 
+	IsHomalgRingElement);
+
 ####################################
 #
 #! @Section Operations

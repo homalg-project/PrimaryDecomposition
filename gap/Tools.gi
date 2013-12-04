@@ -180,6 +180,24 @@ InstallMethod( IsPerfect,
 
 end );
 
+##
+InstallMethod( BasisCoefficientsOfRingElement, 
+	[ IsHomalgRingElement],
+	
+  function( r )
+    local R, M, K, e;
+    
+    R := HomalgRing( r );
+    
+    M := RepresentationOverCoefficientsRing( r );
+    
+    K := CoefficientsRing( AmbientRing ( R ) );
+    
+    e := CertainRows( HomalgIdentityMatrix( NrRows( M ) , K ) , [ 1 ] );
+    
+    return ( e * M );
+    
+end );
 ####################################
 #
 # methods for operations:
