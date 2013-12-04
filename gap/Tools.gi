@@ -102,6 +102,12 @@ InstallMethod( RepresentationOverCoefficientsRing,
         Perform( [ 1 .. Length( pos ) ], function( j ) SetMatElm( mat, i, pos[j], MatElm( coeffs, j, 1 ) / k ); end );
     od;
     
+    if HasIsInitialMatrix( mat ) and IsInitialMatrix( mat ) then
+        mat := HomalgZeroMatrix( d, d, k );
+    fi;
+    
+    MakeImmutable( mat );
+    
     return mat;
     
 end );
