@@ -273,11 +273,16 @@ InstallMethod( PrimaryDecompositionZeroDim,
         
         M[i] := UnionOfRows( CertainRows( J , [ 1 .. j[i] ] ), CertainRows( J, [ j[i + 1] + 1 .. NrRows( J ) ] ) );
         
-        M[i] := UnionOfRows( A * MatrixOfGenerators( I ), A * M[i] );
+        M[i] := IdealBasisToGroebner( IdealBasisOverCoefficientRing( M[i] ) );
         
-        M[i] := LeftSubmodule( BasisOfRows( M[i] ) );
+        M[i] := LeftSubmodule( EntriesOfHomalgMatrix( M[i] ) );
+        
+        #M[i] := UnionOfRows( A * MatrixOfGenerators( I ), A * M[i] );
+        
+        #M[i] := LeftSubmodule( BasisOfRows( M[i] ) );
         
         Append( Decomp, PrimaryDecompositionZeroDim( M[i] ) );
+        # Add( Decomp, M[i] );
     od;
     
     return Decomp;

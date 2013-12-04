@@ -46,7 +46,8 @@ InstallMethod( RadicalOfIdeal,
     ## missing two steps for not perfect fields -> matrixmatrixembedding, fglmToGroebner
     ## then L <> A
     
-    return LeftSubmodule( BasisOfRows( RI * A ) );
+    return LeftSubmodule( EntriesOfHomalgMatrix( IdealBasisToGroebner( IdealBasisOverCoefficientRing( R * RI ) ) ), A );
+    ##return LeftSubmodule( BasisOfRows( RI * A ) );
     
 end );
 
