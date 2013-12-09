@@ -1,5 +1,4 @@
 #! @System BasisOverCoefficientsRing
-
 #! @Example
 LoadPackage( "PrimaryDecomposition" );
 #! true

@@ -46,5 +46,5 @@ DeclareProperty( "IsPrimaryZeroDim",
 #! @Returns a list
 DeclareAttribute( "PrimaryDecompositionZeroDim",
 	IsHomalgObject );
-#! @InsertSystem PrimaryDecompositionZeroDim
+#! @InsertSystem PrimaryDecompositionZeroDim;
 
