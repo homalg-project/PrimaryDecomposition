@@ -220,6 +220,10 @@ InstallMethod( IdealBasisOverCoefficientRing,
     W := List( [ 1 .. NrRows( G ) ], i -> BasisCoefficientsOfRingElement( MatElm( G, i, 1 ) / R ) );
     W := Iterated( W, UnionOfRows );
     
+    if IsZero( W ) then
+        return HomalgZeroMatrix( 1, 1, R );
+    fi;
+    
     n := Length( M );
     
     T := List( [ 1 .. NrRows( W ) ], i -> CertainRows( W, [ i ] ) );
