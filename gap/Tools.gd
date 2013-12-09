@@ -142,3 +142,10 @@ DeclareOperation( "GeneratorOfAnElementNotContainedInAnyHyperplane",
 	[ IsHomalgMatrix ] );
 #! @InsertSystem GeneratorOfAnElementNotContainedInAnyHyperplane
 
+#! @Arguments M, e
+#! @Returns two lists
+#! @Description
+#!  Computes a basis of the residue class ring and a Groebner Basis of the
+#!  defining ideal.
+DeclareOperation( "FGLMToGroebner", 
+	[ IsList, IsHomalgMatrix ] );
