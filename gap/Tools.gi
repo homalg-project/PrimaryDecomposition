@@ -172,6 +172,7 @@ InstallMethod( SeparablePart,
     
 end );
 
+##
 InstallMethod( IsPerfect,
         "for a ring",
         [ IsHomalgRing ],
@@ -279,10 +280,10 @@ InstallMethod( IdealBasisToGroebner,
     C := Iterated( C, UnionOfRows );
     
     ## Reverse order of columns of the matrix instead of reverse order of basis
-    Ech := CertainColumns( C, [ NrColumns( C ), NrColumns( C ) - 1 .. 1 ] );
     Ech := BasisOfRowModule( Ech );
+    Ech := CertainColumns( C, Reversed( [ 1 .. NrColumns( C ) ] ) );
     
-    C := CertainColumns( Ech, [ NrColumns( Ech ), NrColumns( Ech ) - 1 .. 1 ]);
+    C := CertainColumns( Ech, Reversed( [ 1 .. NrColumns( Ech ) ] ) );
     
     pos := PositionOfFirstNonZeroEntryPerRow( Ech );
        
@@ -293,10 +294,8 @@ InstallMethod( IdealBasisToGroebner,
     el := [ Zero( A ) ];
     
     GJ := HomalgZeroMatrix( 0, 1, A );
-    
-    d := NrRows( Ech );
-    
-    for j in [ d, d - 1 .. 1 ] do
+        
+    for j in Reversed( [ 1 .. NrRows( Ech ) ] ) do
     
         I := LeftSubmodule( el, A );
         
