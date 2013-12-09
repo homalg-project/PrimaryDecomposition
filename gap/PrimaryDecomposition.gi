@@ -228,7 +228,6 @@ InstallMethod( PrimaryDecompositionZeroDim,
             
             ListOfNonLinearFactors[i] := fac[i][2];
             
-            
         fi;
     od;
     
@@ -277,12 +276,7 @@ InstallMethod( PrimaryDecompositionZeroDim,
         
         M[i] := LeftSubmodule( EntriesOfHomalgMatrix( M[i] ) );
         
-        #M[i] := UnionOfRows( A * MatrixOfGenerators( I ), A * M[i] );
-        
-        #M[i] := LeftSubmodule( BasisOfRows( M[i] ) );
-        
         Append( Decomp, PrimaryDecompositionZeroDim( M[i] ) );
-        # Add( Decomp, M[i] );
     od;
     
     return Decomp;

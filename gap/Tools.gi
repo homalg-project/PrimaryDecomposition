@@ -292,7 +292,6 @@ InstallMethod( IdealBasisToGroebner,
     
     el := [ Zero( A ) ];
     
-    # GJ := [];
     GJ := HomalgZeroMatrix( 0, 1, A );
     
     d := NrRows( Ech );
@@ -311,7 +310,6 @@ InstallMethod( IdealBasisToGroebner,
                 Add( el, MatElm( bas, NrRows( bas ) + 1 - pos[ j ], 1 ) / A );
             fi;
             
-            # Add( GJ, MatElm( R * CertainRows( C, [j] ) * bas, 1, 1 ) / A );
             GJ := UnionOfRows( GJ, ( A * CertainRows( C, [j]) ) * ( A * bas ) );
         fi;
         
@@ -389,9 +387,6 @@ InstallMethod( MinimalPolynomial,
     ## this relies on the convention that the identity of
     ## the algebra is the first basis vector
     n := CertainRows( HomalgIdentityMatrix( c, k ), [ 1 ] );
-    
-    #n := HomalgInitialMatrix( 1, c, k );
-    #SetMatElm( n, 1, 1, One( k ) );
     
     m := n * M;
     
