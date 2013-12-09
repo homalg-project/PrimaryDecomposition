@@ -267,9 +267,11 @@ InstallMethod( IdealBasisToGroebner,
 	[ IsHomalgMatrix],
 
   function( M )
-    local R, C, Ech, pos, bas, A, el, GJ, d, j, I, S, GI, i, lambda;
+    local R, K, C, Ech, p, d, S, pos, bas, A, el, GJ, j, I, GI, i, lambda;
     
     R := HomalgRing( M );
+    
+    K := CoefficientsRing( AmbientRing( R ) );
     
     if IsZero( M ) then
         return MatrixOfGenerators( DefiningIdeal( R ) );
@@ -280,8 +282,23 @@ InstallMethod( IdealBasisToGroebner,
     C := Iterated( C, UnionOfRows );
     
     ## Reverse order of columns of the matrix instead of reverse order of basis
-    Ech := BasisOfRowModule( Ech );
     Ech := CertainColumns( C, Reversed( [ 1 .. NrColumns( C ) ] ) );
+    
+    ## Regard the matrix over an internal GAP ring to compute the reduced
+    ## echelon form
+    if IsPerfect( K ) then
+        
+        p := Characteristic( K );
+        
+        d := DegreeOverPrimeField( K );
+        
+        S := HomalgRingOfIntegers( p, d );
+                
+        Ech := BasisOfRows( S * Ech );
+        
+        Ech := K * Ech;
+        
+    fi;
     
     C := CertainColumns( Ech, Reversed( [ 1 .. NrColumns( Ech ) ] ) );
     
