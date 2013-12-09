@@ -98,6 +98,13 @@ DeclareOperation( "IdealBasisOverCoefficientRing",
 DeclareAttribute( "IdealBasisToGroebner", 
 	IsHomalgMatrix);
 
+#! @Arguments p
+#! @Returns a ring element
+#! @Description
+#!  Computes the Derivative of a univariate polynomial.
+DeclareAttribute( "DerivativeSep", 
+	IsHomalgRingElement);
+
 ####################################
 #
 #! @Section Operations

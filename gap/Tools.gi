@@ -375,6 +375,44 @@ InstallMethod( IdealBasisToGroebner,
     
 end );
 
+##
+InstallMethod( DerivativeSep,
+	"for a ring element",
+	[ IsHomalgRingElement ],
+
+  function( p )
+    local R, indets, coeffs, monoms, i;
+    
+    R := HomalgRing( p );
+    
+    indets := Indeterminates( R );
+    
+    if Length( indets ) <> 1 then
+        TryNextMethod( );
+    fi;
+    
+    indets := indets[1];
+    
+    coeffs := Coefficients( p );
+    
+    monoms := coeffs!.monomials;
+    
+    p := Zero( HomalgRing( p ) );
+    
+    for i in [ 1 .. NrRows( coeffs ) ] do
+        
+        if not IsOne( monoms[i] ) then
+        
+            p := p + MatElm( coeffs, i, 1) * Degree( monoms[i] ) * indets^( Degree( monoms[i] ) - 1 );
+        
+        fi;
+    
+    od;
+    
+    return p;
+
+end );
+
 ####################################
 #
 # methods for operations:
