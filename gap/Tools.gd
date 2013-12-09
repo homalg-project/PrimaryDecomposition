@@ -81,6 +81,7 @@ DeclareAttribute( "SeparablePart",
 #!  provided the ring is free of finite rang over its coefficients ring.
 DeclareAttribute( "BasisCoefficientsOfRingElement", 
 	IsHomalgRingElement);
+#! @InsertSystem BasisCoefficientsOfRingElement
 
 #! @Arguments G
 #! @Returns a matrix
@@ -89,6 +90,7 @@ DeclareAttribute( "BasisCoefficientsOfRingElement",
 #!  over the coefficient ring. The elements in <A>a</A> have to be in the same ring.
 DeclareOperation( "IdealBasisOverCoefficientRing", 
 	[ IsHomalgMatrix ] );
+#! @InsertSystem IdealBasisOverCoefficientsRing
 
 #! @Arguments M
 #! @Returns a list
@@ -104,6 +106,7 @@ DeclareAttribute( "IdealBasisToGroebner",
 #!  Computes the Derivative of a univariate polynomial.
 DeclareAttribute( "DerivativeSep", 
 	IsHomalgRingElement);
+#! @InsertSystem DerivativeSep
 
 ####################################
 #
