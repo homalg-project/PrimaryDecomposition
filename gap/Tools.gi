@@ -339,32 +339,37 @@ InstallMethod( IdealBasisToGroebner,
         
     S := A / I;
         
-    GI := BasisOfRows( MatrixOfGenerators( DefiningIdeal( R ) ) );
+    GI := MatrixOfSubobjectGenerators( DefiningIdeal( R ) );
     
-    C := List( [ 1 .. NrRows( GI ) ], i -> Coefficients( MatElm( GI, i, 1 ) )!.monomials[1] );
+    ## the algorithm is not working that well yet, so I left out the reduction
+    ## of the Groebner basis and added all generators of I to the Generators of
+    ## the subideal
     
-    for i in [ 1 .. NrRows( GI ) ] do
+    GJ := UnionOfRows( GJ, GI );
+    
+    #C := List( [ 1 .. NrRows( GI ) ], i -> Coefficients( MatElm( GI, i, 1 ) )!.monomials[1] );
+    
+    #for i in [ 1 .. NrRows( GI ) ] do
         
-        if not IsZero( C[i] / S ) then
+    #    if not IsZero( C[i] / S ) then
             
-            lambda := BasisCoefficientsOfRingElement( ( MatElm( GI, i, 1 ) - C[i] ) / R  );
-            d := NrColumns( lambda );
+    #        lambda := BasisCoefficientsOfRingElement( ( MatElm( GI, i, 1 ) - C[i] ) / R  );
+    #        d := NrColumns( lambda );
             
-            lambda := CertainColumns( lambda, [d, d - 1 .. 1 ] );
+    #        lambda := CertainColumns( lambda, [d, d - 1 .. 1 ] );
             
-            lambda := DecideZeroRows( lambda, Ech );
+    #        lambda := DecideZeroRows( lambda, Ech );
             
-            lambda := CertainColumns( lambda, [d, d - 1 .. 1 ] );
+    #        lambda := CertainColumns( lambda, [d, d - 1 .. 1 ] );
             
-            lambda := C[i] + ( MatElm( R * lambda * bas, 1, 1 ) /A );
+    #        lambda := C[i] + ( MatElm( R * lambda * bas, 1, 1 ) /A );
             
-            # Add( GJ, lambda);
-            lambda := HomalgMatrix( [lambda], 1, 1, A );
-            GJ := UnionOfRows( GJ, lambda );
+    #        lambda := HomalgMatrix( [lambda], 1, 1, A );
+    #        GJ := UnionOfRows( GJ, lambda );
             
-        fi;
+    #    fi;
         
-    od;
+    #od;
     
     return GJ;
     
