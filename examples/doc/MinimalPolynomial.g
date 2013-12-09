@@ -6,10 +6,10 @@ Q := HomalgFieldOfRationalsInSingular( );
 #! Q
 A := Q * "x,y,z";
 #! Q[x,y,z]
-I := LeftSubmodule( "x^3-x, y*x^2-y,y^2-x^2,z-x*y", A );
-#! <A torsion-free ideal given by 4 generators>
+I := LeftSubmodule( "y*z-x, x*z-y, y^2-z^2, x*y-z, x^2-z^2, z^3-z", A );
+#! <A torsion-free ideal given by 6 generators>
 R := A / I;
-#! Q[x,y,z]/( x^3-x, x^2*y-y, -x^2+y^2, -x*y+z )
+#! Q[x,y,z]/( y*z-x, x*z-y, y^2-z^2, x*y-z, x^2-z^2, z^3-z )
 r := "x^2+x*y+z" / R;
 #! |[ x^2+x*y+z ]|
 s := "x*y+z"/ R;

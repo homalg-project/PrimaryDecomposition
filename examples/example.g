@@ -4,7 +4,7 @@ Q := HomalgFieldOfRationalsInSingular( );
 
 A := Q * "x,y,z";
 
-I := LeftSubmodule( "x^3-x, y*x^2-y,y^2-x^2,z-x*y", A );
+I := LeftSubmodule( "y*z-x, x*z-y, y^2-z^2, x*y-z, x^2-z^2, z^3-z", A );
 
 R := A / I;
 
