@@ -268,7 +268,7 @@ end );
 
 ##
 InstallMethod( IdealBasisToGroebner, 
-	[ IsHomalgMatrix],
+	[ IsHomalgMatrix ],
 
   function( M )
     local R, K, C, Ech, p, d, S, pos, bas, A, el, GJ, j, I, GI, i, lambda;
@@ -609,9 +609,9 @@ InstallMethod( FGLMToGroebner,
     
     indets := Indeterminates( K );
     
-    ## G is supposed to become the GroebnerBasis, B the Basis of the residue class
-    ## ring and BB contains all elements in B represented by coefficients in the
-    ## rows of BB.
+    ## G is supposed to become the GroebnerBasis, B the monomial basis of the 
+    ## residue class ring and BB contains all elements in B represented by the
+    ## coefficients in the rows of BB.
     G := [ ];
     
     B := [ One( K ) ];
@@ -632,7 +632,7 @@ InstallMethod( FGLMToGroebner,
     ## Gradually increasing the degree of the monomials we proof if they 
     ## are a multiple of an element of L. If all monomials of a 
     ## certain degree are mulitples of elements of L (that is the case if bool
-    ## remains to be 1 in the for - loop for), all monomials of higher 
+    ## remains to be 1 in the for loop for), all monomials of higher 
     ## degree will be also multiples of elements of L and we can stop the 
     ## iteration.
     GK := GradedRing( K );
@@ -658,12 +658,12 @@ InstallMethod( FGLMToGroebner,
             ## only one time.
             # if Position( B, a ) = fail then
             
-                ## Determines if a is a multiple of an element of L.
+                ## Determines if a is a multiple of an element of L:
                 if not IsZero( a / S ) then
                 
                     bool := 0;
                     
-                    ## Computes the coefficient matrix b of the element a.
+                    ## Computes the coefficient matrix b of the element a:
                     for k in [ 1 .. n ] do                    
                         
                         c := a;
@@ -710,7 +710,7 @@ InstallMethod( FGLMToGroebner,
                             
                             S := K / J;
                             
-                            ## Want the linear combination
+                            ## Add the linear combination to the Groebner basis:
                             c :=  MatElm( syz, 1, NrColumns( syz ) ) / K * a;
                             
                             for l in [ 1 .. NrColumns( syz ) - 1 ] do
@@ -734,6 +734,6 @@ InstallMethod( FGLMToGroebner,
     
     od;
     
-    return[ G, B ];
+    return[ B, G ];
     
 end );
