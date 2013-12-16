@@ -17,4 +17,11 @@
 #
 ####################################
 
+#! @Arguments Sep
+#! @Returns a list
+#! @Description
+#!  Defines a common polynomial ring and computes the representation of the 
+#!  polynomials in the list.
+DeclareAttribute( "PolysOverTheSameRing",
+        IsList );
 
