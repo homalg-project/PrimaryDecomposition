@@ -99,3 +99,122 @@ InstallMethod( PolysOverTheSameRing,
     
 end );
 
+##
+InstallMethod( SepUnvollkommen,
+	"for a ring element",
+	[ IsHomalgRingElement ],
+
+  function( f )
+    local R, h, g1, h1, CoeffsRing, p, S, T, K, x, coeffs, monoms, i, a, coeffs2, monoms2, j, b, g2, g3;
+    ## Kemper's algorithm:
+    
+    ## make sure that the polynomial is univariate
+    R := HomalgRing( f );
+        
+    if Length( Indeterminates( R ) ) <> 1 then
+        TryNextMethod( );
+    fi;
+        
+    ## step 1:
+    h := Gcd_UsingCayleyDeterminant( f, DerivativeSep( f ) );
+    
+    g1 := f / h;
+        
+    ## step 2:
+    h1 := Zero( R );
+    
+    ## step 3:
+    while h <> h1 do
+        
+        h1 := h;
+        
+        h := Gcd_UsingCayleyDeterminant( h, DerivativeSep( h ) );
+    
+    od;
+    
+    ## step 4:
+    if Degree( h ) = 1 then
+        
+        if not IsBound( R!.RootOfBaseField ) then
+            R!.RootOfBaseField := 0;
+        fi;
+        
+        return g1;
+    
+    fi;
+    
+    ## step 5:
+    ## write h( x ) = h( x^p ), replace the ti and the ai by their p-th root 
+    
+    ## Characteristic of the base field:
+    CoeffsRing := CoefficientsRing( CoefficientsRing( R ) );
+    
+    p := Characteristic( CoeffsRing );
+    
+    S := CoeffsRing * RationalParameters( R );
+    
+    ## T is the new ring. The RootOfBaseField determines the power of the 
+    ## characteristic p the ti of the base ring are send to the ti in the ring T.
+    T := R;
+    
+    if IsBound( T!.RootOfBaseField ) then
+        T!.RootOfBaseField := 1 + T!.RootOfBaseField;
+    else
+        T!.RootOfBaseField := 1;
+    fi;
+    
+    ## For Computation of the p-th root of elements of the perfect base field.
+    K := CoefficientsRing( CoefficientsRing( R ) ) * Indeterminates( R );
+    
+    x := Indeterminates( K )[1];
+    
+    ## coefficients of h are still polynomials in the rational parameters
+    coeffs := Coefficients( h );
+        
+    monoms := coeffs!.monomials;
+    
+    h := Zero( T );
+    
+    for i in [ 1 .. NrRows( coeffs ) ] do
+    
+        a := MatElm( coeffs, i, 1 ) / S;
+        
+        ## coefficients of a depend only on the base field.
+        coeffs2 := Coefficients( a );
+        
+        monoms2 := coeffs2!.monomials;
+        
+        a := Zero( T );
+        
+        for j in [ 1 .. NrRows( coeffs2 ) ] do
+            
+            ## Computing the p-th root of the coefficients
+            b := x^p - MatElm( coeffs2, j, 1 ) / K;
+            
+            b := SquareFreeFactors( b )[1];
+            
+            b := - MatElm( Coefficients( b ), 2, 1 );
+            
+            b := b / T;
+            monoms2[j] := monoms2[j] / T;
+            
+            ## Putting the polynomial together:
+            a := a + b / T * monoms2[j] / T;
+            
+        od;
+        
+        ## writing h(x) = h(x^p).
+        h := h + a * Indeterminates( T )[1]^( Degree( monoms[i] ) / p ) / T;
+        
+    od;
+    
+    ## step 6:
+    g2 := SepUnvollkommen( h );
+    
+    ## step 7:
+    h := Product( PolysOverTheSameRing( g1, g2) );
+    g3 := SepUnvollkommen( g1 * g2 );
+    
+    return g3;
+
+end );

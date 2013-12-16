@@ -25,3 +25,10 @@
 DeclareAttribute( "PolysOverTheSameRing",
         IsList );
 
+#! @Arguments f
+#! @Returns a ring element
+#! @Description
+#!  Computes the separable part of a univariate polynomial over a non perfect 
+#!  ring.
+DeclareAttribute( "SepUnvollkommen",
+        IsHomalgRingElement );
