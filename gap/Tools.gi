@@ -164,7 +164,7 @@ InstallMethod( SeparablePart,
     
     R := CoefficientsRing( HomalgRing( p ) );
     
-    if Characteristic( R ) = 0 or IsFinite( R ) then
+    if IsPerfect( R ) then
        return Product( SquareFreeFactors( p ) );
     else
        TryNextMethod( );
