@@ -616,7 +616,7 @@ InstallMethod( FGLMToGroebner,
         [ IsList, IsHomalgMatrix ],
         
   function( M, e )
-    local n, A, K, indets, GK, G, B, BB, L, J, S, deg, bool, monoms, j, a, b, k, c, syz, l;
+    local n, A, K, indets, GK, G, B, BB, L, J, S, deg, bool, monoms, j, a, b, k, c, syz, i, l;
     
     ## Creating a Polynomialring with the right number of variables
     n := Length( M );
@@ -709,6 +709,18 @@ InstallMethod( FGLMToGroebner,
                     else
                         
                         syz := SyzygiesOfRows( UnionOfRows( BB, b ) );
+                        
+                        i := 0;
+                        l := 1;
+                        
+                        while IsZero( i ) and ( (l - 1) < NrRows( syz ) ) do
+                            if not IsZero( MatElm( syz, l, NrColumns( syz ) ) ) then
+                                syz := CertainRows( syz, [l] );
+                                i := 1;
+                                l := l + 1;
+                            fi;
+                        od;
+                        
                         
                         if IsZero( MatElm( syz, 1, NrColumns( syz ) ) ) then
                             
