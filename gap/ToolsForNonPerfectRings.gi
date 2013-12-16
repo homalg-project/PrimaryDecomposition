@@ -218,3 +218,74 @@ InstallMethod( SepUnvollkommen,
     return g3;
 
 end );
+
+####################################
+#
+# methods for operations:
+#
+####################################
+
+##
+InstallMethod( MatrixEmbedding,
+        [ IsHomalgMatrix, IsHomalgRingElement ],
+        
+  function( M, f )
+    local R, N, L, K, param, i, j, elm, S, coeffs, monoms, k, deg;
+        
+    R := HomalgRing( M );
+    
+    N := CompanionMatrix( f );
+    
+    L := [];
+    
+    K := CoefficientsRing( R ) * RationalParameters( R );
+    
+    param := - MatElm( Coefficients( f ), 2, 1 ) / K;
+    
+    for i in [1 .. NrRows( M ) ] do
+        
+        L[i] := HomalgZeroMatrix( NrRows( N ) , 0, R );
+        
+        for j in [ 1 .. NrColumns( M ) ] do
+                        
+            elm := MatElm( M, i, j ) / K;
+            
+            S := HomalgZeroMatrix( NrRows( N ), NrRows( N ), R );
+            
+            if IsZero( elm ) then
+                L[i] := UnionOfColumns( L[i], S );
+            else
+                coeffs := Coefficients( elm );
+                monoms := coeffs!.monomials;
+                
+                for k in [ 1 .. NrRows( coeffs ) ] do
+                    
+                    deg := 0;
+                    
+                    while not monoms[k]/param = fail do
+                        
+                        monoms[k] := monoms[k] / param;
+                        
+                        deg := deg + 1;
+                    
+                    od;
+                    
+                    elm := ( monoms[k] / R ) * ( MatElm( coeffs, k, 1 ) / R )* ( R * N^deg );
+                    
+                    S := S + elm;
+                
+                od;
+                
+                L[i] := UnionOfColumns( L[i], S );
+            
+            fi;
+            
+        od;
+        
+    od;
+    
+    return Iterated( L, UnionOfRows );
+    
+end );
+
+

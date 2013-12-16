@@ -32,3 +32,17 @@ DeclareAttribute( "PolysOverTheSameRing",
 #!  ring.
 DeclareAttribute( "SepUnvollkommen",
         IsHomalgRingElement );
+
+####################################
+#
+#! @Section Operations
+#
+####################################
+
+#! @Arguments M, f
+#! @Returns a matrix
+#! @Description
+#!  Computes the embedding of an matrix in another matrix
+DeclareOperation( "MatrixEmbedding",
+        [ IsHomalgMatrix, IsHomalgRingElement ] );
+
