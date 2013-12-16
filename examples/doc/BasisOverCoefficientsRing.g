@@ -13,10 +13,10 @@ R := A / I;
 bas := BasisOverCoefficientsRing( R );
 #! <A 5 x 1 matrix over a residue class ring>
 Display( bas );
-#! 1,
-#! x,
-#! y,
-#! z,
+#! 1, 
+#! z, 
+#! y, 
+#! x, 
 #! z^2
 #! 
 #! modulo [ y*z-x, x*z-y, y^2-z^2, x*y-z, x^2-z^2, z^3-z ]

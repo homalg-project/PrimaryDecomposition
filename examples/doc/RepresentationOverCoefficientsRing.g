@@ -15,9 +15,9 @@ r := HomalgRingElement( "x^2 +xy +z", R );
 RepresentationOverCoefficientsRing( r );
 #! <A 5 x 5 matrix over an external ring>
 Display(last);
-#! 0,0,0,2,1,
-#! 0,1,2,0,0,
-#! 0,2,1,0,0,
-#! 0,0,0,1,2,
-#! 0,0,0,2,1 
+#! 0,2,0,0,1,
+#! 0,1,0,0,2,
+#! 0,0,1,2,0,
+#! 0,0,2,1,0,
+#! 0,2,0,0,1 
 #! @EndExample

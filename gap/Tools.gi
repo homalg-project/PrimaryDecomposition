@@ -59,7 +59,7 @@ InstallMethod( BasisOverCoefficientsRing,
         m := HomogeneousPartOverCoefficientsRing( i, M );
         m := MatrixOfGenerators( UnderlyingModule( m ) );
         
-        bas := UnionOfRows( bas, m );
+        bas := UnionOfRows( bas, CertainRows( m, Reversed( [ 1 .. NrRows( m ) ] ) ) );
         
         i := i + 1;
         
@@ -296,8 +296,12 @@ InstallMethod( IdealBasisToGroebner,
         
         d := DegreeOverPrimeField( K );
         
-        S := HomalgRingOfIntegers( p, d );
-                
+        if IsZero( p ) then
+            S := HomalgFieldOfRationals( );
+        else
+            S := HomalgRingOfIntegers( p, d );
+        fi;
+        
         Ech := BasisOfRows( S * Ech );
         
         Ech := K * Ech;
