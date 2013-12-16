@@ -351,38 +351,42 @@ InstallMethod( IdealBasisToGroebner,
     I := LeftSubmodule( el, A );
     
     S := A / I;
-        
-    GI := MatrixOfSubobjectGenerators( DefiningIdeal( R ) );
     
     ## At least we have to add the generators of the defining ideal in which
     ## residue class ring the ideal was living in. We only add the generators
     ## whose leading monomial is not a multiply of the leading monomials of GJ.
     
-    GJ := UnionOfRows( GJ, GI );
+    GI := MatrixOfSubobjectGenerators( DefiningIdeal( R ) );
     
-    #C := List( [ 1 .. NrRows( GI ) ], i -> Coefficients( MatElm( GI, i, 1 ) )!.monomials[1] );
+    ## C contains the leading monomials of the generators of GI.
+    C := List( [ 1 .. NrRows( GI ) ], i -> Coefficients( MatElm( GI, i, 1 ) )!.monomials[1] );
     
-    #for i in [ 1 .. NrRows( GI ) ] do
+    for i in [ 1 .. NrRows( GI ) ] do
         
-    #    if not IsZero( C[i] / S ) then
+        if not IsZero( C[i] / S ) then
             
-    #        lambda := BasisCoefficientsOfRingElement( ( MatElm( GI, i, 1 ) - C[i] ) / R  );
-    #        d := NrColumns( lambda );
+            ## if the leading monomial of a generator of the defining ideal is 
+            ## not a multiply of the leading monomials of GJ, we add the
+            ## we add the generator to the GJ.
             
-    #        lambda := CertainColumns( lambda, [d, d - 1 .. 1 ] );
+            lambda := BasisCoefficientsOfRingElement( ( MatElm( GI, i, 1 ) - C[i] ) / R  );
+            d := NrColumns( lambda );
             
-    #        lambda := DecideZeroRows( lambda, Ech );
+            lambda := CertainColumns( lambda, [d, d - 1 .. 1 ] );
             
-    #        lambda := CertainColumns( lambda, [d, d - 1 .. 1 ] );
+            lambda := DecideZeroRows( lambda, Ech );
             
-    #        lambda := C[i] + ( MatElm( R * lambda * bas, 1, 1 ) /A );
+            lambda := CertainColumns( lambda, [d, d - 1 .. 1 ] );
             
-    #        lambda := HomalgMatrix( [lambda], 1, 1, A );
-    #        GJ := UnionOfRows( GJ, lambda );
+            lambda := C[i] + ( MatElm( R * lambda * bas, 1, 1 ) /A );
             
-    #    fi;
+            lambda := HomalgMatrix( [lambda], 1, 1, A );
+            
+            GJ := UnionOfRows( GJ, lambda );
+            
+        fi;
         
-    #od;
+    od;
     
     return GJ;
     
