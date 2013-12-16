@@ -308,6 +308,12 @@ InstallMethod( IdealBasisToGroebner,
         
     fi;
     
+    ## The reduced echelon form is a reduction of the generators of the ideal.
+    ## Now we iterate over the generators starting with the one which has the
+    ## smallest leading monomial and add them to the GJ if they
+    ## are not a multiply of the leading monomials of GJ.
+    ## To proof this we defined the ideal I and the residue class ring S.
+    
     C := CertainColumns( Ech, Reversed( [ 1 .. NrColumns( Ech ) ] ) );
     
     pos := PositionOfFirstNonZeroEntryPerRow( Ech );
@@ -316,8 +322,10 @@ InstallMethod( IdealBasisToGroebner,
     
     A := AmbientRing( R );
     
+    ## el saves the leading monomials of the GJ.
     el := [ Zero( A ) ];
     
+    ## GJ is supposed to become the Groebner basis of the ideal.
     GJ := HomalgZeroMatrix( 0, 1, A );
     
     for j in Reversed( [ 1 .. NrRows( Ech ) ] ) do
@@ -346,9 +354,9 @@ InstallMethod( IdealBasisToGroebner,
         
     GI := MatrixOfSubobjectGenerators( DefiningIdeal( R ) );
     
-    ## the algorithm is not working that well yet, so I left out the reduction
-    ## of the Groebner basis and added all generators of I to the Generators of
-    ## the subideal
+    ## At least we have to add the generators of the defining ideal in which
+    ## residue class ring the ideal was living in. We only add the generators
+    ## whose leading monomial is not a multiply of the leading monomials of GJ.
     
     GJ := UnionOfRows( GJ, GI );
     
