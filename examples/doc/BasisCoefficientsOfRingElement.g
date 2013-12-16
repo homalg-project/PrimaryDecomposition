@@ -31,3 +31,4 @@ Display(last);
 #!
 #! modulo [ y*z-x, x*z-y, y^2-z^2, x*y-z, x^2-z^2, z^3-z ]
 #! @EndExample
+

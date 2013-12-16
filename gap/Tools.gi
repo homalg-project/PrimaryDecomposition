@@ -319,7 +319,7 @@ InstallMethod( IdealBasisToGroebner,
     el := [ Zero( A ) ];
     
     GJ := HomalgZeroMatrix( 0, 1, A );
-        
+    
     for j in Reversed( [ 1 .. NrRows( Ech ) ] ) do
     
         I := LeftSubmodule( el, A );
@@ -335,12 +335,13 @@ InstallMethod( IdealBasisToGroebner,
             fi;
             
             GJ := UnionOfRows( GJ, ( A * CertainRows( C, [j]) ) * ( A * bas ) );
+        
         fi;
         
     od;
     
     I := LeftSubmodule( el, A );
-        
+    
     S := A / I;
         
     GI := MatrixOfSubobjectGenerators( DefiningIdeal( R ) );
