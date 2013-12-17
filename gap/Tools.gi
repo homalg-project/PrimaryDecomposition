@@ -616,7 +616,8 @@ InstallMethod( FGLMToGroebner,
         [ IsList, IsHomalgMatrix ],
         
   function( M, e )
-    local n, A, K, indets, GK, G, B, BB, L, J, S, deg, bool, monoms, j, a, b, k, c, syz, i, l;
+    local n, A, K, indets, GK, G, B, BB, L, J, S, deg, bool, monoms, j, a, b,
+          k, c, syz, i, l;
     
     ## Creating a Polynomialring with the right number of variables
     n := Length( M );

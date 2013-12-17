@@ -21,7 +21,8 @@ InstallMethod( PolysOverTheSameRing,
 	[ IsList ],
 
   function( Sep )
-    local R, Rings, S, lcm, K, indets, i, coeffs, r, cocoeffs, b, j, a, monoms, k, deg;
+    local R, Rings, S, lcm, K, indets, i, coeffs, r, cocoeffs, b, j, a, monoms,
+          k, deg;
     
     R := HomalgRing( Sep[1] );
     
@@ -105,7 +106,8 @@ InstallMethod( SepUnvollkommen,
 	[ IsHomalgRingElement ],
 
   function( f )
-    local R, h, g1, h1, CoeffsRing, p, S, T, K, x, coeffs, monoms, i, a, coeffs2, monoms2, j, b, g2, g3;
+    local R, h, g1, h1, CoeffsRing, p, S, T, K, x, coeffs, monoms, i, a,
+          coeffs2, monoms2, j, b, g2, g3;
     ## Kemper's algorithm:
     
     ## make sure that the polynomial is univariate

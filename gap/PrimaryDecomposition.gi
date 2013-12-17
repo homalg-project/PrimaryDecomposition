@@ -21,8 +21,8 @@ InstallMethod( IsPrimeZeroDim,
 	[ IsFinitelyPresentedSubmoduleRep and ConstructedAsAnIdeal ],
 	
   function( I )
-    local A, C, R, indets, mu, sf_mu, degI, i, RadI, n, RmodRadI, degRadI, e, L, iter, 
-          lambda, z, w, comb, bool, l, W, Wext;
+    local A, C, R, indets, mu, sf_mu, degI, i, RadI, J, e, L, LModJ, degJ, n,
+          list, iter, lambda, w;
     
     A := HomalgRing( I );
     
@@ -188,7 +188,8 @@ InstallMethod( PrimaryDecompositionZeroDim,
         [ IsHomalgObject ],
 
   function( I )
-    local Decomp, A, R, a, fac, ListOfNonLinearFactors, factor, N, W, bas, i, J, M, j;
+    local Decomp, A, R, a, fac, ListOfNonLinearFactors, factor, N, W, bas, i,
+          J, M, j;
     
     Decomp := [ ]; 
     
