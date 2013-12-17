@@ -240,22 +240,26 @@ InstallMethod( MatrixEmbedding,
     
     L := [];
     
+    ## K is necessary to get change the ti.
     K := CoefficientsRing( R ) * RationalParameters( R );
     
-    param := - MatElm( Coefficients( f ), 2, 1 ) / K;
+    param := - MatElm( Coefficients( f ), NrRows( Coefficients( f ) ), 1 ) / K;
     
-    for i in [1 .. NrRows( M ) ] do
+    ## i and j are the variable for iterating over the matrix entries.
+    for i in [ 1 .. NrRows( M ) ] do
         
         L[i] := HomalgZeroMatrix( NrRows( N ) , 0, R );
         
         for j in [ 1 .. NrColumns( M ) ] do
-                        
+            
             elm := MatElm( M, i, j ) / K;
             
+            ## S is the Matrix which replaces the matrix entry elm.
             S := HomalgZeroMatrix( NrRows( N ), NrRows( N ), R );
             
             if IsZero( elm ) then
                 L[i] := UnionOfColumns( L[i], S );
+            
             else
                 coeffs := Coefficients( elm );
                 monoms := coeffs!.monomials;
