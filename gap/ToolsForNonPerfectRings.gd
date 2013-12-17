@@ -24,7 +24,8 @@
 #!  polynomials in the list.
 DeclareAttribute( "PolysOverTheSameRing",
         IsList );
-
+#! @InsertSystem PolysOverTheSameRing
+        
 #! @Arguments f
 #! @Returns a ring element
 #! @Description
@@ -45,4 +46,5 @@ DeclareAttribute( "SepUnvollkommen",
 #!  Computes the embedding of an matrix in another matrix
 DeclareOperation( "MatrixEmbedding",
         [ IsHomalgMatrix, IsHomalgRingElement ] );
+#! @InsertSystem MatrixEmbedding
 
