@@ -44,7 +44,7 @@ InstallMethod( PolysOverTheSameRing,
     S!.RootOfBaseField := lcm;
     
     ## K is necessary to compute the representation of the polynomials over the 
-    ## new ring S. 
+    ## new ring S.
     K := CoefficientsRing( CoefficientsRing( R ) ) * RationalParameters( R );
     
     indets := Indeterminates( K );

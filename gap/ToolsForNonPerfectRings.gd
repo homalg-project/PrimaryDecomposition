@@ -20,8 +20,8 @@
 #! @Arguments Sep
 #! @Returns a list
 #! @Description
-#!  Defines a common polynomial ring and computes the representation of the 
-#!  polynomials in the list.
+#!  Defines a common polynomial ring of polynomials who have the same base field
+#!  and computes the representation of the polynomials in the list.
 DeclareAttribute( "PolysOverTheSameRing",
         IsList );
 #! @InsertSystem PolysOverTheSameRing
@@ -43,7 +43,7 @@ DeclareAttribute( "SepUnvollkommen",
 #! @Arguments M, f
 #! @Returns a matrix
 #! @Description
-#!  Computes the embedding of an matrix in another matrix
+#!  Computes the embedding of an matrix over a field extension.
 DeclareOperation( "MatrixEmbedding",
         [ IsHomalgMatrix, IsHomalgRingElement ] );
 #! @InsertSystem MatrixEmbedding
