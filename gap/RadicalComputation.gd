@@ -18,6 +18,13 @@
 ####################################
 
 #! @Description
+#!  Computes some stuff needed in RadicalOfIdeal and IsPrimeZeroDim.
+#! @Arguments I
+#! @Returns a LeftSubmodule
+DeclareAttribute( "PreparationForRadicalOfIdeal",
+	IsHomalgModule );
+
+#! @Description
 #!  Computes the radical of a zero dimensional ideal <A>I</A>. 
 #! @Arguments I
 #! @Returns a LeftSubmodule

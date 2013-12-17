@@ -16,18 +16,14 @@
 ####################################
 
 ##
-InstallMethod( RadicalOfIdeal,
+InstallMethod( PreparationForRadicalOfIdeal,
 	"for an ideal",
 	[ IsFinitelyPresentedSubmoduleRep and ConstructedAsAnIdeal ],
 	
   function( I )
-    local A, R, indets, Sep, deg, J, M, K, p, i, f, d;
+    local A, R, indets, Sep, deg, J, M, i, d;
     
     A := HomalgRing( I );
-    
-    if not IsPerfect( CoefficientsRing( A ) ) then
-        TryNextMethod( );
-    fi;
     
     ## step 1 and 2:
     R := A / I ;
@@ -64,22 +60,45 @@ InstallMethod( RadicalOfIdeal,
     fi;
     
     ## step 5:
-    M := FGLMdata( HomalgRing( J ) / J );
+    return [ FGLMdata( HomalgRing( J ) / J ), I ];
     
-    K := CoefficientsRing( HomalgRing( I ) ) * "var";
+end );
+
+##
+InstallMethod( RadicalOfIdeal,
+	"for a an ideal",
+	[  IsHomalgModule ],
+
+  function( I )
+    local A, M, R, K, p, i, f, d;  
+    
+    A := HomalgRing( I );
+    
+    if IsPerfect( CoefficientsRing( A ) ) then
+        return PreparationForRadicalOfIdeal( I );
+    fi;
+    
+    M := PreparationForRadicalOfIdeal( I )[1];
+    
+    I := PreparationForRadicalOfIdeal( I )[2];
+    
+    A := AmbientRing( I );
+    
+    R := A / I;
+    
+    K := CoefficientsRing( A ) * "var";
     
     p := Characteristic( CoefficientsRing( CoefficientsRing( A ) ) );
     
-    for i in [ 1 .. Length( RationalParameters( R ) ) ] do
+    for i in [ 1 .. Length( RationalParameters( A ) ) ] do
     
         f := ("( var^p )^deg" / K ) - RationalParameters[i] / K;
          
         M := List( M, i -> MatrixEmbedding( i ) );
     
     od;
-    
-    ## step 6:
-    M := List( M, n -> n * CoefficientsRing( R ) );
+        
+    M := List( M, n -> n );
     
     d := NrRows( M[1] );
     
