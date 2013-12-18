@@ -129,8 +129,11 @@ InstallMethod( MinimalPolynomial,
 	[ IsHomalgRingElement ],
         
   function( r )
+    local t;
     
-    return MinimalPolynomial( r, "t" );
+    t := UnusedVariableName( HomalgRing( r ), "t" );
+    
+    return MinimalPolynomial( r, t );
     
 end );
     
