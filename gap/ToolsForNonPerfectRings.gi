@@ -24,7 +24,13 @@ InstallMethod( PolysOverTheSameRing,
     local R, Rings, S, lcm, K, indets, i, coeffs, r, cocoeffs, b, j, a, monoms,
           k, deg;
     
+    if IsOne( Length( Sep ) ) then
+        return Sep;
+    fi;
+    
     R := HomalgRing( Sep[1] );
+    
+    p := Characteristic( CoefficientsRing( CoefficientsRing( R ) ) );
     
     Rings := List( [ 1 .. Length( Sep ) ], i -> HomalgRing( Sep[i] )!.RootOfBaseField );
     S := [ ];
@@ -80,7 +86,7 @@ InstallMethod( PolysOverTheSameRing,
                     od;
                     
                     if not IsZero( deg ) then
-                        a := a * RationalParameters( S )[k]^( lcm * deg );
+                        a := a * ( RationalParameters( S )[k]^p )^( lcm * deg );
                     fi;
                                     
                 od;
