@@ -23,5 +23,5 @@ R3!.RootOfBaseField := 0;
 r3 := "(t)*x^2+(-s)*x"/ R3;
 #! (t)*x^2+(-s)*x
 PolysOverTheSameRing( [ r1, r2, r3 ] );
-#! [ (t^6*s^6)*x^3+(s^12)*x+(t^6), (t^6)*x^2+(s^6), (t^6)*x^2+(-s^6)*x ]
+#! [ (t^9*s^9)*x^3+(s^18)*x+(t^9), (t^12)*x^2+(s^12), (t^18)*x^2+(-s^18)*x ]
 #! @EndExample
