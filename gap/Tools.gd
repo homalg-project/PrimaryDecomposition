@@ -135,12 +135,17 @@ DeclareOperation( "IsNotContainedInAnyHyperplane",
 	
 #! @Description
 #!  Generates an element, which is not contained in any <M>n - 1 </M> dimensional 
-#!  subspace spanned by the rows of L
+#!  subspace of C spanned by the rows of L
 #! @Arguments L
 #! @Returns a value
 DeclareOperation( "GeneratorOfAnElementNotContainedInAnyHyperplane",
 	[ IsHomalgMatrix ] );
 #! @InsertSystem GeneratorOfAnElementNotContainedInAnyHyperplane
+
+#! @Arguments L, C
+#! @Returns a value
+DeclareOperation( "GeneratorOfAnElementNotContainedInAnyHyperplane",
+	[ IsHomalgMatrix, IsHomalgRing ] );
 
 #! @Arguments M, e
 #! @Returns two lists

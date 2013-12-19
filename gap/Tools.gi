@@ -270,6 +270,28 @@ InstallMethod( IdealBasisOverCoefficientRing,
 end );
 
 ##
+InstallMethod( IdealBasisToGroebner,
+	[ IsHomalgMatrix ],
+
+  function( M )
+    local R, A, I;
+    
+    R := HomalgRing( M );
+    if IsPerfect( CoefficientsRing( R ) ) then
+        TryNextMethod( );
+    fi;
+    
+    A := AmbientRing( R );
+    
+    I := MatrixOfSubobjectGenerators( DefiningIdeal( R ) );
+    
+    M := UnionOfRows( M, I );
+    
+    return BasisOfRows( M );
+
+end );
+
+##
 InstallMethod( IdealBasisToGroebner, 
 	[ IsHomalgMatrix ],
 
@@ -278,10 +300,14 @@ InstallMethod( IdealBasisToGroebner,
     
     R := HomalgRing( M );
     
+    if not IsPerfect( CoefficientsRing( R ) ) then
+        TryNextMethod( );
+    fi;
+    
     K := CoefficientsRing( AmbientRing( R ) );
     
     if IsZero( M ) then
-        return MatrixOfGenerators( DefiningIdeal( R ) );
+        return MatrixOfSubobjectGenerators( DefiningIdeal( R ) );
     fi;
     
     ## Computes the coefficients with respect to the basis of R.
