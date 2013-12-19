@@ -74,7 +74,7 @@ InstallMethod( PolysOverTheSameRing,
 end );
 
 ##
-InstallMethod( SepUnvollkommen,
+InstallMethod( SeparablePart,
 	"for a ring element",
 	[ IsHomalgRingElement ],
 
@@ -185,11 +185,11 @@ InstallMethod( SepUnvollkommen,
     od;
     
     ## step 6:
-    g2 := SepUnvollkommen( h );
+    g2 := SeparablePart( h );
     
     ## step 7:
     h := Product( PolysOverTheSameRing( [ g1, g2 ] ) );
-    g3 := SepUnvollkommen( h );
+    g3 := SeparablePart( h );
     
     return g3;
 

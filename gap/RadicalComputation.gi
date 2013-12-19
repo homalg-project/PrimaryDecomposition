@@ -30,11 +30,7 @@ InstallMethod( PreparationForRadicalOfIdeal,
     
     indets := Indeterminates( R );
     
-    if IsPerfect( CoefficientsRing( A ) ) then
-        Sep := List( indets, a -> SeparablePart( MinimalPolynomial( a ) ) );
-    else
-        Sep := List( indets, a -> SepUnvollkommen( MinimalPolynomial( a ) ) );
-    fi;
+    Sep := List( indets, a -> SeparablePart( MinimalPolynomial( a ) ) );
     
     if not IsPerfect( CoefficientsRing( A ) ) then
         
