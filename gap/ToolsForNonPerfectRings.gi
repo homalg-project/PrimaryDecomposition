@@ -44,7 +44,7 @@ InstallMethod( PolysOverTheSameRing,
     lcm := Lcm( S ); 
     
     ## S is the common ring.
-    S := R;
+    S := CoefficientsRing( R ) * List( Indeterminates( R ), Name );
     S!.RootOfBaseField := lcm;
     
     ## K is necessary to compute the representation of the polynomials over the 
@@ -85,7 +85,15 @@ InstallMethod( SepUnvollkommen,
     
     ## make sure that the polynomial is univariate
     R := HomalgRing( f );
-        
+    
+    if not IsBound( R!.RootOfBaseField ) then
+            R!.RootOfBaseField := 0;
+    fi;
+    
+    if IsPerfect( CoefficientsRing( R ) ) then
+        TryNextMethod( );
+    fi;
+    
     if Length( Indeterminates( R ) ) <> 1 then
         TryNextMethod( );
     fi;
@@ -94,7 +102,8 @@ InstallMethod( SepUnvollkommen,
     h := Gcd_UsingCayleyDeterminant( f, DerivativeSep( f ) );
     
     g1 := f / h;
-        
+    
+    g1 := g1 / R;
     ## step 2:
     h1 := Zero( R );
     
@@ -108,12 +117,8 @@ InstallMethod( SepUnvollkommen,
     od;
     
     ## step 4:
-    if Degree( h ) = 1 then
-        
-        if not IsBound( R!.RootOfBaseField ) then
-            R!.RootOfBaseField := 0;
-        fi;
-        
+    if IsOne( h ) then
+    
         return g1;
     
     fi;
@@ -130,13 +135,9 @@ InstallMethod( SepUnvollkommen,
     
     ## T is the new ring. The RootOfBaseField determines the power of the 
     ## characteristic p the ti of the base ring are send to the ti in the ring T.
-    T := R;
+    T := CoefficientsRing( R ) * List( Indeterminates( R ), Name );
     
-    if IsBound( T!.RootOfBaseField ) then
-        T!.RootOfBaseField := 1 + T!.RootOfBaseField;
-    else
-        T!.RootOfBaseField := 1;
-    fi;
+    T!.RootOfBaseField := 1 + R!.RootOfBaseField;
     
     ## For Computation of the p-th root of elements of the perfect base field.
     K := CoefficientsRing( CoefficientsRing( R ) ) * Indeterminates( R );
@@ -187,8 +188,8 @@ InstallMethod( SepUnvollkommen,
     g2 := SepUnvollkommen( h );
     
     ## step 7:
-    h := Product( PolysOverTheSameRing( g1, g2) );
-    g3 := SepUnvollkommen( g1 * g2 );
+    h := Product( PolysOverTheSameRing( [ g1, g2 ] ) );
+    g3 := SepUnvollkommen( h );
     
     return g3;
 
