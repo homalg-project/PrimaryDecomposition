@@ -22,16 +22,11 @@ InstallMethod( IsPrimeZeroDim,
 	
   function( I )
     local A, C, R, indets, mu, sf_mu, degI, i, RadI, J, e, L, LModJ, degJ, n,
-          list, iter, lambda, w;
+          mat, iter, lambda, w;
     
     A := HomalgRing( I );
     
     C := CoefficientsRing( A );
-    
-    ## preliminary test for perfectness, should be replaced by IsPerfect
-    if not IsPerfect( C ) then
-        TryNextMethod( );
-    fi;
     
     ## The first part of the algorithm computes the minimal polynomials of the 
     ## indeterminates of R and determines if at least one of them is irreducible 
@@ -76,25 +71,39 @@ InstallMethod( IsPrimeZeroDim,
     ## degRadI or reducible.
     ## It is splitted into two cases: Finite and infinite coefficient fields.
     
+    ## if the coefficients ring C is perfect then the ideal J coincides with the 
+    ## radical ideal. 
+    if IsPerfect( C ) then
+        J := RadI;
+    else
+        
+        J := PreparationForRadicalOfIdeal( I );
+        e := CertainRows( HomalgIdentityMatrix( NrRows( J[1] ), HomalgRing( J[1] ) ), [1] );
+        
+        J := FGLMToGroebner( J, e );
+        
+    fi;
+    
     ## Some values needed in both cases:
     
-    RmodRadI := A / RadI;
+    L := HomalgRing( J );
     
-    degRadI := NrRows( BasisOverCoefficientsRing( RmodRadI ) );
+    LModJ := L / J;
+    
+    degJ := NrRows( BasisOverCoefficientsRing( LModJ ) );
     
     n := Length( indets );
     
     e := HomalgIdentityMatrix( n, C );
     
-    indets := HomalgMatrix( indets, Length( indets ), 1, R );
+    indets := HomalgMatrix( indets, Length( indets ), 1, LModJ );
     
     ## First case: Coefficients ring is finite.
     ## The iteration goes over all ring elements.
     
     if IsFinite( C ) then
         
-        L := [];
-        L := List( [ 1 .. n ], i -> CertainRows( e, [i] ) );
+        mat := List( [ 1 .. n ], i -> CertainRows( e, [i] ) );
         
         iter := Iterator( e );
         
@@ -104,24 +113,24 @@ InstallMethod( IsPrimeZeroDim,
             
             lambda := NextIterator( iter );
 
-            if Position( L, lambda )= fail then
+            if Position( mat, lambda )= fail then
                 
-                w := ( R * lambda ) * indets;
+                w := ( LModJ * lambda ) * indets;
                 
-                mu := MinimalPolynomial( w );
+                mu := MinimalPolynomial( MatElm( w, 1, 1 ) );
             
-                if IsIrreducible( mu ) and Degree( mu ) = degRadI then
+                if IsIrreducible( mu ) and Degree( mu ) = degJ then
                 
                     return true;
                 
                 elif not IsIrreducible( mu ) then
                 
-                    I!.AZeroDivisor := w;
+                    I!.AZeroDivisor := MatElm( R * w , 1, 1 );
                     return false;
                 
                 fi;
                 
-                Add( L , lambda);
+                Add( mat , lambda);
                 
             fi;
                         
@@ -132,28 +141,33 @@ InstallMethod( IsPrimeZeroDim,
     ## Second case: Coefficients field is not finite.
     ## The iteration goes over elements, whose coefficients of the basis do 
     ## not lie in any hyperplane of the vectorspace over the coeffient field. 
-    L := e;
+    mat := e;
      
     while true do
         
-        lambda := GeneratorOfAnElementNotContainedInAnyHyperplane( L );
-        
-        w := ( R * lambda ) * indets;
+        if IsPerfect( C ) then
             
-        mu := MinimalPolynomial( w );
+            lambda := GeneratorOfAnElementNotContainedInAnyHyperplane( mat );
+        else
+            lambda := GeneratorOfAnElementNotContainedInAnyHyperplane( mat, CoefficientsRing( L ) );
+        fi;
+                
+        w := ( LModJ * lambda ) * indets;
+            
+        mu := MinimalPolynomial( MatElm( w, 1, 1 ) );
         
-        if IsIrreducible( mu ) and Degree( mu ) = degRadI then
+        if IsIrreducible( mu ) and Degree( mu ) = degJ then
             
             return true;
             
         elif not IsIrreducible( mu ) then
         
-            I!.AZeroDivisor := w;
+            I!.AZeroDivisor := MatElm( R * w , 1, 1 );
             return false;
         
         fi;
         
-        Add( L, lambda );
+        mat := UnionOfRows( mat, lambda );
         
     od;
     
