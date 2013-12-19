@@ -129,9 +129,15 @@ InstallMethod( MinimalPolynomial,
 	[ IsHomalgRingElement ],
         
   function( r )
-    local t;
+    local R, t;
     
-    t := UnusedVariableName( HomalgRing( r ), "t" );
+    R := HomalgRing( r );
+    
+    if HasAmbientRing( R ) then
+        R := AmbientRing( R );
+    fi;
+    
+    t := UnusedVariableName( R, "t" );
     
     return MinimalPolynomial( r, t );
     
