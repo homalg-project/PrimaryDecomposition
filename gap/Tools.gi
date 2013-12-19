@@ -646,19 +646,85 @@ InstallMethod( GeneratorOfAnElementNotContainedInAnyHyperplane,
 end );
 
 ##
-InstallMethod( FGLMToGroebner,
-        "for a list and a matrix",
-        [ IsList, IsHomalgMatrix ],
+InstallMethod( GeneratorOfAnElementNotContainedInAnyHyperplane,
+	"for a matrix",
+	[ IsHomalgMatrix , IsHomalgRing ],
+
+  function( L , S )
+    local lambda, R, r, s, lambda2;
+    
+    while true do
+    
+        lambda := Iterated( List( [ 1 .. NrRows( L ) ], i -> Random( [ -10 .. 10 ] ) * CertainRows( L, [i]) ), \+ );
         
+        R := HomalgRing( L );
+        
+        if IsBound( R!.RootOfBaseRing ) then
+            r := R!.RootOfBaseRing;
+        else
+            r := 0;
+        fi;
+        
+        if IsBound( S!.RootOfBaseRing ) then
+            s := S!.RootOfBaseRing;
+        else
+            s := 0;
+        fi;
+        
+        L := CoefficientsTransformation( L, s - r );
+        
+        lambda2 := CoefficientsTransformation( lambda, s - r );
+        
+        if IsNotContainedInAnyHyperplane( lambda2, L ) then
+            return lambda;
+        fi;
+        
+    od;
+    
+end );
+
+##
+InstallMethod( FGLMToGroebner,
+	"for a list and a matrix",
+	[ IsList, IsHomalgMatrix ],
+
   function( M, e )
-    local n, A, K, indets, GK, G, B, BB, L, J, S, deg, bool, monoms, j, a, b,
-          k, c, syz, i, l;
+    local n, R, x, l;
+    
+    R := HomalgRing( M[1] );
+    
+    if HasAmbientRing( R ) then
+        R := AmbientRing( R );
+    fi;
+    
+    x := UnusedVariableName( R, "x" );
+    
+    return FGLMToGroebner( M, e, [ x ] );
+
+end );
+
+##
+InstallMethod( FGLMToGroebner,
+        "for a list, a matrix and a list",
+        [ IsList, IsHomalgMatrix, IsList ],
+        
+  function( M, e, l )
+    local n, c, K, indets, GK, G, B, BB, L, J, S, deg, bool, monoms, j, a, b,
+          k, syz, i;
     
     ## Creating a Polynomialring with the right number of variables
-    n := Length( M );
     
-    A := HomalgRing( M[1] );
-    K := A * Concatenation( "x1..", String( n ) );
+    n := Length( [ M ] );
+    
+    if IsOne( Length( l ) ) and Length( l ) < n then
+        
+        c := l[1];
+        
+        K := HomalgRing( M[1] ) * Concatenation( "c1..", String( n ) );
+    
+    else
+        K := HomalgRing( M[1] ) * l;
+    fi;
     
     indets := Indeterminates( K );
     

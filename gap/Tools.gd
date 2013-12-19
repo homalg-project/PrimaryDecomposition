@@ -154,3 +154,9 @@ DeclareOperation( "GeneratorOfAnElementNotContainedInAnyHyperplane",
 #!  defining ideal.
 DeclareOperation( "FGLMToGroebner", 
 	[ IsList, IsHomalgMatrix ] );
+#! @InsertSystem FGLMToGroebner
+
+#! @Arguments M, e, l
+#! @Returns two lists
+DeclareOperation( "FGLMToGroebner", 
+	[ IsList, IsHomalgMatrix, IsList ] );
