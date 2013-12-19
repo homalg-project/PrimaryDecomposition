@@ -81,7 +81,7 @@ InstallMethod( RadicalOfIdeal,
 	[  IsHomalgModule ],
 
   function( I )
-    local A, p, M, deg, R, K, i, f, d, e;  
+    local A, p, M, J, deg, R, x, K, i, f, d, e, FGLM;  
     
     A := HomalgRing( I );
     
@@ -92,21 +92,25 @@ InstallMethod( RadicalOfIdeal,
     p := PreparationForRadicalOfIdeal( I );
     
     M := p[1];
-    I := p[2];
+    J := p[2];
     
-    p := HomalgRing( I )!.RootOfBaseField;
+    deg := HomalgRing( J )!.RootOfBaseField;
     
-    A := HomalgRing( I );
+    A := HomalgRing( J );
     
-    R := A / I;
+    R := A / J;
     
-    K := CoefficientsRing( A ) * "x";
+    x := UnusedVariableName( CoefficientsRing( A ), "x" );
+    
+    K := CoefficientsRing( A ) * x;
+    
+    x := Indeterminates( K )[1];
     
     p := Characteristic( CoefficientsRing( CoefficientsRing( A ) ) );
     
     for i in [ 1 .. Length( RationalParameters( A ) ) ] do
     
-        f := (("x"/K)^p)^deg - RationalParameters( A )[i] / K;
+        f := ( x^p)^deg - RationalParameters( A )[i] / K;
          
         M := List( M, i -> MatrixEmbedding( i , f ) );
     
@@ -118,7 +122,9 @@ InstallMethod( RadicalOfIdeal,
     
     e :=CertainRows( HomalgIdentityMatrix( d, CoefficientsRing( R ) ) , [1] );
     
-    return FGLMToGroebner( M, e );
+    FGLM := FGLMToGroebner( M, e, List( Indeterminates( A ), Name ) )[2];
+    
+    return LeftSubmodule( FGLM, HomalgRing( I ) );
     
 end );
 
