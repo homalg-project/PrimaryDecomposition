@@ -30,15 +30,13 @@ InstallMethod( PolysOverTheSameRing,
     
     R := HomalgRing( Sep[1] );
     
-    p := Characteristic( CoefficientsRing( CoefficientsRing( R ) ) );
-    
     Rings := List( [ 1 .. Length( Sep ) ], i -> HomalgRing( Sep[i] )!.RootOfBaseField );
     S := [ ];
     
     ## if any polynomial is the one or if the related ring is not a root of the
     ## base field we left
     for i in [ 1 .. Length( Rings ) ] do
-        if not IsZero( Rings[i] ) and not IsOne( Sep[i] ) then
+        if not IsZero( Rings[i] ) then
             Add( S, Rings[i] );
         fi;
     od;
@@ -59,46 +57,15 @@ InstallMethod( PolysOverTheSameRing,
     
         coeffs := Coefficients( Sep[i] );
         
-        Sep[i] := Zero( S );
+        monoms := coeffs!.monomials;
         
-        for r in [ 1 .. NrRows( coeffs ) ] do
+        deg := lcm - HomalgRing( Sep[i])!.RootOfBaseField;
         
-            cocoeffs := Coefficients( MatElm( K * coeffs, r, 1 ) );
-            
-            b := Zero( S );
-                        
-            for j in [ 1 .. NrRows( cocoeffs ) ] do
-                
-                a := One( S );
-                
-                monoms := cocoeffs!.monomials[j];
-                
-                for k in [ 1 .. Length( indets ) ] do
-                
-                    deg := 0;
-                
-                    while not monoms / indets[k] = fail do
-                    
-                        monoms := monoms/indets[k];
-                        
-                        deg := deg + 1;
-                    
-                    od;
-                    
-                    if not IsZero( deg ) then
-                        a := a * ( RationalParameters( S )[k]^p )^( lcm * deg );
-                    fi;
-                                    
-                od;
-            
-                a := a / S;
-                b := b + MatElm( S * cocoeffs, j, 1 ) * a;
-                        
-            od;
-            
-            Sep[i] := Sep[i] + ( b / S ) * ( coeffs!.monomials[r] / S );
-            
-        od;
+        coeffs := CoefficientsTransformation( coeffs, deg );
+        
+        Sep[ i ] := Involution( HomalgMatrix( monoms, Length( monoms ), 1, S ) ) * ( S * coeffs ); 
+        
+        Sep[ i ] := MatElm( Sep[i], 1, 1 );
         
     od;
     
