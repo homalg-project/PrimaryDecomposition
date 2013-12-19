@@ -36,17 +36,17 @@ InstallMethod( PreparationForRadicalOfIdeal,
         
         Sep := PolysOverTheSameRing( Sep );
                 
-        A := CoefficientsRing( HomalgRing( Sep[1] ) ) * Indeterminates( A );
+        A := CoefficientsRing( HomalgRing( Sep[1] ) ) * List( Indeterminates( A ), Name );
         
         A!.RootOfBaseField := HomalgRing( Sep[1] )!.RootOfBaseField;
         
         list := EntriesOfHomalgMatrix( MatrixOfSubobjectGenerators( I ) );
         
-        Add( list, Sep[1] );
-        list := PolysOverTheSameRing( list );
-        Unbind( list[ Length( list ) ] );
+        HomalgRing( list[1] )!.RootOfBaseField:=0;
         
-        list := List( list , i -> i / A );
+        Add( list, One( A ) );
+        list := PolysOverTheSameRing( list );
+        list := List( [ 1 .. Length( list ) - 1 ] , i -> list[i] / A );
         
         I := LeftSubmodule( list, A );
         
