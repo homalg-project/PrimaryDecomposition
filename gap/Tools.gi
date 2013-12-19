@@ -423,6 +423,12 @@ InstallMethod( IdealBasisToGroebner,
         
     od;
     
+    ## here we assume that the Gršbner basis oracle
+    ## does not rely on its own sorting of a Gršbner basis
+    Assert( 6, BasisOfRows( GJ ) = GJ );
+    
+    SetIsBasisOfRowsMatrix( GJ, true );
+    
     return GJ;
     
 end );
