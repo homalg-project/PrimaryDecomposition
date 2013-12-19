@@ -48,3 +48,11 @@ DeclareOperation( "MatrixEmbedding",
         [ IsHomalgMatrix, IsHomalgRingElement ] );
 #! @InsertSystem MatrixEmbedding
 
+#! @Arguments M, deg
+#! @Returns a matrix
+#! @Description
+#!  Defines a common polynomial ring of polynomials who have the same base field
+#!  and computes the representation of the polynomials in the list.
+DeclareOperation( "CoefficientsTransformation",
+        [ IsHomalgMatrix, IsInt ] );
+#! @InsertSystem CoefficientsTransformation

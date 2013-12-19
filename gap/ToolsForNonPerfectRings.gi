@@ -300,4 +300,83 @@ InstallMethod( MatrixEmbedding,
     
 end );
 
+##
+InstallMethod( CoefficientsTransformation,
+	"for a matrix and a integer",
+	[ IsHomalgMatrix, IsInt ],
+
+  function( M, deg )
+    local R, p, K, indets, N, r, c, b, coeffs, monoms, l, a, k, d;
+    
+    if IsZero( deg ) then
+        return M;
+    fi;
+    
+    R := HomalgRing( M );
+    
+    p := Characteristic( CoefficientsRing( R ) );
+    
+    K := CoefficientsRing( R ) * RationalParameters( R );
+    
+    indets := Indeterminates( K );
+    
+    M := K * M;
+    
+    N := HomalgInitialMatrix( NrRows( M ), NrColumns( M ), R );
+    
+    for r in [ 1 .. NrRows( M ) ] do
+    
+        for c in [ 1 .. NrColumns( M ) ] do
+            
+            b := Zero( R );
+            
+            coeffs := Coefficients( MatElm( M, r, c ) );
+            
+            monoms := coeffs!.monomials;
+            
+            if not monoms = [ ] then
+                
+                for l in [ 1 .. NrRows( coeffs ) ] do
+                    
+                    a := One( R );
+                    
+                    for k in [ 1 .. Length( indets ) ] do
+                    
+                        d := 0;
+                        
+                        while not monoms[l] / indets[k] = fail do
+                        
+                            monoms[l] := monoms[l] / indets[k];
+                            
+                            d := d + 1;
+                            
+                        od;
+                        
+                        a := a * ( RationalParameters( R )[k]^p )^( deg * d );
+                        
+                    od;
+                    
+                    a := a / R;
+                    
+                    b := b + MatElm( R * coeffs, l, 1 ) * a;
+                    
+                od;
+                
+                SetMatElm( N, r, c, b );
+            
+            else
+            
+                SetMatElm( N, r, c, Zero( R ) );
+            
+            fi;
+            
+        od;
+    
+    od;
+    
+    MakeImmutable( N );
+    
+    return( N );
+
+end );
 
