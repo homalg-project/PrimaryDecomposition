@@ -39,19 +39,24 @@ InstallMethod( PreparationForRadicalOfIdeal,
     if not IsPerfect( CoefficientsRing( A ) ) then
         
         Sep := PolysOverTheSameRing( Sep );
-        
-        deg := HomalgRing( Sep[1] )!.RootOfBaseField;
-        
+                
         A := CoefficientsRing( HomalgRing( Sep[1] ) ) * Indeterminates( A );
         
+        A!.RootOfBaseField := HomalgRing( Sep[1] )!.RootOfBaseField;
+        
         list := EntriesOfHomalgMatrix( MatrixOfSubobjectGenerators( I ) );
-        list := Add( list, Sep[1] );
+        
+        Add( list, Sep[1] );
         list := PolysOverTheSameRing( list );
+        Unbind( list[ Length( list ) ] );
+        
         list := List( list , i -> i / A );
         
         I := LeftSubmodule( list, A );
         
         R := A / I;
+        
+        R!.RootOfBaseField := A!.RootOfBaseField;
         
     fi;
     
@@ -70,7 +75,7 @@ InstallMethod( PreparationForRadicalOfIdeal,
     fi;
     
     ## step 5:
-    return [ FGLMdata( HomalgRing( J ) / J ), I, deg ];
+    return [ FGLMdata( HomalgRing( J ) / J ), I ];
     
 end );
 
@@ -92,7 +97,8 @@ InstallMethod( RadicalOfIdeal,
     
     M := p[1];
     I := p[2];
-    deg := p[3];
+    
+    p := HomalgRing( I )!.RootOfBaseField;
     
     A := HomalgRing( I );
     
