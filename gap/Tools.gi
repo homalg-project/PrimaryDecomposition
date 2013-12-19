@@ -407,15 +407,15 @@ InstallMethod( IdealBasisToGroebner,
             lambda := BasisCoefficientsOfRingElement( ( MatElm( GI, i, 1 ) - C[i] ) / R  );
             d := NrColumns( lambda );
             
-            lambda := CertainColumns( lambda, [d, d - 1 .. 1 ] );
+            lambda := CertainColumns( lambda, [ d, d - 1 .. 1 ] );
             
             lambda := DecideZeroRows( lambda, Ech );
             
-            lambda := CertainColumns( lambda, [d, d - 1 .. 1 ] );
+            lambda := CertainColumns( lambda, [ d, d - 1 .. 1 ] );
             
-            lambda := C[i] + ( MatElm( R * lambda * bas, 1, 1 ) /A );
+            lambda := C[i] + ( MatElm( R * lambda * bas, 1, 1 ) / A );
             
-            lambda := HomalgMatrix( [lambda], 1, 1, A );
+            lambda := HomalgMatrix( [ lambda ], 1, 1, A );
             
             GJ := UnionOfRows( GJ, lambda );
             
