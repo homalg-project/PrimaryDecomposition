@@ -92,6 +92,13 @@ DeclareOperation( "IdealBasisOverCoefficientRing",
 	[ IsHomalgMatrix ] );
 #! @InsertSystem IdealBasisOverCoefficientsRing
 
+#! @Arguments K
+#! @Returns a ring
+#! @Description
+#!  Computes an isomorphic, GAP internal ring.
+DeclareAttribute( "GapInternalIsomorphicRing",
+	IsHomalgRing);
+
 #! @Arguments M
 #! @Returns a list
 #! @Description

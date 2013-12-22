@@ -282,24 +282,24 @@ InstallMethod( IdealBasisOverCoefficientRing,
 end );
 
 ##
-InstallMethod( IdealBasisToGroebner,
-	[ IsHomalgMatrix ],
+InstallMethod( GapInternalIsomorphicRing,
+	"for a ring",
+	[ IsHomalgRing ],
 
-  function( M )
-    local R, A, I;
+  function( K )
+    local p, d, S;
     
-    R := HomalgRing( M );
-    if IsPerfect( CoefficientsRing( R ) ) then
-        TryNextMethod( );
+    p := Characteristic( K );
+    
+    d := DegreeOverPrimeField( K );
+    
+    if IsZero( p ) then
+        S := HomalgFieldOfRationals( );
+    else
+        S := HomalgRingOfIntegers( p, d );
     fi;
     
-    A := AmbientRing( R );
-    
-    I := MatrixOfSubobjectGenerators( DefiningIdeal( R ) );
-    
-    M := UnionOfRows( M, I );
-    
-    return BasisOfRows( M );
+    return S;
 
 end );
 
