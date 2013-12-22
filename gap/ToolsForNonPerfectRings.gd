@@ -17,11 +17,15 @@
 #
 ####################################
 
-#! @Arguments Sep
+#! @Arguments L
 #! @Returns a list
 #! @Description
-#!  Defines a common polynomial ring of polynomials who have the same base field
-#!  and computes the representation of the polynomials in the list.
+#!  Defines a new polynomial ring <M>S</M>, whose coefficients ring is a root
+#!  of the same field than the coefficients ring, in which the polynomials of
+#!  the list <A>L</A> are defined. Furthermore a representation of the 
+#!  polynomials will be computed. The degree <M>d</M> of the root for a ring <M>R</M>
+#!  is stored in <M>R!.RootOfBaseField</M>, which is given as the exponent of the
+#!  characeteristic <M>p</M> of the base field <M>d = p^e</M>.
 DeclareAttribute( "PolysOverTheSameRing",
         IsList );
 #! @InsertSystem PolysOverTheSameRing
@@ -35,7 +39,7 @@ DeclareAttribute( "PolysOverTheSameRing",
 #! @Arguments M, f
 #! @Returns a matrix
 #! @Description
-#!  Computes the embedding of an matrix over a field extension.
+#!  Computes the embedding of the matrix over a field extension.
 DeclareOperation( "MatrixEmbedding",
         [ IsHomalgMatrix, IsHomalgRingElement ] );
 #! @InsertSystem MatrixEmbedding
@@ -43,8 +47,9 @@ DeclareOperation( "MatrixEmbedding",
 #! @Arguments M, deg
 #! @Returns a matrix
 #! @Description
-#!  Defines a common polynomial ring of polynomials who have the same base field
-#!  and computes the representation of the polynomials in the list.
+#!  Raises the rational parameters to the power <M>p^<A>deg</A></M> in the
+#!  entries of the matrix <A>M</A>, where p is the characteristic of the
+#!  base field.
 DeclareOperation( "CoefficientsTransformation",
         [ IsHomalgMatrix, IsInt ] );
 #! @InsertSystem CoefficientsTransformation
