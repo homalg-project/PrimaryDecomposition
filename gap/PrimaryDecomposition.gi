@@ -205,6 +205,10 @@ InstallMethod( PrimaryDecompositionZeroDim,
     local Decomp, A, R, a, fac, ListOfNonLinearFactors, factor, N, W, bas, i,
           J, M, j;
     
+    if IsOne( I ) then
+        return [ ];
+    fi;
+    
     Decomp := [ ]; 
     
     ## If I is already primary, then the algorithmus returns I itself.
