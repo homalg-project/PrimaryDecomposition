@@ -106,7 +106,7 @@ DeclareAttribute( "IdealBasisToGroebner",
 #!  Computes the Derivative of a univariate polynomial.
 DeclareAttribute( "DerivativeSep", 
 	IsHomalgRingElement);
-#! @InsertSystem DerivativeSep
+#! @InsertSystem Derivative
 
 ####################################
 #

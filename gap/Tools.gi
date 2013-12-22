@@ -434,7 +434,7 @@ InstallMethod( IdealBasisToGroebner,
 end );
 
 ##
-InstallMethod( DerivativeSep,
+InstallMethod( Derivative,
 	"for a ring element",
 	[ IsHomalgRingElement ],
 

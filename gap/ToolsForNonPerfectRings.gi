@@ -99,7 +99,7 @@ InstallMethod( SeparablePart,
     fi;
         
     ## step 1:
-    h := Gcd_UsingCayleyDeterminant( f, DerivativeSep( f ) );
+    h := Gcd_UsingCayleyDeterminant( f, Derivative( f ) );
     
     g1 := f / h;
     
@@ -112,7 +112,7 @@ InstallMethod( SeparablePart,
         
         h1 := h;
         
-        h := Gcd_UsingCayleyDeterminant( h, DerivativeSep( h ) );
+        h := Gcd_UsingCayleyDeterminant( h, Derivative( h ) );
     
     od;
     
