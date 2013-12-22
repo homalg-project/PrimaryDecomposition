@@ -23,7 +23,7 @@ InstallMethod( IsPrimeZeroDim,
   function( I )
     local A, C, R, indets, mu, sf_mu, degI, i, RadI, J, e, L, LModJ, degJ, n,
           mat, iter, lambda, w;
-    
+        
     A := HomalgRing( I );
     
     C := CoefficientsRing( A );
@@ -180,7 +180,7 @@ InstallMethod ( IsPrimaryZeroDim,
         
   function( I )
     local bool, Rad;
-    
+        
     Rad := RadicalOfIdeal( I );
     
     bool := IsPrimeZeroDim( Rad );
