@@ -160,6 +160,7 @@ InstallMethod( SquareFreeFactors,
     ## We assume that the polynomials generating the radical components are 
     ## irreducible.
     Assert( 8, Set( List( rad, IsIrreducibleHomalgRingElement ) ) = [ true ] );
+    
     Perform( rad, function( r ) SetIsIrreducibleHomalgRingElement( r, true ); end );
     
     return SortedList( rad );
@@ -223,11 +224,9 @@ InstallMethod( IdealBasisOverCoefficientRing,
         [ IsHomalgMatrix ],
         
   function( G )
-    local R, M, W, n, T, k, bool, N, j, bas;  
+    local R, W, M, n, T, k, bool, N, j, bas;  
     
     R := HomalgRing( G );
-    
-    M := FGLMdata( R );
         
     W := List( [ 1 .. NrRows( G ) ], i -> BasisCoefficientsOfRingElement( MatElm( G, i, 1 ) / R ) );
     W := Iterated( W, UnionOfRows );
@@ -238,6 +237,8 @@ InstallMethod( IdealBasisOverCoefficientRing,
     if IsZero( W ) then
         return HomalgZeroMatrix( 1, 1, R );
     fi;
+    
+    M := FGLMdata( R );
     
     n := Length( M );
     
@@ -251,7 +252,7 @@ InstallMethod( IdealBasisOverCoefficientRing,
             
             bool := 0;
             
-            N := List( [ 1 .. Length( T ) ], i ->  T[i] * M[k] );
+            N := List( T, i ->  i * M[k] );
             
             T := [ ];
             
@@ -308,7 +309,7 @@ InstallMethod( IdealBasisToGroebner,
 	[ IsHomalgMatrix ],
 
   function( M )
-    local R, K, C, Ech, p, d, S, pos, bas, A, el, GJ, j, I, GI, i, lambda;
+    local R, K, C, Ech, p, d, S, pos, bas, A, leadingmonoms, GJ, j, I, GI, i, lambda;
     
     R := HomalgRing( M );
     
@@ -353,24 +354,27 @@ InstallMethod( IdealBasisToGroebner,
     
     A := AmbientRing( R );
     
-    ## el saves the leading monomials of the GJ.
-    el := [ Zero( A ) ];
+    ## The list leadingmonoms stores the leading monomials of GJ, which define
+    ## the ideal I of the residue class ring S.
+    
+    leadingmonoms := [ Zero( A ) ];
+    
     ## GJ is supposed to become the Groebner Basis of the ideal.
     
     GJ := HomalgZeroMatrix( 0, 1, A );
     
     for j in Reversed( [ 1 .. NrRows( Ech ) ] ) do
     
-        I := LeftSubmodule( el, A );
+        I := LeftSubmodule( leadingmonoms, A );
         
         S := A / I;
         
         if not IsZero( MatElm( bas, NrRows( bas ) + 1 - pos[ j ] , 1 ) / S ) then
         
-            if IsZero( el[1] ) then
-                el[1] := MatElm( bas, NrRows( bas ) + 1 - pos[ j ] , 1 ) / A;
+            if IsZero( leadingmonoms[1] ) then
+                leadingmonoms[1] := MatElm( bas, NrRows( bas ) + 1 - pos[ j ] , 1 ) / A;
             else
-                Add( el, MatElm( bas, NrRows( bas ) + 1 - pos[ j ], 1 ) / A );
+                Add( leadingmonoms, MatElm( bas, NrRows( bas ) + 1 - pos[ j ], 1 ) / A );
             fi;
             
             GJ := UnionOfRows( GJ, ( A * CertainRows( C, [j]) ) * ( A * bas ) );
@@ -379,7 +383,7 @@ InstallMethod( IdealBasisToGroebner,
         
     od;
     
-    I := LeftSubmodule( el, A );
+    I := LeftSubmodule( leadingmonoms, A );
     
     S := A / I;
     
@@ -398,12 +402,11 @@ InstallMethod( IdealBasisToGroebner,
         if not IsZero( C[i] / S ) then
             
             lambda := BasisCoefficientsOfRingElement( ( MatElm( GI, i, 1 ) - C[i] ) / R  );
+            
             d := NrColumns( lambda );
             
             lambda := CertainColumns( lambda, [ d, d - 1 .. 1 ] );
-            
             lambda := DecideZeroRows( lambda, Ech );
-            
             lambda := CertainColumns( lambda, [ d, d - 1 .. 1 ] );
             
             lambda := C[i] + ( MatElm( R * lambda * bas, 1, 1 ) / A );
@@ -457,10 +460,10 @@ InstallMethod( Derivative,
 	"for a ring element",
 	[ IsHomalgRingElement ],
 
-  function( p )
+  function( f )
     local R, indets, coeffs, monoms, i;
     
-    R := HomalgRing( p );
+    R := HomalgRing( f );
     
     indets := Indeterminates( R );
     
@@ -468,25 +471,23 @@ InstallMethod( Derivative,
         TryNextMethod( );
     fi;
     
-    indets := indets[1];
-    
-    coeffs := Coefficients( p );
+    coeffs := Coefficients( f );
     
     monoms := coeffs!.monomials;
     
-    p := Zero( HomalgRing( p ) );
+    f := Zero( HomalgRing( f ) );
     
     for i in [ 1 .. NrRows( coeffs ) ] do
         
         if not IsOne( monoms[i] ) then
         
-            p := p + MatElm( coeffs, i, 1) * Degree( monoms[i] ) * indets^( Degree( monoms[i] ) - 1 );
+            f := f + MatElm( coeffs, i, 1) * Degree( monoms[i] ) * indets[1]^( Degree( monoms[i] ) - 1 );
         
         fi;
     
     od;
     
-    return p;
+    return f;
 
 end );
 
@@ -630,9 +631,9 @@ InstallMethod( IsNotContainedInAnyHyperplane,
   function( lambda, L )
     local n, l, comb, i, W;
     
-    n := NrColumns( L );
+    n := NrRows( L );
     
-    l := Set( [ 1 .. NrRows( L ) ] );
+    l := Set( [ 1 .. n ] );
     
     comb := Combinations( l, n - 1 );
     
