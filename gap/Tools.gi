@@ -330,26 +330,11 @@ InstallMethod( IdealBasisToGroebner,
     ## of basis.
     Ech := CertainColumns( C, Reversed( [ 1 .. NrColumns( C ) ] ) );
     
-    if IsPerfect( K ) then
-        
-        p := Characteristic( K );
-        
-        d := DegreeOverPrimeField( K );
-        
-        if IsZero( p ) then
-            S := HomalgFieldOfRationals( );
-        else
-            S := HomalgRingOfIntegers( p, d );
-        fi;
-        
-        Ech := BasisOfRows( S * Ech );
-        
-        Ech := K * Ech;
-        
-    fi;
     ## Regard the matrix over an GAP internal ring to compute the reduced
     ## echelon form.
+    S := GapInternalIsomorphicRing( K );
     
+    Ech := K * BasisOfRows( S * Ech );
     
     C := CertainColumns( Ech, Reversed( [ 1 .. NrColumns( Ech ) ] ) );
     
