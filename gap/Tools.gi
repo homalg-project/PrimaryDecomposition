@@ -745,8 +745,8 @@ InstallMethod( FGLMToGroebner,
         [ IsList, IsHomalgMatrix, IsList ],
         
   function( M, e, l )
-    local n, c, K, indets, GK, G, B, BB, L, J, S, deg, bool, monoms, j, a, b,
-          k, syz, i;
+    local K, indets, G, B, BB, L, J, S, GK, deg, bool, n, monoms, j, a, b,
+          c, k, syz, i;
     
     ## The list l should contain as many variables as the list M contains elements.
     K := HomalgRing( M[1] ) * l;

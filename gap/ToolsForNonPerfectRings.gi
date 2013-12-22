@@ -20,20 +20,18 @@ InstallMethod( PolysOverTheSameRing,
 	"for a list",
 	[ IsList ],
 
-  function( Sep )
-    local R, Rings, S, lcm, K, indets, i, coeffs, r, cocoeffs, b, j, a, monoms,
-          k, deg;
+  function( L )
+    local R, i, lcm, S, K, indets, coeffs, monoms, deg;
     
-    if IsOne( Length( Sep ) ) then
-        return Sep;
+    if IsOne( Length( L ) ) then
+        return L;
     fi;
     
-    R := HomalgRing( Sep[1] );
+    R := HomalgRing( L[1] );
     
-    Rings := List( [ 1 .. Length( Sep ) ], i -> HomalgRing( Sep[i] )!.RootOfBaseField );
+    i := List( [ 1 .. Length( L ) ], i -> HomalgRing( L[i] )!.RootOfBaseField );
     
-    
-    lcm := Lcm( S ); 
+    lcm := Lcm( i ); 
     
     ## S is the common ring.
     S := CoefficientsRing( R ) * List( Indeterminates( R ), Name );
@@ -45,23 +43,23 @@ InstallMethod( PolysOverTheSameRing,
     
     indets := Indeterminates( K );
     
-    for i in [ 1 .. Length( Sep ) ] do
+    for i in [ 1 .. Length( L ) ] do
     
-        coeffs := Coefficients( Sep[i] );
+        coeffs := Coefficients( L[i] );
         
         monoms := coeffs!.monomials;
         
-        deg := lcm - HomalgRing( Sep[i])!.RootOfBaseField;
+        deg := lcm - HomalgRing( L[i])!.RootOfBaseField;
         
         coeffs := CoefficientsTransformation( coeffs, deg );
         
-        Sep[ i ] := Involution( HomalgMatrix( monoms, Length( monoms ), 1, S ) ) * ( S * coeffs ); 
+        L[ i ] := Involution( HomalgMatrix( monoms, Length( monoms ), 1, S ) ) * ( S * coeffs ); 
         
-        Sep[ i ] := MatElm( Sep[i], 1, 1 );
+        L[ i ] := MatElm( L[i], 1, 1 );
         
     od;
     
-    return Sep;
+    return L;
     
 end );
 
