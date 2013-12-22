@@ -802,93 +802,86 @@ InstallMethod( FGLMToGroebner,
             a := MatElm( monoms, j, 1 ) / K;
             b := e;
             
-            ## this if statement is redundant, since we regard every monomial
-            ## only one time.
-            # if Position( B, a ) = fail then
+            ## Determines whether a is a multiple of an element of L.
+             if not IsZero( a / S ) then
             
-                ## Determines if a is a multiple of an element of L:
-                if not IsZero( a / S ) then
+                bool := 0;
                 
-                    bool := 0;
+                c := a;
+                
+                ## Computes the coefficient matrix b of the element a.
+                for k in [ 1 .. n ] do
+                
+                    while c / indets[k] <> fail do
+                   
+                        b := b * M[k];
+                        c := c / indets[k];
                     
-                    ## Computes the coefficient matrix b of the element a:
-                    for k in [ 1 .. n ] do                    
-                        
-                        c := a;
-                        
-                        while c / indets[k] <> fail do
-                        
-                            b := b * M[k];
-                            c := c / indets[k];
-                        
-                        od;
-                        
                     od;
                     
-                    ## Determines if a represented by b is contained in the 
-                    ## k-span of the elements in B represented by the rows of 
-                    ## BB. If not, a resp. b is a basis element of the residue
-                    ## class fiel and will be added to B resp. BB.
-                    ## If yes, the linear combination is a element of the
-                    ## Groebner basis.
+                od;
+                
+                ## Determines whether a represented by b is contained in the 
+                ## k-span of the elements in B represented by the rows of 
+                ## BB. If not, a resp. b is a basis element of the residue
+                ## class fiel and will be added to B resp. BB.
+                ## If yes, the linear combination is a element of the
+                ## Groebner Basis.
+                
+                if not IsZero( DecideZeroRows( b, BB ) ) then
+                   
+                    Add( B, a );
+                    BB := UnionOfRows( BB, b );
+                
+                else
                     
-                    if not IsZero( DecideZeroRows( b, BB ) ) then
+                    syz := SyzygiesOfRows( UnionOfRows( BB, b ) );
+                    
+                    i := 0;
+                    l := 1;
+                    
+                    while IsZero( i ) and ( (l - 1) < NrRows( syz ) ) do
+                        if not IsZero( MatElm( syz, l, NrColumns( syz ) ) ) then
+                            syz := CertainRows( syz, [l] );
+                            i := 1;
+                            l := l + 1;
+                        fi;
+                    od;
+                    
+                    
+                    if IsZero( MatElm( syz, 1, NrColumns( syz ) ) ) then
                         
-                        Add( B, a );
-                        BB := UnionOfRows( BB, b );
+                        Error();
+                   
+                    elif not IsOne( MatElm( syz, 1, NrColumns( syz ) ) ) then
+                    
+                        Error();
                     
                     else
+                        ## Every time we change L, J and S have to get
+                        ## changed, too.
+                        Add( L, a );
                         
-                        syz := SyzygiesOfRows( UnionOfRows( BB, b ) );
+                        J := LeftSubmodule( L, K );
                         
-                        i := 0;
-                        l := 1;
+                        S := K / J;
                         
-                        while IsZero( i ) and ( (l - 1) < NrRows( syz ) ) do
-                            if not IsZero( MatElm( syz, l, NrColumns( syz ) ) ) then
-                                syz := CertainRows( syz, [l] );
-                                i := 1;
-                                l := l + 1;
-                            fi;
+                        ## Add the linear combination to the Groebner basis.
+                        c :=  MatElm( syz, 1, NrColumns( syz ) ) / K * a;
+                        
+                        for l in [ 1 .. NrColumns( syz ) - 1 ] do
+                        
+                            c :=c + ( MatElm( syz, 1, l ) / K ) * B[l];
+                        
                         od;
                         
-                        
-                        if IsZero( MatElm( syz, 1, NrColumns( syz ) ) ) then
-                            
-                            Error();
-                        
-                        elif not IsOne( MatElm( syz, 1, NrColumns( syz ) ) ) then
-                        
-                            Error();
-                        
-                        else
-                            ## Every time we change L, J and S have to get
-                            ## changed, too.
-                            Add( L, a );
-                            
-                            J := LeftSubmodule( L, K );
-                            
-                            S := K / J;
-                            
-                            ## Add the linear combination to the Groebner basis:
-                            c :=  MatElm( syz, 1, NrColumns( syz ) ) / K * a;
-                            
-                            for l in [ 1 .. NrColumns( syz ) - 1 ] do
-                            
-                                c :=c + ( MatElm( syz, 1, l ) / K ) * B[l];
-                            
-                            od;
-                            
-                            Add( G, c );
-                            
-                            
-                        fi;
-                    
+                        Add( G, c );
+                                                 
                     fi;
-                    
+                
                 fi;
-             
-            #fi;
+                
+            fi;
         
         od;
     
