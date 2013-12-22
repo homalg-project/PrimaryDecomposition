@@ -442,6 +442,32 @@ InstallMethod( IdealBasisToGroebner,
 end );
 
 ##
+InstallMethod( AppendToGroebnerBasisOfZeroDimensionalIdeal,
+	"for a matrix",
+	[ IsHomalgMatrix ],
+
+  function( G )
+    local R, I, M;
+    
+    R := HomalgRing( G );
+    
+    if IsPerfect( CoefficientsRing( R ) ) then
+        return IdealBasisToGroebner( IdealBasisOverCoefficientRing( G ) );
+    fi;
+    
+    ## If the ring R has a non perfect coefficients ring the method uses the
+    ## actual Groebner Basis algorithm since we cannot define a non perfect
+    ## GAP internal ring, which is needed in the alternative method.
+    
+    I := MatrixOfSubobjectGenerators( DefiningIdeal( R ) );
+        
+    M := UnionOfRows( AmbientRing( R ) * M, I );
+    
+    return BasisOfRows( M );
+    
+end );
+
+##
 InstallMethod( Derivative,
 	"for a ring element",
 	[ IsHomalgRingElement ],

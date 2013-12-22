@@ -63,7 +63,7 @@ InstallMethod( PreparationForRadicalOfIdeal,
     J := HomalgMatrix( Sep, Length( Sep ), 1, A );
     
     ## step 3 and 4:
-    J := IdealBasisToGroebner( IdealBasisOverCoefficientRing( R * J ) );
+    J := AppendToGroebnerBasisOfZeroDimensionalIdeal( R * J );
     J := LeftSubmodule( EntriesOfHomalgMatrix( J ), A );
     
     if IsPerfect( CoefficientsRing( A ) ) then

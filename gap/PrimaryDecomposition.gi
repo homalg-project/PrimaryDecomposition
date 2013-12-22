@@ -287,7 +287,7 @@ InstallMethod( PrimaryDecompositionZeroDim,
         
         M[i] := UnionOfRows( CertainRows( J , [ 1 .. j[i] ] ), CertainRows( J, [ j[i + 1] + 1 .. NrRows( J ) ] ) );
         
-        M[i] := IdealBasisToGroebner( IdealBasisOverCoefficientRing( M[i] ) );
+        M[i] := AppendToGroebnerBasisOfZeroDimensionalIdeal( M[i] );
         
         M[i] := LeftSubmodule( EntriesOfHomalgMatrix( M[i] ) );
         
