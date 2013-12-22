@@ -31,15 +31,7 @@ InstallMethod( PolysOverTheSameRing,
     R := HomalgRing( Sep[1] );
     
     Rings := List( [ 1 .. Length( Sep ) ], i -> HomalgRing( Sep[i] )!.RootOfBaseField );
-    S := [ ];
     
-    ## if any polynomial is the one or if the related ring is not a root of the
-    ## base field we left
-    for i in [ 1 .. Length( Rings ) ] do
-        if not IsZero( Rings[i] ) then
-            Add( S, Rings[i] );
-        fi;
-    od;
     
     lcm := Lcm( S ); 
     
