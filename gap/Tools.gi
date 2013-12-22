@@ -720,6 +720,8 @@ InstallMethod( FGLMToGroebner,
   function( M, e )
     local n, R, x, l;
     
+    n := Length( M );
+    
     R := HomalgRing( M[1] );
     
     if HasAmbientRing( R ) then
@@ -728,8 +730,13 @@ InstallMethod( FGLMToGroebner,
     
     x := UnusedVariableName( R, "x" );
     
-    return FGLMToGroebner( M, e, [ x ] );
-
+    if IsOne( n ) then
+        return FGLMToGroebner( M, e, [x] );
+    else
+        ##TODO: list should depend on the UnusedVariable
+        return FGLMToGroebner( M, e, Concatenation( "x1..", String( n ) ) );
+    fi;
+    
 end );
 
 ##
@@ -741,20 +748,8 @@ InstallMethod( FGLMToGroebner,
     local n, c, K, indets, GK, G, B, BB, L, J, S, deg, bool, monoms, j, a, b,
           k, syz, i;
     
-    ## Creating a Polynomialring with the right number of variables
-    
-    n := Length( [ M ] );
-    
-    if IsOne( Length( l ) ) and Length( l ) < n then
-        
-        c := l[1];
-        
-        K := HomalgRing( M[1] ) * Concatenation( "c1..", String( n ) );
-    
-    else
-        K := HomalgRing( M[1] ) * l;
-    fi;
     ## The list l should contain as many variables as the list M contains elements.
+    K := HomalgRing( M[1] ) * l;
     
     indets := Indeterminates( K );
     
@@ -788,6 +783,8 @@ InstallMethod( FGLMToGroebner,
     deg := 0;
         
     bool := 0;
+    
+    n := Length( M );
     
     while IsZero( bool ) do
         
