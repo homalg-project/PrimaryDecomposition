@@ -81,9 +81,9 @@ InstallMethod( SeparablePart,
   function( f )
     local R, h, g1, h1, CoeffsRing, p, S, T, K, x, coeffs, monoms, i, a,
           coeffs2, monoms2, j, b, g2, g3;
-    ## Kemper's algorithm:
     
-    ## make sure that the polynomial is univariate
+    ## make sure that the polynomial is univariate and the coefficients ring
+    ## is not perfect.
     R := HomalgRing( f );
     
     if not IsBound( R!.RootOfBaseField ) then
@@ -97,13 +97,16 @@ InstallMethod( SeparablePart,
     if Length( Indeterminates( R ) ) <> 1 then
         TryNextMethod( );
     fi;
-        
+    
+    ## Kemper's algorithm:
+    
     ## step 1:
     h := Gcd_UsingCayleyDeterminant( f, Derivative( f ) );
     
     g1 := f / h;
     
     g1 := g1 / R;
+    
     ## step 2:
     h1 := Zero( R );
     
@@ -214,7 +217,7 @@ InstallMethod( MatrixEmbedding,
     
     L := [];
     
-    ## K is necessary to get change the ti.
+    ## K is necessary to change the ti.
     K := CoefficientsRing( R ) * RationalParameters( R );
     
     param := - MatElm( Coefficients( f ), NrRows( Coefficients( f ) ), 1 ) / K;
@@ -222,6 +225,7 @@ InstallMethod( MatrixEmbedding,
     ## i and j are the variable for iterating over the matrix entries.
     for i in [ 1 .. NrRows( M ) ] do
         
+        ## L[i] becomes the i-th row of the new matrix.
         L[i] := HomalgZeroMatrix( NrRows( N ) , 0, R );
         
         for j in [ 1 .. NrColumns( M ) ] do
