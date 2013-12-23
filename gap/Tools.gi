@@ -685,23 +685,29 @@ InstallMethod( GeneratorOfAnElementNotContainedInAnyHyperplane,
 	[ IsHomalgMatrix , IsHomalgRing ],
 
   function( L , S )
-    local lambda, R, r, s, lambda2;
+    local R, lambda, r, s, lambda2;
     
     while true do
         
         ## Generating a random lambda.
-        lambda := Iterated( List( [ 1 .. NrRows( L ) ], i -> Random( [ -10 .. 10 ] ) * CertainRows( L, [i]) ), \+ );
         
         R := HomalgRing( L );
         
-        if IsBound( R!.RootOfBaseRing ) then
-            r := R!.RootOfBaseRing;
+        ## Todo: involve the rational parameters of R to generate lambda
+        lambda := HomalgInitialMatrix( 1, NrColumns( L ), R );
+        
+        Perform( [ 1 .. NrColumns( L ) ], function(j) SetMatElm( lambda, 1, j , Random( [ - 50 .. 50 ] ) / R ); end );
+        
+        MakeImmutable( lambda );
+        
+        if IsBound( R!.RootOfBaseField ) then
+            r := R!.RootOfBaseField;
         else
             r := 0;
         fi;
         
-        if IsBound( S!.RootOfBaseRing ) then
-            s := S!.RootOfBaseRing;
+        if IsBound( S!.RootOfBaseField ) then
+            s := S!.RootOfBaseField;
         else
             s := 0;
         fi;
