@@ -55,5 +55,5 @@ T := HomalgRing( M );
 e := CertainRows( HomalgIdentityMatrix( NrRows( M ), HomalgRing( M ) ), [1] );
 #! <An unevaluated diagonal right invertible sub-identity 1 x 6 matrix over an external ring>
 FGLMToGroebner( [ M ], e );
-#! [ [ 1, x1 ], [ x1^2+(-t) ] ]
+#! [ [ 1, x ], [ x^2+(-t) ] ]
 #! @EndExample
