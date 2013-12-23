@@ -657,12 +657,19 @@ InstallMethod( GeneratorOfAnElementNotContainedInAnyHyperplane,
 	[ IsHomalgMatrix ],
 
   function( L )
-    local lambda;
+    local R, lambda;
     
     while true do
         
         ## Generating a random lambda.
-        lambda := Iterated( List( [ 1 .. NrRows( L ) ], i -> Random( [ -10 .. 10 ] ) * CertainRows( L, [i]) ), \+ );
+        
+        R := HomalgRing( L );
+        
+        lambda := HomalgInitialMatrix( 1, NrColumns( L ), R );
+        
+        Perform( [ 1 .. NrColumns( L ) ], function(j) SetMatElm( lambda, 1, j , Random( [ - 50 .. 50 ] ) / R ); end );
+        
+        MakeImmutable( lambda );
         
         if IsNotContainedInAnyHyperplane( lambda, L ) then
             return lambda;
