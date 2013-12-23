@@ -31,7 +31,15 @@ InstallMethod( PolysOverTheSameRing,
     
     i := List( [ 1 .. Length( L ) ], i -> HomalgRing( L[i] )!.RootOfBaseField );
     
-    lcm := Lcm( i ); 
+    j := [ ];
+    
+    Perform( [ 1 .. Length( L ) ], function( k ) if not IsZero( i[k] ) then Add( j, i[k] ); fi; end );
+    
+    if IsEmpty( j ) then
+        return( L );
+    fi;
+    
+    lcm := Lcm( j );
     
     ## S is the common ring.
     S := CoefficientsRing( R ) * List( Indeterminates( R ), Name );
