@@ -107,7 +107,8 @@ InstallMethod( IsPrimeZeroDim,
         
         iter := Iterator( e );
         
-        lambda := NextIterator( iter );  ## The zero element will be left out.
+        ## Skip the zero. Depends on the iterator!
+        lambda := NextIterator( iter );
         
         while true do
             
@@ -130,7 +131,7 @@ InstallMethod( IsPrimeZeroDim,
                 
                 fi;
                 
-                Add( mat , lambda);
+                Add( mat, lambda);
                 
             fi;
                         

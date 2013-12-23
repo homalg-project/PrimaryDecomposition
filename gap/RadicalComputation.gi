@@ -21,7 +21,7 @@ InstallMethod( PreparationForRadicalOfIdeal,
 	[ IsFinitelyPresentedSubmoduleRep and ConstructedAsAnIdeal ],
 	
   function( I )
-    local A, R, indets, Sep, deg, list, J, M, i, d;
+    local A, R, indets, J, deg, list, M, i, d;
     
     A := HomalgRing( I );
     
@@ -30,15 +30,15 @@ InstallMethod( PreparationForRadicalOfIdeal,
     
     indets := Indeterminates( R );
     
-    Sep := List( indets, a -> SeparablePart( MinimalPolynomial( a ) ) );
+    J := List( indets, a -> SeparablePart( MinimalPolynomial( a ) ) );
     
     if not IsPerfect( CoefficientsRing( A ) ) then
         
-        Sep := PolysOverTheSameRing( Sep );
+        J := PolysOverTheSameRing( J );
                 
-        A := CoefficientsRing( HomalgRing( Sep[1] ) ) * List( Indeterminates( A ), Name );
+        A := CoefficientsRing( HomalgRing( J[1] ) ) * List( Indeterminates( A ), Name );
         
-        A!.RootOfBaseField := HomalgRing( Sep[1] )!.RootOfBaseField;
+        A!.RootOfBaseField := HomalgRing( J[1] )!.RootOfBaseField;
         
         list := EntriesOfHomalgMatrix( MatrixOfSubobjectGenerators( I ) );
         
@@ -58,12 +58,13 @@ InstallMethod( PreparationForRadicalOfIdeal,
     
     indets := List( indets, a -> a / R );
     
-    Sep := List( [ 1 .. Length( Sep ) ], i -> Value( Sep[i], indets[i] ) );
+    J := List( [ 1 .. Length( J ) ], i -> Value( J[i], indets[i] ) );
     
-    J := HomalgMatrix( Sep, Length( Sep ), 1, A );
+    J := HomalgMatrix( J, Length( J ), 1, A );
     
     ## step 3 and 4:
     J := AppendToGroebnerBasisOfZeroDimensionalIdeal( R * J );
+    
     J := LeftSubmodule( EntriesOfHomalgMatrix( J ), A );
     
     if IsPerfect( CoefficientsRing( A ) ) then
@@ -81,7 +82,7 @@ InstallMethod( RadicalOfIdeal,
 	[  IsHomalgModule ],
 
   function( I )
-    local A, p, M, J, deg, R, x, K, i, f, d, e, FGLM;  
+    local A, p, M, J, deg, R, x, K, i, f, FGLM;  
     
     A := HomalgRing( I );
     
@@ -94,12 +95,13 @@ InstallMethod( RadicalOfIdeal,
     M := p[1];
     J := p[2];
     
-    deg := HomalgRing( J )!.RootOfBaseField;
-    
     A := HomalgRing( J );
     
     R := A / J;
     
+    deg := A!.RootOfBaseField;
+    
+    ## Needed to compute the matrix embedding concerning the field extension.
     x := UnusedVariableName( CoefficientsRing( A ), "x" );
     
     K := CoefficientsRing( A ) * x;
@@ -118,11 +120,8 @@ InstallMethod( RadicalOfIdeal,
         
     M := List( M, n -> n );
     
-    d := NrRows( M[1] );
     
-    e :=CertainRows( HomalgIdentityMatrix( d, CoefficientsRing( R ) ) , [1] );
-    
-    FGLM := FGLMToGroebner( M, e, List( Indeterminates( A ), Name ) )[2];
+    FGLM := FGLMToGroebner( M, CertainRows( HomalgIdentityMatrix( NrRows( M[1] ), HomalgRing( M[1] ) ) , [1] ), List( Indeterminates( A ), Name ) )[2];
     
     return LeftSubmodule( FGLM, HomalgRing( I ) );
     
