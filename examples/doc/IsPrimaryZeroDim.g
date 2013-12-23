@@ -20,4 +20,10 @@ IsBound( I!.AZeroDivisor );
 #! true
 I!.AZeroDivisor;
 #! |[ x ]|
+A := HomalgRingOfIntegersInSingular( 3, "t,s" ) * "x,y";
+#! GF(3)(t,s)[x,y]
+I := LeftSubmodule( "x- s*t, y-s", A );
+#! <A torsion-free ideal given by 2 generators>
+IsPrimaryZeroDim( I^3 );
+#! true
 #! @EndExample
