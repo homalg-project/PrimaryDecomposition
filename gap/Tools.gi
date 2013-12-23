@@ -449,7 +449,7 @@ InstallMethod( AppendToGroebnerBasisOfZeroDimensionalIdeal,
     
     I := MatrixOfSubobjectGenerators( DefiningIdeal( R ) );
         
-    M := UnionOfRows( AmbientRing( R ) * M, I );
+    M := UnionOfRows( AmbientRing( R ) * G, I );
     
     return BasisOfRows( M );
     
