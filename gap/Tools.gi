@@ -863,9 +863,13 @@ InstallMethod( FGLMToGroebner,
                         
                         Error();
                    
-                    elif not IsOne( MatElm( syz, 1, NrColumns( syz ) ) ) then
-                    
-                        Error();
+                    #elif not IsOne( MatElm( syz, 1, NrColumns( syz ) ) ) then
+                    ## if not IsOne( MatElm( syz, 1, NrColumns( syz ) ) ) then the
+                    ## leading coefficients of the linear combination which 
+                    ## will be added to the Groebner Basis is not one. If one
+                    ## wants to fix this there will probably appear some
+                    ## coefficients depending on rational parameters with
+                    ## negativ exponents.
                     
                     else
                         ## Every time we change L, J and S have to get
