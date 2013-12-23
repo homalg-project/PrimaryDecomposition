@@ -110,16 +110,19 @@ InstallMethod( RadicalOfIdeal,
     
     p := Characteristic( CoefficientsRing( CoefficientsRing( A ) ) );
     
-    for i in [ 1 .. Length( RationalParameters( A ) ) ] do
+    ## Computing recursily the matrix embedding of the FGLM matrices into the
+    ## matrix space over the old field.
+    if not IsZero( deg ) then
     
-        f := ( x^p)^deg - RationalParameters( A )[i] / K;
-         
-        M := List( M, i -> MatrixEmbedding( i , f ) );
-    
-    od;
+        for i in [ 1 .. Length( RationalParameters( A ) ) ] do
         
-    M := List( M, n -> n );
-    
+            f := ( x^p)^deg - RationalParameters( A )[i] / K;
+            
+            M := List( M, i -> MatrixEmbedding( i , f ) );
+        
+        od;
+        
+    fi;
     
     FGLM := FGLMToGroebner( M, CertainRows( HomalgIdentityMatrix( NrRows( M[1] ), HomalgRing( M[1] ) ) , [1] ), List( Indeterminates( A ), Name ) )[2];
     
