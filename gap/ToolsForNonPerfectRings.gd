@@ -39,7 +39,10 @@ DeclareAttribute( "PolysOverTheSameRing",
 #! @Arguments M, f
 #! @Returns a matrix
 #! @Description
-#!  Computes the embedding of the matrix over a field extension.
+#!  Computes the embedding of the matrix <A>M</A> which lies in a finite 
+#!  extension field of <M>K</M> with minimal polynomial <A>f</A> into 
+#!  the space of matrices over K of degree <M>n x n</M> with 
+#!  <M> n := deg( <A>M</A> )* deg(<A>f</A>)</M>.
 DeclareOperation( "MatrixEmbedding",
         [ IsHomalgMatrix, IsHomalgRingElement ] );
 #! @InsertSystem MatrixEmbedding

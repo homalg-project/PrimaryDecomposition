@@ -41,7 +41,7 @@ DeclareProperty( "IsPrimaryZeroDim",
 ####################################
 
 #! @Description
-#!  Computes the primary decomposition of a zerodimensional ideal.
+#!  Computes the primary decomposition of a zerodimensional ideal <A>I</A>.
 #! @Arguments I
 #! @Returns a list
 DeclareAttribute( "PrimaryDecompositionZeroDim",
