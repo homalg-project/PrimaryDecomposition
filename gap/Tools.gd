@@ -118,7 +118,8 @@ DeclareAttribute( "IdealBasisToGroebner",
 #!  dimensional ideal of the residue class ring.
 DeclareAttribute( "AppendToGroebnerBasisOfZeroDimensionalIdeal", 
 	IsHomalgMatrix );
-
+#! @InsertSystem AppendToGroebnerBasisOfZeroDimensionalIdeal
+	
 #! @Arguments f
 #! @Returns a ring element
 #! @Description
