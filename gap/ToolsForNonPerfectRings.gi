@@ -21,7 +21,7 @@ InstallMethod( PolysOverTheSameRing,
 	[ IsList ],
 
   function( L )
-    local R, i, lcm, S, K, indets, coeffs, monoms, deg;
+    local R, i, j, lcm, S, K, indets, coeffs, monoms, deg;
     
     if IsOne( Length( L ) ) then
         return L;
