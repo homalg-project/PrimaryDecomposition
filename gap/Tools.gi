@@ -205,17 +205,40 @@ InstallMethod( BasisCoefficientsOfRingElement,
 	[ IsHomalgRingElement],
 	
   function( r )
-    local R, M, K, e;
+    local R, A, k, bas, m, d, mat, coeffs, monoms, pos;
     
     R := HomalgRing( r );
     
-    M := RepresentationOverCoefficientsRing( r );
+    A := AmbientRing( R );
     
-    K := CoefficientsRing( AmbientRing ( R ) );
+    k := CoefficientsRing( A );
     
-    e := CertainRows( HomalgIdentityMatrix( NrRows( M ) , K ) , [ 1 ] );
+    m := DecideZero( r * One(R) );
     
-    return ( e * M );
+    bas := EntriesOfHomalgMatrix( A * BasisOverCoefficientsRing( R ) );
+    
+    d := Length( bas );
+    
+    mat := HomalgInitialMatrix( 1, d, k );
+    
+    coeffs := Coefficients( m / A );
+    
+    monoms := coeffs!.monomials;
+    
+    coeffs := k * coeffs;
+    
+    pos := List( monoms, a -> Position( bas, a ) );
+    
+    Perform( [ 1 .. Length( pos ) ], function( j ) SetMatElm( mat, 1, pos[j], MatElm( coeffs, j, 1 ) / k ); end );
+    
+    if HasIsInitialMatrix( mat ) and IsInitialMatrix( mat ) then
+        mat := HomalgZeroMatrix( 1, d, k );
+    fi;
+    
+    MakeImmutable( mat );
+    
+    return mat;
+    
     
 end );
 

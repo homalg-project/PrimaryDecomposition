@@ -11,7 +11,7 @@ R := A / I;
 r := "x^4 * y^2 + z*x" / R;
 #! |[ x^4*y^2+x*z ]|
 coeffs := BasisCoefficientsOfRingElement( r );
-#! <An unevaluated 1 x 5 matrix over an external ring>
+#! <A 1 x 5 matrix over an external ring>
 Display(coeffs);
 #! 0,0,1,0,1
 bas := BasisOverCoefficientsRing( R );
