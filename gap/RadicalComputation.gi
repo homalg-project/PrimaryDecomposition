@@ -44,6 +44,7 @@ InstallMethod( PreparationForRadicalOfIdeal,
         
         HomalgRing( list[1] )!.RootOfBaseField:=0;
         
+        ## added the one of the ring A to transfer the polynomials into the right ring.
         Add( list, One( A ) );
         list := PolysOverTheSameRing( list );
         list := List( [ 1 .. Length( list ) - 1 ] , i -> list[i] / A );

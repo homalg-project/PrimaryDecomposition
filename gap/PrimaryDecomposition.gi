@@ -33,6 +33,7 @@ InstallMethod( IsPrimeZeroDim,
     ## of degree dim_C( R/I ) or reducible. In the first case this element proves
     ## that the ideal I is a prime ideal, in the second case the ideal I cannot be
     ## a prime ideal.
+    ## STEP 1:
     
     R := A / I;
     
@@ -57,8 +58,9 @@ InstallMethod( IsPrimeZeroDim,
         fi;
     od;
     
-    ## Now the algorithms asks if I is a radical ideal.
-    ## If yes, it is a prime ideal. If not, then I cannot be a prime ideal.
+    ## Now the algorithms checks if I is a radical ideal.
+    ## If not, then I cannot be a prime ideal.
+    ## STEP 2:
     
     RadI := RadicalOfIdeal( I );
     
@@ -85,6 +87,7 @@ InstallMethod( IsPrimeZeroDim,
     fi;
     
     ## Some values needed in both cases:
+    ## STEP 3:
     
     L := HomalgRing( J );
     
@@ -103,6 +106,8 @@ InstallMethod( IsPrimeZeroDim,
     
     if IsFinite( C ) then
         
+        ## STEP 4:
+        
         mat := List( [ 1 .. n ], i -> CertainRows( e, [i] ) );
         
         iter := Iterator( e );
@@ -115,6 +120,8 @@ InstallMethod( IsPrimeZeroDim,
             lambda := NextIterator( iter );
 
             if Position( mat, lambda )= fail then
+                
+                ## STEP 5:
                 
                 w := ( LModJ * lambda ) * indets;
                 
@@ -146,13 +153,17 @@ InstallMethod( IsPrimeZeroDim,
      
     while true do
         
+        ## STEP 4:
+        
         if IsPerfect( C ) then
             
             lambda := GeneratorOfAnElementNotContainedInAnyHyperplane( mat );
         else
             lambda := GeneratorOfAnElementNotContainedInAnyHyperplane( mat, CoefficientsRing( L ) );
         fi;
-                
+        
+        ## STEP 5:
+        
         w := ( LModJ * lambda ) * indets;
             
         mu := MinimalPolynomial( MatElm( w, 1, 1 ) );
