@@ -16,8 +16,8 @@ Display( M );
 CoefficientsTransformation( M, deg);
 #! <A 4 x 1 matrix over an external ring>
 Display( last );
-#! (t^6),    
-#! (t^6*s^6),
-#! (s^12),   
+#! (t^9),
+#! (t^9*s^9),
+#! (s^18),
 #! 1         
 #! @EndExample

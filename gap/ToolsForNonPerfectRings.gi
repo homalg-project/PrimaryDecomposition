@@ -21,7 +21,7 @@ InstallMethod( PolysOverTheSameRing,
 	[ IsList ],
 
   function( L )
-    local R, i, j, lcm, S, K, indets, coeffs, monoms, deg;
+    local R, i, j, lcm, S, K, indets, coeffs, monoms, deg, C;
     
     if IsOne( Length( L ) ) then
         return L;
@@ -59,7 +59,11 @@ InstallMethod( PolysOverTheSameRing,
         
         deg := lcm - HomalgRing( L[i])!.RootOfBaseField;
         
-        coeffs := CoefficientsTransformation( coeffs, deg );
+        C := HomalgRing( coeffs );
+        
+        coeffs := CoefficientsTransformation( CoefficientsRing( C ) * coeffs, deg );
+        
+        coeffs := C * coeffs;
         
         L[ i ] := Involution( HomalgMatrix( monoms, Length( monoms ), 1, S ) ) * ( S * coeffs ); 
         
@@ -322,7 +326,7 @@ InstallMethod( CoefficientsTransformation,
                             
                         od;
                         
-                        a := a * ( RationalParameters( R )[k]^p )^( deg * d );
+                        a := a * ( RationalParameters( R )[k] )^( p^deg * d );
                         
                     od;
                     
