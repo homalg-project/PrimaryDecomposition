@@ -15,6 +15,7 @@ AutoDoc( "PrimaryDecomposition" :
                            "HOMALG_IO.suppress_PID := true;",
                            "HOMALG_IO.use_common_stream := true;",
                            "HOMALG.SuppressParityInViewObjForCommutativeStructureObjects := true;",
+                           "PRIMARY_DECOMPOSITION.RandomSource := RandomSource( IsMersenneTwister );",
                            ],
                          ),
         

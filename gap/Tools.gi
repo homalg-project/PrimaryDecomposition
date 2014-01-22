@@ -9,6 +9,12 @@
 ##
 #############################################################################
 
+InstallValue( PRIMARY_DECOMPOSITION,
+        rec(
+              RandomSource := GlobalMersenneTwister,
+            )
+);
+
 ####################################
 #
 # methods for properties:
@@ -687,7 +693,7 @@ InstallMethod( GeneratorOfAnElementNotContainedInAnyHyperplane,
 	[ IsHomalgMatrix ],
 
   function( L )
-    local R, lambda;
+    local R, lambda, rs;
     
     while true do
         
@@ -697,7 +703,9 @@ InstallMethod( GeneratorOfAnElementNotContainedInAnyHyperplane,
         
         lambda := HomalgInitialMatrix( 1, NrColumns( L ), R );
         
-        Perform( [ 1 .. NrColumns( L ) ], function(j) SetMatElm( lambda, 1, j , Random( [ - 50 .. 50 ] ) / R ); end );
+        rs := PRIMARY_DECOMPOSITION.RandomSource;
+        
+        Perform( [ 1 .. NrColumns( L ) ], function(j) SetMatElm( lambda, 1, j , Random( rs, [ - 50 .. 50 ] ) / R ); end );
         
         MakeImmutable( lambda );
         
@@ -715,7 +723,7 @@ InstallMethod( GeneratorOfAnElementNotContainedInAnyHyperplane,
 	[ IsHomalgMatrix , IsHomalgRing ],
 
   function( L , S )
-    local R, lambda, r, s, lambda2;
+    local R, lambda, rs, r, s, lambda2;
     
     while true do
         
@@ -726,7 +734,9 @@ InstallMethod( GeneratorOfAnElementNotContainedInAnyHyperplane,
         ## Todo: involve the rational parameters of R to generate lambda
         lambda := HomalgInitialMatrix( 1, NrColumns( L ), R );
         
-        Perform( [ 1 .. NrColumns( L ) ], function(j) SetMatElm( lambda, 1, j , Random( [ - 50 .. 50 ] ) / R ); end );
+        rs := PRIMARY_DECOMPOSITION.RandomSource;
+        
+        Perform( [ 1 .. NrColumns( L ) ], function(j) SetMatElm( lambda, 1, j , Random( rs, [ - 50 .. 50 ] ) / R ); end );
         
         MakeImmutable( lambda );
         
