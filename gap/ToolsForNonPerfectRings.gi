@@ -15,7 +15,20 @@
 #
 ####################################
 
-##
+#! @Chunk PolysOverTheSameRing_info
+#!  For each polynomial ring <M>R_j</M> containing <A>L_j</A> the number
+#!  <M>e_j = R_j</M>!.RootOfBaseField defines the embedding map 
+#!  <M>R \hookrightarrow R_j: a \mapsto a; t_i \mapsto t_i^{p^{e_j}}</M>
+#!  where <M>p</M> is the characteristic of the base field, <M>a</M> a field
+#!  element and <M>t_i</M> are the rational parameters and <M>R</M> the common
+#!  base function field. The rings <M>R_j</M> and <M>R</M> have to be
+#!  technically identical, such that even the variable names coincide.
+#!  The common ring <M>S</M> the method defines is in turn a copy of <M>R</M>
+#!  with <M>e_S = S</M>!.RootOfBaseField is the least common multiply of the 
+#!  <M>e_j</M>, excluding zero. The polynomials <A>L_j</A> will be represented
+#!  over <M>S</M> by taking the $t_i$ to the power of <M>p^{e_S-e_j}</M>.
+#! @EndChunk
+
 InstallMethod( PolysOverTheSameRing,
 	"for a list",
 	[ IsList ],
@@ -75,7 +88,11 @@ InstallMethod( PolysOverTheSameRing,
     
 end );
 
-##
+#! @Chunk SeparablePart_info
+#!  For polynomials over nonperfect rings the method uses an algorithm
+#!  of Kemper (see <Cite Key="Kemper" />).
+#! @EndChunk
+
 InstallMethod( SeparablePart,
 	"for a ring element",
 	[ IsHomalgRingElement ],
@@ -221,6 +238,12 @@ InstallMethod( MatrixEmbedding,
     
     ## K is necessary to change the ti.
     K := CoefficientsRing( R ) * RationalParameters( R );
+    
+#! @Chunk MatrixEmbedding_info
+#!  The method provides that the generator of the field extension <M>\alpha</M>
+#!  coincides withe the negativ of the constant coefficients of the minimal
+#!  polynomial.
+#! @EndChunk
     
     param := - MatElm( Coefficients( f ), NrRows( Coefficients( f ) ), 1 ) / K;
     

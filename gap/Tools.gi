@@ -452,7 +452,13 @@ InstallMethod( IdealBasisToGroebner,
     
 end );
 
-##
+#! @Chunk AppendToGroebner_info
+#!  If the coefficients ring <M>K</M> is perfect, the method uses the 
+#!  IdealBasisOverCoefficientsRing and IdealBasisToGroebner.
+#!  If not, the method uses the usual Groebner basis algorithms, since 
+#!  IdealBasisToGroebner only works for perfect coefficient rings.
+#! @EndChunk
+
 InstallMethod( AppendToGroebnerBasisOfZeroDimensionalIdeal,
 	"for a matrix",
 	[ IsHomalgMatrix ],
@@ -527,6 +533,7 @@ end );
 #!  is the identity of the ring.
 #! @EndChunk
 
+##
 InstallMethod( MinimalPolynomial,
         "for two ring elements",
 	[ IsHomalgRingElement, IsHomalgRingElement ],

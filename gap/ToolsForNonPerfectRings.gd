@@ -17,15 +17,14 @@
 #
 ####################################
 
+#! @Description
+#!  Accepts a list <A>L</A> of polynomials which are defined over function
+#!  fields, whose coefficients rings are a root of the same function field.
+#!  The method computes a polynomial ring over a function field and the 
+#!  representations of the polynomials in <A>L</A> over this ring.
+#!  @InsertChunk PolysOverTheSameRing_info
 #! @Arguments L
 #! @Returns a list
-#! @Description
-#!  Defines a new polynomial ring <M>S</M>, whose coefficients ring is a root
-#!  of the same field than the coefficients ring, in which the polynomials of
-#!  the list <A>L</A> are defined. Furthermore a representation of the 
-#!  polynomials will be computed. The degree <M>d</M> of the root for a ring <M>R</M>
-#!  is stored in <M>R!.RootOfBaseField</M>, which is given as the exponent of the
-#!  characeteristic <M>p</M> of the base field <M>d = p^e</M>.
 DeclareAttribute( "PolysOverTheSameRing",
         IsList );
 #! @InsertSystem PolysOverTheSameRing
@@ -36,13 +35,17 @@ DeclareAttribute( "PolysOverTheSameRing",
 #
 ####################################
 
+#! @Description
+#!  Computes the image of the matrix <M><A>M</A>\in K(\alpha)^{r \times c})</M>
+#!  where <M>K(\alpha)</M> with minimal polynomial <A>f</A>, under the  
+#!  extension field <M>K(\alpha)</M> with minimal polynomial <A>f</A>
+#!  embedding <M>K(\alpha)^{r \times c } \hookrightarrow
+#!  K^{r deg(<A>f</A>) \times c deg(<A>f</A>)}</M> which is a the natural
+#!  extension of <M>K(\alpha )\hookrightarrow 
+#!  K^{deg(<A>f</A>)\times deg(<A>f</A>)}: \alpha \mapsto \texttt{CompanionMatrix}(\alpha)</M>.
+#! @InsertChunk MatrixEmbedding_info
 #! @Arguments M, f
 #! @Returns a matrix
-#! @Description
-#!  Computes the embedding of the matrix <A>M</A> which lies in a finite 
-#!  extension field of <M>K</M> with minimal polynomial <A>f</A> into 
-#!  the space of matrices over K of degree <M>n x n</M> with 
-#!  <M> n := deg( <A>M</A> )* deg(<A>f</A>)</M>.
 DeclareOperation( "MatrixEmbedding",
         [ IsHomalgMatrix, IsHomalgRingElement ] );
 #! @InsertSystem MatrixEmbedding
@@ -56,3 +59,4 @@ DeclareOperation( "MatrixEmbedding",
 DeclareOperation( "CoefficientsTransformation",
         [ IsHomalgMatrix, IsInt ] );
 #! @InsertSystem CoefficientsTransformation
+
