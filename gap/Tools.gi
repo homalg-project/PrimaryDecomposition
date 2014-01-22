@@ -312,7 +312,7 @@ InstallMethod( IdealBasisOverCoefficientRing,
 end );
 
 ##
-InstallMethod( GapInternalIsomorphicRing,
+InstallMethod( GapInternalIsomorphicField,
 	"for a ring",
 	[ IsHomalgRing ],
 
@@ -358,16 +358,17 @@ InstallMethod( IdealBasisToGroebner,
     
     ## Reverse order of the columns of the matrix instead of reversed order
     ## of basis.
-    Ech := CertainColumns( C, Reversed( [ 1 .. NrColumns( C ) ] ) );
-    
-    ## Regard the matrix over an GAP internal ring to compute the reduced
+    Ech := CertainColumns( C, Reversed( [ 1 .. NrColumns( C ) ] ) ); 
+
+    ## Regard the matrix over an GAP internal field to compute the reduced
     ## echelon form.
-    S := GapInternalIsomorphicRing( K );
+    S := GapInternalIsomorphicField( K );
     
     Ech := K * BasisOfRows( S * Ech );
     
     C := CertainColumns( Ech, Reversed( [ 1 .. NrColumns( Ech ) ] ) );
     
+
     ## A reduction of the generators of the ideal is computed by the
     ## reduced echelon form.
     ## The next part of the algorithms iterates over all generators 

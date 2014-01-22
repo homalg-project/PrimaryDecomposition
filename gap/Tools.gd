@@ -101,8 +101,8 @@ DeclareOperation( "IdealBasisOverCoefficientRing",
 #! @Arguments K
 #! @Returns a ring
 #! @Description
-#!  Computes an isomorphic, GAP internal ring.
-DeclareAttribute( "GapInternalIsomorphicRing",
+#!  Computes an isomorphic, GAP internal field, provided the field is perfect.
+DeclareAttribute( "GapInternalIsomorphicField",
 	IsHomalgRing);
 
 #! @Description
