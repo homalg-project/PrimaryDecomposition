@@ -5,7 +5,7 @@ PackageName := "PrimaryDecomposition",
 Subtitle := "Tools for primary decomposition",
 
 Version := Maximum( [
-                   "2013.10.27", ## Mohamed's version
+                   "2014.09.15", ## Mohamed's version
                    ## this line prevents merge conflicts
                    "2013.11.02", ## Eva Maria's version
                    ] ),
