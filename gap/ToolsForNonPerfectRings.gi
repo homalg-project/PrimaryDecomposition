@@ -180,7 +180,7 @@ InstallMethod( SeparablePart,
         ## coefficients of a depend only on the base field.
         coeffs2 := Coefficients( a );
         
-        monoms2 := coeffs2!.monomials;
+        monoms2 := ShallowCopy( coeffs2!.monomials );
         
         a := Zero( T );
         
@@ -265,7 +265,7 @@ InstallMethod( MatrixEmbedding,
             
             else
                 coeffs := Coefficients( elm );
-                monoms := coeffs!.monomials;
+                monoms := ShallowCopy( coeffs!.monomials );
                 
                 for k in [ 1 .. NrRows( coeffs ) ] do
                     
@@ -329,7 +329,7 @@ InstallMethod( CoefficientsTransformation,
             
             coeffs := Coefficients( MatElm( M, r, c ) );
             
-            monoms := coeffs!.monomials;
+            monoms := ShallowCopy( coeffs!.monomials );
             
             if not monoms = [ ] then
                 

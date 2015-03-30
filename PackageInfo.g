@@ -5,7 +5,7 @@ PackageName := "PrimaryDecomposition",
 Subtitle := "Tools for primary decomposition",
 
 Version := Maximum( [
-                   "2014.09.15", ## Mohamed's version
+                   "2014.12.27", ## Mohamed's version
                    ## this line prevents merge conflicts
                    "2013.11.02", ## Eva Maria's version
                    ] ),
@@ -75,7 +75,7 @@ Dependencies := rec(
                    [ "AutoDoc", ">= 2013.11.06" ],
                    [ "RingsForHomalg", ">= 2013.08.22" ],
                    [ "GaussForHomalg", ">= 2013.06.26" ],
-                   [ "MatricesForHomalg", ">= 2013.12.18" ],
+                   [ "MatricesForHomalg", ">= 2014.12.27" ],
                    [ "Modules", ">= 2013.09.14" ],
                    [ "GradedModules", "2013.09.30" ],
                    [ "GAPDoc", ">= 1.1" ]
