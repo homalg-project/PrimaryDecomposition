@@ -165,7 +165,7 @@ InstallMethod( SquareFreeFactors,
     
     ## We assume that the polynomials generating the radical components are 
     ## irreducible.
-    Assert( 8, Set( List( rad, IsIrreducibleHomalgRingElement ) ) = [ true ] );
+    Assert( 8, ForAll( rad, IsIrreducibleHomalgRingElement ) );
     
     Perform( rad, function( r ) SetIsIrreducibleHomalgRingElement( r, true ); end );
     
