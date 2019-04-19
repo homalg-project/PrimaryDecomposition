@@ -1,38 +1,38 @@
+#
+# PrimaryDecomposition: Tools for primary decomposition
+#
+# This file contains package meta data. For additional information on
+# the meaning and correct usage of these fields, please consult the
+# manual of the "Example" package as well as the comments in its
+# PackageInfo.g file.
+#
 SetPackageInfo( rec(
 
 PackageName := "PrimaryDecomposition",
-
 Subtitle := "Tools for primary decomposition",
-
 Version := Maximum( [
-                   "2014.12.27", ## Mohamed's version
+                   "2016.02.01", ## Mohamed's version
                    ## this line prevents merge conflicts
                    "2013.11.02", ## Eva Maria's version
                    ] ),
 
-# this avoids git-merge conflicts
 Date := ~.Version{[ 1 .. 10 ]},
 Date := Concatenation( ~.Date{[ 9, 10 ]}, "/", ~.Date{[ 6, 7 ]}, "/", ~.Date{[ 1 .. 4 ]} ),
 
-ArchiveURL := Concatenation( "http://homalg.math.rwth-aachen.de/~barakat/homalg-project/PrimaryDecomposition-", ~.Version ),
-
-ArchiveFormats := ".tar.gz",
-
 Persons := [
-  rec( 
-    LastName      := "Barakat",
-    FirstNames    := "Mohamed",
-    IsAuthor      := true,
-    IsMaintainer  := true,
-    Email         := "mohamed.barakat@rwth-aachen.de",
-    WWWHome       := "http://www.mathematik.uni-kl.de/~barakat/",
-    PostalAddress := Concatenation( [
-                       "Lehrstuhl B fuer Mathematik, RWTH Aachen\n",
-                       "Templergraben 64\n",
-                       "52062 Aachen\n",
-                       "Germany" ] ),
-    Place         := "Aachen",
-    Institution   := "RWTH Aachen University"
+  rec(
+    IsAuthor := true,
+    IsMaintainer := true,
+    FirstNames := "Mohamed",
+    LastName := "Barakat",
+    WWWHome := "https://mohamed-barakat.github.io",
+    Email := "mohamed.barakat@uni-siegen.de",
+    PostalAddress := Concatenation(
+               "Walter-Flex-Str. 3\n",
+               "57068 Siegen\n",
+               "Germany" ),
+    Place := "Siegen",
+    Institution := "University of Siegen",
   ),
   rec(
     LastName      := "Hemmerling",
@@ -40,7 +40,7 @@ Persons := [
     IsAuthor      := true,
     IsMaintainer  := false,
     Email         := "evamaria@hemmerling-nw.de",
-    WWWHome       := "",
+    WWWHome       := "https://github.com/HemEM/",
     PostalAddress := Concatenation( [
                        "Department of Mathematics\n",
                        "University of Kaiserslautern\n",
@@ -52,25 +52,44 @@ Persons := [
   
 ],
 
+SourceRepository := rec(
+    Type := "git",
+    URL := Concatenation( "https://github.com/homalg-project/", ~.PackageName ),
+),
+IssueTrackerURL := Concatenation( ~.SourceRepository.URL, "/issues" ),
+#SupportEmail   := "TODO",
+PackageWWWHome  := Concatenation( "https://github.com/homalg-project/", ~.PackageName ),
+PackageInfoURL  := Concatenation( ~.PackageWWWHome, "PackageInfo.g" ),
+README_URL      := Concatenation( ~.PackageWWWHome, "README.md" ),
+ArchiveURL      := Concatenation( ~.SourceRepository.URL,
+                                 "/releases/download/v", ~.Version,
+                                 "/", ~.PackageName, "-", ~.Version ),
+
+ArchiveFormats := ".tar.gz",
+
+##  Status information. Currently the following cases are recognized:
+##    "accepted"      for successfully refereed packages
+##    "submitted"     for packages submitted for the refereeing
+##    "deposited"     for packages for which the GAP developers agreed
+##                    to distribute them with the core GAP system
+##    "dev"           for development versions of packages
+##    "other"         for all other packages
+##
 Status := "dev",
 
-README_URL := 
-  "http://homalg.math.rwth-aachen.de/~barakat/homalg-project/PrimaryDecomposition/README.PrimaryDecomposition",
-PackageInfoURL := 
-  "http://homalg.math.rwth-aachen.de/~barakat/homalg-project/PrimaryDecomposition/PackageInfo.g",
+AbstractHTML   :=  "",
 
 PackageDoc := rec(
-  BookName  := ~.PackageName,
+  BookName  := "PrimaryDecomposition",
   ArchiveURLSubset := ["doc"],
   HTMLStart := "doc/chap0.html",
   PDFFile   := "doc/manual.pdf",
   SixFile   := "doc/manual.six",
-  LongTitle := ~.Subtitle,
-  Autoload  := false
+  LongTitle := "Tools for primary decomposition",
 ),
 
 Dependencies := rec(
-  GAP := ">=4.4",
+  GAP := ">= 4.9.1",
   NeededOtherPackages := [
                    [ "AutoDoc", ">= 2013.11.06" ],
                    [ "RingsForHomalg", ">= 2013.08.22" ],
@@ -84,17 +103,18 @@ Dependencies := rec(
   ExternalConditions := [ ]
 ),
 
-AvailabilityTest := function( )
-    return true;
-  end,
+AvailabilityTest := function()
+        return true;
+    end,
 
-Autoload := false,
+TestFile := "tst/testall.g",
 
 Keywords := [
              "primary decomposition",
              "radical ideal",
              "prime decomposition",
              "associated primes",
-             "embedded primes" ]
+             "embedded primes",
+             ],
 
 ));
