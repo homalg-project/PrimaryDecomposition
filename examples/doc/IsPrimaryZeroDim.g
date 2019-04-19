@@ -4,7 +4,7 @@ LoadPackage( "PrimaryDecomposition" );
 #! true
 A := HomalgFieldOfRationalsInSingular( ) * "x";
 #! Q[x]
-I := LeftSubmodule( "x^2 - 2*x + 1", A);
+I := LeftSubmodule( "x^2 - 2*x + 1", A );
 #! <A principal torsion-free ideal given by a cyclic generator>
 IsPrimaryZeroDim( I );
 #! true

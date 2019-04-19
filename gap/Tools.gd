@@ -85,7 +85,7 @@ DeclareAttribute( "SeparablePart",
 #!  Computes the coefficients of the basis representation of <A>r</A>,
 #!  provided the ring is free of finite rank over its coefficients ring.
 DeclareAttribute( "BasisCoefficientsOfRingElement",
-	IsHomalgRingElement);
+	IsHomalgRingElement );
 #! @InsertSystem BasisCoefficientsOfRingElement
 
 #! @Arguments G
@@ -170,7 +170,7 @@ DeclareOperation( "IsNotContainedInAnyHyperplane",
 #!  dimensional subspace of the vector field <M>K^n</M>, respectively <M>C^n</M>,
 #!  spanned by the rows of <A>L</A>. The method repeats generating a random 
 #!  vector <M>\lambda \in K^n</M> until the method IsNotContainedInAnyHyperplan 
-#!  of <M>\lambda</M> and <A>L</A> returns TRUE.
+#!  of <M>\lambda</M> and <A>L</A> returns <C>true</C>.
 #! @Group GeneratorOfAnElement
 #! @Arguments L
 #! @Returns a value

@@ -53,7 +53,7 @@ DeclareOperation( "MatrixEmbedding",
 #! @Arguments M, deg
 #! @Returns a matrix
 #! @Description
-#!  Raises the rational parameters to the power <M>p^<A>deg</A></M> in the
+#!  Raises the rational parameters to the power <M>p</M>^<A>deg</A> in the
 #!  entries of the matrix <A>M</A>, where p is the characteristic of the
 #!  base field.
 DeclareOperation( "CoefficientsTransformation",

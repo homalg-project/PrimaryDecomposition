@@ -23,7 +23,7 @@ IsSubset( I, RI );
 #! true
 A := HomalgRingOfIntegersInSingular( 3, "t" ) * "x,y";
 #! GF(3)(t)[x,y]
-J := LeftSubmodule( "x-t, y", A);
+J := LeftSubmodule( "x-t, y", A );
 #! <A torsion-free ideal given by 2 generators>
 RadicalOfIdeal( J^2 );
 #! <A torsion-free ideal given by 2 generators>
