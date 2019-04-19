@@ -158,10 +158,7 @@ InstallMethod( SquareFreeFactors,
   function( r )
     local rad;
     
-    rad := RadicalDecomposition( LeftSubmodule( r ) );
-    rad := List( rad, MatrixOfSubobjectGenerators );
-    
-    rad := List( rad, m -> MatElm( m, 1, 1 ) );
+    rad := IrreducibleFactors( r );
     
     ## We assume that the polynomials generating the radical components are 
     ## irreducible.
