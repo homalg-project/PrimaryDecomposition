@@ -120,7 +120,7 @@ InstallMethod( SeparablePart,
     ## Kemper's algorithm:
     
     ## step 1:
-    h := Gcd_UsingCayleyDeterminant( f, Derivative( f ) );
+    h := GcdOp( f, Derivative( f ) );
     
     g1 := f / h;
     
@@ -134,7 +134,7 @@ InstallMethod( SeparablePart,
         
         h1 := h;
         
-        h := Gcd_UsingCayleyDeterminant( h, Derivative( h ) );
+        h := GcdOp( h, Derivative( h ) );
     
     od;
     
