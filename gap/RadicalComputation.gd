@@ -33,7 +33,7 @@ DeclareAttribute( "PreparationForRadicalOfIdeal",
 #! @Returns a LeftSubmodule
 DeclareAttribute( "RadicalOfIdeal",
 	IsHomalgModule );
-#! @InsertSystem RadicalOfIdeal
+#! @InsertChunk RadicalOfIdeal
 
 #! @Arguments mu
 #! @Returns a matrix
@@ -42,4 +42,4 @@ DeclareAttribute( "RadicalOfIdeal",
 #!  over a univariate ring.
 DeclareAttribute( "CompanionMatrix",
         IsHomalgRingElement );
-#! @InsertSystem CompanionMatrix
+#! @InsertChunk CompanionMatrix
