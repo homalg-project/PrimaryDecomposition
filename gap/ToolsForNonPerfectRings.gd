@@ -27,7 +27,7 @@
 #! @Returns a list
 DeclareAttribute( "PolysOverTheSameRing",
         IsList );
-#! @InsertSystem PolysOverTheSameRing
+#! @InsertChunk PolysOverTheSameRing
 
 ####################################
 #
@@ -48,7 +48,7 @@ DeclareAttribute( "PolysOverTheSameRing",
 #! @Returns a matrix
 DeclareOperation( "MatrixEmbedding",
         [ IsHomalgMatrix, IsHomalgRingElement ] );
-#! @InsertSystem MatrixEmbedding
+#! @InsertChunk MatrixEmbedding
 
 #! @Arguments M, deg
 #! @Returns a matrix
@@ -58,5 +58,5 @@ DeclareOperation( "MatrixEmbedding",
 #!  base field.
 DeclareOperation( "CoefficientsTransformation",
         [ IsHomalgMatrix, IsInt ] );
-#! @InsertSystem CoefficientsTransformation
+#! @InsertChunk CoefficientsTransformation
 

@@ -26,7 +26,7 @@ DeclareGlobalVariable( "PRIMARY_DECOMPOSITION" );
 #! @Returns a &homalg; matrix
 DeclareAttribute( "BasisOverCoefficientsRing",
         IsHomalgRing );
-#! @InsertSystem BasisOverCoefficientsRing
+#! @InsertChunk BasisOverCoefficientsRing
 
 #! @Description
 #!  Computes a representation matrix of the ring element <A>r</A>,
@@ -36,7 +36,7 @@ DeclareAttribute( "BasisOverCoefficientsRing",
 #! @Returns a &homalg; matrix
 DeclareAttribute( "RepresentationOverCoefficientsRing",
         IsHomalgRingElement );
-#! @InsertSystem RepresentationOverCoefficientsRing
+#! @InsertChunk RepresentationOverCoefficientsRing
 
 #! @Description
 #!  Computes the FGLM data of the ring <A>R</A> (see <Cite Key="SJ"/>),
@@ -48,7 +48,7 @@ DeclareAttribute( "RepresentationOverCoefficientsRing",
 #! @Returns a list
 DeclareAttribute( "FGLMdata",
         IsHomalgRing );
-#! @InsertSystem FGLMdata
+#! @InsertChunk FGLMdata
 
 #! @Description
 #!  Computes the minimal polynomial of the element <A>r</A>
@@ -59,7 +59,7 @@ DeclareAttribute( "FGLMdata",
 #! @Group MinimalPolynomial
 DeclareAttribute( "MinimalPolynomial",
 	IsHomalgRingElement );
-#! @InsertSystem MinimalPolynomial
+#! @InsertChunk MinimalPolynomial
 
 #! @Description
 #!  Computes the irreducible factors of the square free part of the 
@@ -68,7 +68,7 @@ DeclareAttribute( "MinimalPolynomial",
 #! @Returns a list
 DeclareAttribute( "SquareFreeFactors",
 	IsHomalgRingElement );
-#! @InsertSystem SquareFreeFactors
+#! @InsertChunk SquareFreeFactors
 
 #! @Description
 #!  Computes the separable part of a univariate polynomial <A>p</A>.
@@ -77,7 +77,7 @@ DeclareAttribute( "SquareFreeFactors",
 #! @Returns a ring element
 DeclareAttribute( "SeparablePart",
 	IsHomalgRingElement );
-#! @InsertSystem SeparablePart
+#! @InsertChunk SeparablePart
 
 #! @Arguments r
 #! @Returns a matrix
@@ -86,7 +86,7 @@ DeclareAttribute( "SeparablePart",
 #!  provided the ring is free of finite rank over its coefficients ring.
 DeclareAttribute( "BasisCoefficientsOfRingElement",
 	IsHomalgRingElement );
-#! @InsertSystem BasisCoefficientsOfRingElement
+#! @InsertChunk BasisCoefficientsOfRingElement
 
 #! @Arguments G
 #! @Returns a matrix
@@ -96,7 +96,7 @@ DeclareAttribute( "BasisCoefficientsOfRingElement",
 #!  using an algorithm of Sebastian Jambor (see <Cite Key="SJ"/>).
 DeclareOperation( "IdealBasisOverCoefficientRing", 
 	[ IsHomalgMatrix ] );
-#! @InsertSystem IdealBasisOverCoefficientsRing
+#! @InsertChunk IdealBasisOverCoefficientsRing
 
 #! @Arguments K
 #! @Returns a ring
@@ -130,7 +130,7 @@ DeclareAttribute( "IdealBasisToGroebner",
 #! @Returns a matrix
 DeclareAttribute( "AppendToGroebnerBasisOfZeroDimensionalIdeal", 
 	IsHomalgMatrix );
-#! @InsertSystem AppendToGroebnerBasisOfZeroDimensionalIdeal
+#! @InsertChunk AppendToGroebnerBasisOfZeroDimensionalIdeal
 	
 #! @Arguments f
 #! @Returns a ring element
@@ -138,7 +138,7 @@ DeclareAttribute( "AppendToGroebnerBasisOfZeroDimensionalIdeal",
 #!  Computes the derivative of the univariate polynomial <A>f</A>.
 DeclareAttribute( "Derivative", 
 	IsHomalgRingElement);
-#! @InsertSystem Derivative
+#! @InsertChunk Derivative
 
 ####################################
 #
@@ -163,7 +163,7 @@ DeclareOperation( "MinimalPolynomial",
 #! @Returns a matrix
 DeclareOperation( "IsNotContainedInAnyHyperplane",
 	[IsHomalgMatrix, IsHomalgMatrix ] );
-#! @InsertSystem IsNotContainedInAnyHyperplane
+#! @InsertChunk IsNotContainedInAnyHyperplane
 	
 #! @Description
 #!  Generates an element of <M>K^n</M>, which is not contained in any <M>n - 1</M> 
@@ -176,7 +176,7 @@ DeclareOperation( "IsNotContainedInAnyHyperplane",
 #! @Returns a value
 DeclareOperation( "GeneratorOfAnElementNotContainedInAnyHyperplane",
 	[ IsHomalgMatrix ] );
-#! @InsertSystem GeneratorOfAnElementNotContainedInAnyHyperplane
+#! @InsertChunk GeneratorOfAnElementNotContainedInAnyHyperplane
 
 #! @Arguments L, C
 #! @Group GeneratorOfAnElement
@@ -193,7 +193,7 @@ DeclareOperation( "GeneratorOfAnElementNotContainedInAnyHyperplane",
 #!  (see <Cite Key="SJ"/>).
 DeclareOperation( "FGLMToGroebner", 
 	[ IsList, IsHomalgMatrix ] );
-#! @InsertSystem FGLMToGroebner
+#! @InsertChunk FGLMToGroebner
 
 #! @Arguments M, e, l
 #! @Group FGLMToGroebner
