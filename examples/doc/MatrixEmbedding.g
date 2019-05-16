@@ -1,4 +1,4 @@
-#! @System MatrixEmbedding
+#! @Chunk MatrixEmbedding
 #! @Example
 LoadPackage( "PrimaryDecomposition" );
 #! true

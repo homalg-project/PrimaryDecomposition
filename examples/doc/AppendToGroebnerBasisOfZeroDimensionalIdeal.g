@@ -1,4 +1,4 @@
-#! @System AppendToGroebnerBasisOfZeroDimensionalIdeal
+#! @Chunk AppendToGroebnerBasisOfZeroDimensionalIdeal
 #! @Example
 LoadPackage( "PrimaryDecomposition" );
 #! true

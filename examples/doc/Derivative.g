@@ -1,4 +1,4 @@
-#! @System Derivative
+#! @Chunk Derivative
 #! @Example
 LoadPackage( "PrimaryDecomposition" );
 #! true

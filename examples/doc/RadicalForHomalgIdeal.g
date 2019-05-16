@@ -1,4 +1,4 @@
-#! @System RadicalOfIdeal
+#! @Chunk RadicalOfIdeal
 #! @Example
 LoadPackage( "PrimaryDecomposition" );
 #! true

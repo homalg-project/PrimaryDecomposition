@@ -1,4 +1,4 @@
-#! @System CoefficientsTransformation
+#! @Chunk CoefficientsTransformation
 #! @Example
 LoadPackage( "PrimaryDecomposition" );
 #! true

@@ -1,4 +1,4 @@
-#! @System CompanionMatrix
+#! @Chunk CompanionMatrix
 #! @Example
 LoadPackage( "PrimaryDecomposition" );
 #! true

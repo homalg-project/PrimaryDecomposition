@@ -1,4 +1,4 @@
-#! @System BasisCoefficientsOfRingElement
+#! @Chunk BasisCoefficientsOfRingElement
 #! @Example
 LoadPackage( "PrimaryDecomposition" );
 #! true

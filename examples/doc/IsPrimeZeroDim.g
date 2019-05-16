@@ -1,4 +1,4 @@
-#! @System IsPrimeZeroDim
+#! @Chunk IsPrimeZeroDim
 #! @Example
 LoadPackage( "PrimaryDecomposition" );
 #! true

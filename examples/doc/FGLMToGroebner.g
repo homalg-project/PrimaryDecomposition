@@ -1,4 +1,4 @@
-#! @System FGLMToGroebner
+#! @Chunk FGLMToGroebner
 #! @Example
 LoadPackage( "PrimaryDecomposition" );
 #! true

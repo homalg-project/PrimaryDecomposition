@@ -1,4 +1,4 @@
-#! @System SquareFreeFactors
+#! @Chunk SquareFreeFactors
 #! @Example
 LoadPackage( "PrimaryDecomposition" );
 #! true

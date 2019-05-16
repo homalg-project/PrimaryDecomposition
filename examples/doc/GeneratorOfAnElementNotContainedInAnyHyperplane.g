@@ -1,4 +1,4 @@
-#! @System GeneratorOfAnElementNotContainedInAnyHyperplane
+#! @Chunk GeneratorOfAnElementNotContainedInAnyHyperplane
 #! @Example
 LoadPackage( "PrimaryDecomposition" );
 #! true

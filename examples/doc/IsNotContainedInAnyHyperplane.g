@@ -1,4 +1,4 @@
-#! @System IsNotContainedInAnyHyperplane
+#! @Chunk IsNotContainedInAnyHyperplane
 #! @Example
 LoadPackage( "PrimaryDecomposition" );
 #! true

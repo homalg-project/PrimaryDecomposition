@@ -1,4 +1,4 @@
-#! @System MinimalPolynomial
+#! @Chunk MinimalPolynomial
 #! @Example
 LoadPackage( "PrimaryDecomposition" );
 #! true

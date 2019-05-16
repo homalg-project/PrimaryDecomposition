@@ -1,4 +1,4 @@
-#! @System PolysOverTheSameRing
+#! @Chunk PolysOverTheSameRing
 #! @Example
 LoadPackage( "PrimaryDecomposition" );
 #! true

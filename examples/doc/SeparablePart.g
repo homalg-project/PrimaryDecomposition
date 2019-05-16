@@ -1,4 +1,4 @@
-#! @System SeparablePart
+#! @Chunk SeparablePart
 #! @Example
 LoadPackage( "PrimaryDecomposition" );
 #! true

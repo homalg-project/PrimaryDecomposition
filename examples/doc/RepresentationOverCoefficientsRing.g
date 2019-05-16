@@ -1,4 +1,4 @@
-#! @System RepresentationOverCoefficientsRing
+#! @Chunk RepresentationOverCoefficientsRing
 #! @Example
 LoadPackage( "PrimaryDecomposition" );
 #! true

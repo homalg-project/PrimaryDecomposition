@@ -1,4 +1,4 @@
-#! @System FGLMdata
+#! @Chunk FGLMdata
 #! @Example
 LoadPackage( "PrimaryDecomposition" );
 #! true
