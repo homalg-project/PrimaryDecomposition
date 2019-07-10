@@ -80,7 +80,7 @@ InstallMethod( PolysOverTheSameRing,
         
         L[ i ] := Involution( HomalgMatrix( monoms, Length( monoms ), 1, S ) ) * ( S * coeffs ); 
         
-        L[ i ] := MatElm( L[i], 1, 1 );
+        L[ i ] := L[i][ 1, 1 ];
         
     od;
     
@@ -175,7 +175,7 @@ InstallMethod( SeparablePart,
     
     for i in [ 1 .. NrRows( coeffs ) ] do
     
-        a := MatElm( coeffs, i, 1 ) / S;
+        a := coeffs[ i, 1 ] / S;
         
         ## coefficients of a depend only on the base field.
         coeffs2 := Coefficients( a );
@@ -187,11 +187,11 @@ InstallMethod( SeparablePart,
         for j in [ 1 .. NrRows( coeffs2 ) ] do
             
             ## Computing the p-th root of the coefficients
-            b := x^p - MatElm( coeffs2, j, 1 ) / K;
+            b := x^p - coeffs2[ j, 1 ] / K;
             
             b := SquareFreeFactors( b )[1];
             
-            b := - MatElm( Coefficients( b ), 2, 1 );
+            b := - Coefficients( b )[ 2, 1 ];
             
             b := b / T;
             monoms2[j] := monoms2[j] / T;
@@ -255,7 +255,7 @@ InstallMethod( MatrixEmbedding,
         
         for j in [ 1 .. NrColumns( M ) ] do
             
-            elm := MatElm( M, i, j ) / K;
+            elm := M[ i, j ] / K;
             
             ## S is the Matrix which replaces the matrix entry elm.
             S := HomalgZeroMatrix( NrRows( N ), NrRows( N ), R );
@@ -279,7 +279,7 @@ InstallMethod( MatrixEmbedding,
                     
                     od;
                     
-                    elm := ( monoms[k] / R ) * ( MatElm( coeffs, k, 1 ) / R )* ( R * N^deg );
+                    elm := ( monoms[k] / R ) * ( coeffs[ k, 1 ] / R )* ( R * N^deg );
                     
                     S := S + elm;
                 
@@ -327,7 +327,7 @@ InstallMethod( CoefficientsTransformation,
             
             b := Zero( R );
             
-            coeffs := Coefficients( MatElm( M, r, c ) );
+            coeffs := Coefficients( M[ r, c ] );
             
             monoms := ShallowCopy( coeffs!.monomials );
             
@@ -359,11 +359,11 @@ InstallMethod( CoefficientsTransformation,
                     
                 od;
                 
-                SetMatElm( N, r, c, b );
+                N[ r, c ] := b;
             
             else
             
-                SetMatElm( N, r, c, Zero( R ) );
+                N[ r, c ] := Zero( R );
             
             fi;
             

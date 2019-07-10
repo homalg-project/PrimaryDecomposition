@@ -125,7 +125,7 @@ InstallMethod( IsPrimeZeroDim,
                 
                 w := ( LModJ * lambda ) * indets;
                 
-                mu := MinimalPolynomial( MatElm( w, 1, 1 ) );
+                mu := MinimalPolynomial( w[ 1, 1 ] );
             
                 if IsIrreducible( mu ) and Degree( mu ) = degJ then
                 
@@ -166,7 +166,7 @@ InstallMethod( IsPrimeZeroDim,
         
         w := ( LModJ * lambda ) * indets;
             
-        mu := MinimalPolynomial( MatElm( w, 1, 1 ) );
+        mu := MinimalPolynomial( w[ 1, 1 ] );
         
         if IsIrreducible( mu ) and Degree( mu ) = degJ then
             
@@ -267,7 +267,7 @@ InstallMethod( PrimaryDecompositionZeroDim,
     fi;
     
     fac := List( [ 1 .. Length( fac ) ], i -> MatrixOfSubobjectGenerators( fac[i][1] ) );
-    fac := List( [ 1 .. Length( fac ) ], i -> MatElm( fac[i], 1 ,1 ) );
+    fac := List( [ 1 .. Length( fac ) ], i -> fac[i][ 1, 1 ] );
     
     ## Computation of the ring elements obtained by evaluating the factors of
     ## the minimal polynomial for the element a, their representation matrices 
