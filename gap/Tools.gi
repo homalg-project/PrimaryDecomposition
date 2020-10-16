@@ -24,7 +24,7 @@ InstallValue( PRIMARY_DECOMPOSITION,
 ##
 InstallMethod( IsIrreducibleHomalgRingElement,
         "for a ring element",
-	[ IsHomalgRingElement ],
+        [ IsHomalgRingElement ],
         
   function( r )
     
@@ -133,7 +133,7 @@ end );
 ##
 InstallMethod( MinimalPolynomial,
         "for a ring element",
-	[ IsHomalgRingElement ],
+        [ IsHomalgRingElement ],
         
   function( r )
     local R, t;
@@ -153,7 +153,7 @@ end );
 ##
 InstallMethod( SquareFreeFactors,
         "for a ring element",
-	[ IsHomalgRingElement ],
+        [ IsHomalgRingElement ],
         
   function( r )
     local rad;
@@ -173,7 +173,7 @@ end );
 ##
 InstallMethod( SeparablePart,
         "for a ring element",
-	[ IsHomalgRingElement ],
+        [ IsHomalgRingElement ],
 
   function( p )
     local R;
@@ -205,8 +205,8 @@ end );
 
 ##
 InstallMethod( BasisCoefficientsOfRingElement, 
-	[ IsHomalgRingElement],
-	
+        [ IsHomalgRingElement],
+        
   function( r )
     local R, A, k, bas, m, d, mat, coeffs, monoms, pos;
     
@@ -310,8 +310,8 @@ end );
 
 ##
 InstallMethod( GapInternalIsomorphicField,
-	"for a ring",
-	[ IsHomalgRing ],
+        "for a ring",
+        [ IsHomalgRing ],
 
   function( K )
     local p, d, S;
@@ -332,7 +332,7 @@ end );
 
 ##
 InstallMethod( IdealBasisToGroebner, 
-	[ IsHomalgMatrix ],
+        [ IsHomalgMatrix ],
 
   function( M )
     local R, K, C, Ech, p, d, S, pos, bas, A, leadingmonoms, GJ, j, I, GI, i, lambda;
@@ -464,8 +464,8 @@ end );
 #! @EndChunk
 
 InstallMethod( AppendToGroebnerBasisOfZeroDimensionalIdeal,
-	"for a matrix",
-	[ IsHomalgMatrix ],
+        "for a matrix",
+        [ IsHomalgMatrix ],
 
   function( G )
     local R, I, M;
@@ -490,8 +490,8 @@ end );
 
 ##
 InstallMethod( Derivative,
-	"for a ring element",
-	[ IsHomalgRingElement ],
+        "for a ring element",
+        [ IsHomalgRingElement ],
 
   function( f )
     local R, indets, coeffs, monoms, i;
@@ -540,7 +540,7 @@ end );
 ##
 InstallMethod( MinimalPolynomial,
         "for two ring elements",
-	[ IsHomalgRingElement, IsHomalgRingElement ],
+        [ IsHomalgRingElement, IsHomalgRingElement ],
         
   function( r, t )
     local R, bas, M, k, m, n, c, e;
@@ -583,7 +583,7 @@ end );
 ##
 InstallMethod( MinimalPolynomial,
         "for a ring element and a string",
-	[ IsHomalgRingElement, IsString ],
+        [ IsHomalgRingElement, IsString ],
         
   function( r, t )
     local R, u, kt;
@@ -612,7 +612,7 @@ end );
 ##
 InstallMethod( Value,
         "for two homalg ring elements",
-	[ IsHomalgRingElement, IsHomalgRingElement ],
+        [ IsHomalgRingElement, IsHomalgRingElement ],
         
   function( p, v )
     local R, t, coeffs, A, z;
@@ -653,14 +653,14 @@ end );
 ##
 InstallMethod( IsIrreducible,
         "for a ring element",
-	[ IsHomalgRingElement ],
+        [ IsHomalgRingElement ],
         
   IsIrreducibleHomalgRingElement );
 
 ##
 InstallMethod( IsNotContainedInAnyHyperplane,
-	"for two matrices",
-	[ IsHomalgMatrix, IsHomalgMatrix ],
+        "for two matrices",
+        [ IsHomalgMatrix, IsHomalgMatrix ],
 
   function( lambda, L )
     local n, l, comb, i, W;
@@ -687,8 +687,8 @@ end );
 
 ##
 InstallMethod( GeneratorOfAnElementNotContainedInAnyHyperplane,
-	"for a matrix",
-	[ IsHomalgMatrix ],
+        "for a matrix",
+        [ IsHomalgMatrix ],
 
   function( L )
     local R, lambda, rs;
@@ -717,8 +717,8 @@ end );
 
 ##
 InstallMethod( GeneratorOfAnElementNotContainedInAnyHyperplane,
-	"for a matrix",
-	[ IsHomalgMatrix , IsHomalgRing ],
+        "for a matrix",
+        [ IsHomalgMatrix , IsHomalgRing ],
 
   function( L , S )
     local R, lambda, rs, r, s, lambda2;
@@ -765,8 +765,8 @@ end );
 
 ##
 InstallMethod( FGLMToGroebner,
-	"for a list and a matrix",
-	[ IsList, IsHomalgMatrix ],
+        "for a list and a matrix",
+        [ IsList, IsHomalgMatrix ],
 
   function( M, e )
     local n, R, x, l;

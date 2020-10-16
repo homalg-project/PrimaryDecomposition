@@ -17,9 +17,9 @@
 
 ##
 InstallMethod( IsPrimeZeroDim,
-	"for a zero dimensional ideal",
-	[ IsFinitelyPresentedSubmoduleRep and ConstructedAsAnIdeal ],
-	
+        "for a zero dimensional ideal",
+        [ IsFinitelyPresentedSubmoduleRep and ConstructedAsAnIdeal ],
+        
   function( I )
     local A, C, R, indets, mu, sf_mu, degI, i, RadI, J, e, L, LModJ, degJ, n,
           mat, iter, lambda, w;
@@ -187,8 +187,8 @@ end );
 
 ##
 InstallMethod ( IsPrimaryZeroDim,
-	"for a zero dimensional ideal",
-	[ IsFinitelyPresentedSubmoduleRep and ConstructedAsAnIdeal ],
+        "for a zero dimensional ideal",
+        [ IsFinitelyPresentedSubmoduleRep and ConstructedAsAnIdeal ],
         
   function( I )
     local bool, Rad;

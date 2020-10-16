@@ -25,14 +25,14 @@
 #! @Arguments I
 #! @Returns a LeftSubmodule
 DeclareAttribute( "PreparationForRadicalOfIdeal",
-	IsHomalgModule );
+        IsHomalgModule );
 
 #! @Description
 #!  Computes the radical of a zero dimensional ideal <A>I</A>. 
 #! @Arguments I
 #! @Returns a LeftSubmodule
 DeclareAttribute( "RadicalOfIdeal",
-	IsHomalgModule );
+        IsHomalgModule );
 #! @InsertChunk RadicalOfIdeal
 
 #! @Arguments mu

@@ -12,7 +12,7 @@ r := "x^4 * y^2 + z*x" / R;
 #! |[ x^4*y^2+x*z ]|
 coeffs := BasisCoefficientsOfRingElement( r );
 #! <A 1 x 5 matrix over an external ring>
-Display(coeffs);
+Display( coeffs );
 #! 0,0,1,0,1
 bas := BasisOverCoefficientsRing( R );
 #! <A 5 x 1 matrix over a residue class ring>

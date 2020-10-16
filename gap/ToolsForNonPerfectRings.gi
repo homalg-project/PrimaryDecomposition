@@ -30,8 +30,8 @@
 #! @EndChunk
 
 InstallMethod( PolysOverTheSameRing,
-	"for a list",
-	[ IsList ],
+        "for a list",
+        [ IsList ],
 
   function( L )
     local R, i, j, lcm, S, K, indets, coeffs, monoms, deg, C;
@@ -94,8 +94,8 @@ end );
 #! @EndChunk
 
 InstallMethod( SeparablePart,
-	"for a ring element",
-	[ IsHomalgRingElement ],
+        "for a ring element",
+        [ IsHomalgRingElement ],
 
   function( f )
     local R, h, g1, h1, CoeffsRing, p, S, T, K, x, coeffs, monoms, i, a,
@@ -299,8 +299,8 @@ end );
 
 ##
 InstallMethod( CoefficientsTransformation,
-	"for a matrix and a integer",
-	[ IsHomalgMatrix, IsInt ],
+        "for a matrix and a integer",
+        [ IsHomalgMatrix, IsInt ],
 
   function( M, deg )
     local R, p, K, indets, N, r, c, b, coeffs, monoms, l, a, k, d;

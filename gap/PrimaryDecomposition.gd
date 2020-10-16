@@ -23,7 +23,7 @@
 #! @Arguments I
 #! @Returns a LeftSubmodule
 DeclareProperty( "IsPrimeZeroDim",
-	IsHomalgModule );
+        IsHomalgModule );
 #! @InsertChunk IsPrimeZeroDim
 
 #! @Description
@@ -31,7 +31,7 @@ DeclareProperty( "IsPrimeZeroDim",
 #! @Arguments I
 #! @Returns a LeftSubmodule
 DeclareProperty( "IsPrimaryZeroDim",
-	IsHomalgModule );
+        IsHomalgModule );
 #! @InsertChunk IsPrimaryZeroDim
 
 ####################################
@@ -45,6 +45,6 @@ DeclareProperty( "IsPrimaryZeroDim",
 #! @Arguments I
 #! @Returns a list
 DeclareAttribute( "PrimaryDecompositionZeroDim",
-	IsHomalgObject );
+        IsHomalgObject );
 #! @InsertChunk PrimaryDecompositionZeroDim
 

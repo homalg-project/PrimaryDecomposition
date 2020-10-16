@@ -17,9 +17,9 @@
 
 ##
 InstallMethod( PreparationForRadicalOfIdeal,
-	"for an ideal",
-	[ IsFinitelyPresentedSubmoduleRep and ConstructedAsAnIdeal ],
-	
+        "for an ideal",
+        [ IsFinitelyPresentedSubmoduleRep and ConstructedAsAnIdeal ],
+        
   function( I )
     local A, R, indets, J, deg, list, M, i, d;
     
@@ -79,8 +79,8 @@ end );
 
 ##
 InstallMethod( RadicalOfIdeal,
-	"for a an ideal",
-	[  IsHomalgModule ],
+        "for a an ideal",
+        [  IsHomalgModule ],
 
   function( I )
     local A, p, M, J, deg, R, x, K, i, f, FGLM;  
@@ -133,7 +133,7 @@ end );
 
 ##
 InstallMethod( CompanionMatrix,
-	"for a univariate polynomial",
+        "for a univariate polynomial",
         [ IsHomalgRingElement ],
         
   function( mu )
