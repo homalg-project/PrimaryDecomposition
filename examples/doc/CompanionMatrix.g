@@ -14,7 +14,7 @@ mu := MinimalPolynomial( r );
 #! t^3-2*t^2-3*t
 M := CompanionMatrix( mu );
 #! <An unevaluated non-zero 3 x 3 matrix over an external ring>
-Display( last );
+Display( M );
 #! 2,3,0,
 #! 1,0,0,
 #! 0,1,0 

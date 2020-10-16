@@ -14,7 +14,7 @@ G := HomalgMatrix( "[ z + 1, y - 1 ]", 1, 1, R );
 #! <A 1 x 1 matrix over a residue class ring>
 B := IdealBasisOverCoefficientRing( G );         
 #! <An unevaluated 3 x 1 matrix over a residue class ring>
-Display( last );
+Display( B );
 #! z+1, 
 #! x+y, 
 #! z^2+z

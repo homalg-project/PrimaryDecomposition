@@ -24,9 +24,9 @@ Display( bas );
 #! z^2
 #!
 #! modulo [ y*z-x, x*z-y, y^2-z^2, x*y-z, x^2-z^2, z^3-z ]
-R * coeffs * bas ;
+s := R * coeffs * bas ;
 #! <An unevaluated 1 x 1 matrix over a residue class ring>
-Display(last);
+Display( s );
 #! z^2+y
 #!
 #! modulo [ y*z-x, x*z-y, y^2-z^2, x*y-z, x^2-z^2, z^3-z ]

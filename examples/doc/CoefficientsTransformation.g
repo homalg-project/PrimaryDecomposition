@@ -13,9 +13,9 @@ Display( M );
 #! (t*s),
 #! (s^2),
 #! 1     
-CoefficientsTransformation( M, deg );
+coeffs := CoefficientsTransformation( M, deg );
 #! <A 4 x 1 matrix over an external ring>
-Display( last );
+Display( coeffs );
 #! (t^9),
 #! (t^9*s^9),
 #! (s^18),

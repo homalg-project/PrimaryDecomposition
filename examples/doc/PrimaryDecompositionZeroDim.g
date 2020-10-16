@@ -46,10 +46,10 @@ I2 := LeftSubmodule( "x- s*t, y-s", A );
 #! <A torsion-free ideal given by 2 generators>
 I := Intersect( I1^2, I2 );
 #! <A torsion-free ideal given by 3 generators>
-PrimaryDecompositionZeroDim( I );
+dec := PrimaryDecompositionZeroDim( I );
 #! [ <A torsion-free ideal given by 3 generators>, 
 #!   <A torsion-free ideal given by 2 generators> ]
-Perform( last, Display );
+Perform( dec, Display );
 #! y^2,
 #! x*y+(-t)*y,
 #! x^2+(t)*x+(t^2)
