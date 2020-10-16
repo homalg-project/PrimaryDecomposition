@@ -109,7 +109,7 @@ InstallMethod( RepresentationOverCoefficientsRing,
         Perform( [ 1 .. Length( pos ) ], function( j ) mat[ i, pos[j] ] := coeffs[ j, 1 ] / k; end );
     od;
     
-    if HasIsInitialMatrix( mat ) and IsInitialMatrix( mat ) then
+    if IsInitialMatrix( mat ) then
         mat := HomalgZeroMatrix( d, d, k );
     fi;
     
@@ -234,7 +234,7 @@ InstallMethod( BasisCoefficientsOfRingElement,
     
     Perform( [ 1 .. Length( pos ) ], function( j ) mat[ 1, pos[j] ] := coeffs[ j, 1 ] / k; end );
     
-    if HasIsInitialMatrix( mat ) and IsInitialMatrix( mat ) then
+    if IsInitialMatrix( mat ) then
         mat := HomalgZeroMatrix( 1, d, k );
     fi;
     
