@@ -40,6 +40,9 @@ DeclareAttribute( "RadicalOfIdeal",
 #! @Description
 #!  Computes the companion matrix of the monic univariate polynomial <A>mu</A>
 #!  over a univariate ring.
-DeclareAttribute( "CompanionMatrix",
-        IsHomalgRingElement );
+DeclareOperation( "CompanionMatrix",
+        [ IsHomalgRingElement ] );
 #! @InsertChunk CompanionMatrix
+
+DeclareAttribute( "CompanionMatrixAttr",
+        IsHomalgRingElement );

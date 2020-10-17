@@ -11,7 +11,7 @@ SetPackageInfo( rec(
 PackageName := "PrimaryDecomposition",
 Subtitle := "Tools for primary decomposition",
 Version := Maximum( [
-                   "2019.09.02", ## Mohamed's version
+                   "2020.01.01", ## Mohamed's version
                    ## this line prevents merge conflicts
                    "2013.11.02", ## Eva Maria's version
                    ] ),

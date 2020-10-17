@@ -132,7 +132,7 @@ InstallMethod( RadicalOfIdeal,
 end );
 
 ##
-InstallMethod( CompanionMatrix,
+InstallMethod( CompanionMatrixAttr,
         "for a univariate polynomial",
         [ IsHomalgRingElement ],
         
@@ -156,3 +156,10 @@ InstallMethod( CompanionMatrix,
     return UnionOfRows( mu, L );
     
 end );
+
+##
+InstallMethod( CompanionMatrix,
+        "for a univariate polynomial",
+        [ IsHomalgRingElement ],
+        
+  CompanionMatrixAttr );
