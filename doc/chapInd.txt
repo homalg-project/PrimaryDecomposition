@@ -1,0 +1,35 @@
+  
+  
+  [1XIndex[101X
+  
+  [2XAppendToGroebnerBasisOfZeroDimensionalIdeal[102X, for IsHomalgMatrix 5.1-11 
+  [2XBasisCoefficientsOfRingElement[102X, for IsHomalgRingElement 5.1-7 
+  [2XBasisOverCoefficientsRing[102X, for IsHomalgRing 5.1-1 
+  [2XCoefficientsTransformation[102X, for IsHomalgMatrix, IsInt 5.2-5 
+  [2XCompanionMatrix[102X, for IsHomalgRingElement 4.1-3 
+  [2XDerivative[102X, for IsHomalgRingElement 5.1-12 
+  [2XFGLMdata[102X, for IsHomalgRing 5.1-3 
+  [2XFGLMToGroebner[102X, for IsList, IsHomalgMatrix 5.2-3 
+      for IsList, IsHomalgMatrix, IsList 5.2-3 
+  [2XGapInternalIsomorphicField[102X, for IsHomalgRing 5.1-9 
+  [2XGeneratorOfAnElementNotContainedInAnyHyperplane[102X, for IsHomalgMatrix 5.2-2 
+      for IsHomalgMatrix, IsHomalgRing 5.2-2 
+  [2XIdealBasisOverCoefficientRing[102X, for IsHomalgMatrix 5.1-8 
+  [2XIdealBasisToGroebner[102X, for IsHomalgMatrix 5.1-10 
+  [2XIsNotContainedInAnyHyperplane[102X, for IsHomalgMatrix, IsHomalgMatrix 5.2-1 
+  [2XIsPrimaryZeroDim[102X, for IsHomalgModule 3.1-2 
+  [2XIsPrimeZeroDim[102X, for IsHomalgModule 3.1-1 
+  [2XMatrixEmbedding[102X, for IsHomalgMatrix, IsHomalgRingElement 5.2-4 
+  [2XMinimalPolynomial[102X, for IsHomalgRingElement 5.1-4 
+      for IsHomalgRingElement, IsHomalgRingElement 5.1-4 
+      for IsHomalgRingElement, IsString 5.1-4 
+  [2XPolysOverTheSameRing[102X, for IsList 5.1-13 
+  [2XPreparationForRadicalOfIdeal[102X, for IsHomalgModule 4.1-1 
+  [2XPrimaryDecompositionZeroDim[102X, for IsHomalgObject 3.2-1 
+  [2XRadicalOfIdeal[102X, for IsHomalgModule 4.1-2 
+  [2XRepresentationOverCoefficientsRing[102X, for IsHomalgRingElement 5.1-2 
+  [2XSeparablePart[102X, for IsHomalgRingElement 5.1-6 
+  [2XSquareFreeFactors[102X, for IsHomalgRingElement 5.1-5 
+  
+  
+  -------------------------------------------------------

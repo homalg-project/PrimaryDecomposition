@@ -1,1 +1,80 @@
-Placeholder
+  
+  
+                             [1X PrimaryDecomposition [101X
+  
+  
+                       [1X Tools for primary decomposition [101X
+  
+  
+                                   2020.04.17
+  
+  
+                                17 October 2020
+  
+  
+                                Mohamed Barakat
+  
+                              Eva Maria Hemmerling
+  
+  
+  
+  Mohamed Barakat
+      Email:    [7Xmailto:mohamed.barakat@uni-siegen.de[107X
+      Homepage: [7Xhttps://mohamed-barakat.github.io[107X
+      Address:  [33X[0;14YWalter-Flex-Str. 3[133X
+                [33X[0;14Y57068 Siegen[133X
+                [33X[0;14YGermany[133X
+  
+  
+  Eva Maria Hemmerling
+      Email:    [7Xmailto:evamaria@hemmerling-nw.de[107X
+      Homepage: [7Xhttps://github.com/HemEM/[107X
+      Address:  [33X[0;14YDepartment of Mathematics[133X
+                [33X[0;14YUniversity of Kaiserslautern[133X
+                [33X[0;14Y67653 Kaiserslautern[133X
+                [33X[0;14YGermany[133X
+  
+  
+  
+  -------------------------------------------------------
+  
+  
+  [1XContents (PrimaryDecomposition)[101X
+  
+  1 [33X[0;0YIntroduction[133X
+  2 [33X[0;0YFunctionality[133X
+  3 [33X[0;0YPrimary Decomposition[133X
+    3.1 [33X[0;0YProperties[133X
+      3.1-1 IsPrimeZeroDim
+      3.1-2 IsPrimaryZeroDim
+    3.2 [33X[0;0YAttributes[133X
+      3.2-1 PrimaryDecompositionZeroDim
+  4 [33X[0;0YRadical Computation[133X
+    4.1 [33X[0;0YAttributes[133X
+      4.1-1 PreparationForRadicalOfIdeal
+      4.1-2 RadicalOfIdeal
+      4.1-3 CompanionMatrix
+  5 [33X[0;0YTools[133X
+    5.1 [33X[0;0YAttributes[133X
+      5.1-1 BasisOverCoefficientsRing
+      5.1-2 RepresentationOverCoefficientsRing
+      5.1-3 FGLMdata
+      5.1-4 MinimalPolynomial
+      5.1-5 SquareFreeFactors
+      5.1-6 SeparablePart
+      5.1-7 BasisCoefficientsOfRingElement
+      5.1-8 IdealBasisOverCoefficientRing
+      5.1-9 GapInternalIsomorphicField
+      5.1-10 IdealBasisToGroebner
+      5.1-11 AppendToGroebnerBasisOfZeroDimensionalIdeal
+      5.1-12 Derivative
+      5.1-13 PolysOverTheSameRing
+    5.2 [33X[0;0YOperations[133X
+      5.2-1 IsNotContainedInAnyHyperplane
+      5.2-2 GeneratorOfAnElementNotContainedInAnyHyperplane
+      5.2-3 FGLMToGroebner
+      5.2-4 MatrixEmbedding
+      5.2-5 CoefficientsTransformation
+  
+  
+  [32X

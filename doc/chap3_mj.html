@@ -1,0 +1,251 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+         "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+<script type="text/javascript"
+  src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+<title>GAP (PrimaryDecomposition) - Chapter 3: Primary Decomposition</title>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+<meta name="generator" content="GAPDoc2HTML" />
+<link rel="stylesheet" type="text/css" href="manual.css" />
+<script src="manual.js" type="text/javascript"></script>
+<script type="text/javascript">overwriteStyle();</script>
+</head>
+<body class="chap3"  onload="jscontent()">
+
+
+<div class="chlinktop"><span class="chlink1">Goto Chapter: </span><a href="chap0_mj.html">Top</a>  <a href="chap1_mj.html">1</a>  <a href="chap2_mj.html">2</a>  <a href="chap3_mj.html">3</a>  <a href="chap4_mj.html">4</a>  <a href="chap5_mj.html">5</a>  <a href="chapBib_mj.html">Bib</a>  <a href="chapInd_mj.html">Ind</a>  </div>
+
+<div class="chlinkprevnexttop">&nbsp;<a href="chap0_mj.html">[Top of Book]</a>&nbsp;  <a href="chap0_mj.html#contents">[Contents]</a>&nbsp;  &nbsp;<a href="chap2_mj.html">[Previous Chapter]</a>&nbsp;  &nbsp;<a href="chap4_mj.html">[Next Chapter]</a>&nbsp;  </div>
+
+<p id="mathjaxlink" class="pcenter"><a href="chap3.html">[MathJax off]</a></p>
+<p><a id="X82F1923486ABBC56" name="X82F1923486ABBC56"></a></p>
+<div class="ChapSects"><a href="chap3_mj.html#X82F1923486ABBC56">3 <span class="Heading">Primary Decomposition</span></a>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap3_mj.html#X871597447BB998A1">3.1 <span class="Heading">Properties</span></a>
+</span>
+<div class="ContSSBlock">
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3_mj.html#X8693DD4B7D0035D7">3.1-1 IsPrimeZeroDim</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3_mj.html#X7F57AAE77B478B65">3.1-2 IsPrimaryZeroDim</a></span>
+</div></div>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap3_mj.html#X7C701DBF7BAE649A">3.2 <span class="Heading">Attributes</span></a>
+</span>
+<div class="ContSSBlock">
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3_mj.html#X87729CF58040A04D">3.2-1 PrimaryDecompositionZeroDim</a></span>
+</div></div>
+</div>
+
+<h3>3 <span class="Heading">Primary Decomposition</span></h3>
+
+<p><a id="X871597447BB998A1" name="X871597447BB998A1"></a></p>
+
+<h4>3.1 <span class="Heading">Properties</span></h4>
+
+<p><a id="X8693DD4B7D0035D7" name="X8693DD4B7D0035D7"></a></p>
+
+<h5>3.1-1 IsPrimeZeroDim</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; IsPrimeZeroDim</code>( <var class="Arg">I</var> )</td><td class="tdright">(&nbsp;property&nbsp;)</td></tr></table></div>
+<p>Returns: a LeftSubmodule</p>
+
+<p>Determines if the zerodimensional ideal <var class="Arg">I</var> is a prime ideal and eventually saves an element, which proofs that <var class="Arg">I</var> is not prime.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">LoadPackage( "PrimaryDecomposition" );</span>
+true
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">A := HomalgFieldOfRationalsInSingular( ) * "x";</span>
+Q[x]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">I1 := LeftSubmodule( "x^2 + 1", A );</span>
+&lt;A principal torsion-free ideal given by a cyclic generator&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">IsPrimeZeroDim( I1 );</span>
+true
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">I2 := LeftSubmodule( "(x-1)^2", A );</span>
+&lt;A principal torsion-free ideal given by a cyclic generator&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">IsPrimeZeroDim( I2 );</span>
+false
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">I2!.AZeroDivisor;</span>
+|[ x ]|
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">I2!.ANilpotentElement;</span>
+|[ x ]|
+</pre></div>
+
+<p><a id="X7F57AAE77B478B65" name="X7F57AAE77B478B65"></a></p>
+
+<h5>3.1-2 IsPrimaryZeroDim</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; IsPrimaryZeroDim</code>( <var class="Arg">I</var> )</td><td class="tdright">(&nbsp;property&nbsp;)</td></tr></table></div>
+<p>Returns: a LeftSubmodule</p>
+
+<p>Determines if the zerodimensional ideal <var class="Arg">I</var> is a primary ideal.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">LoadPackage( "PrimaryDecomposition" );</span>
+true
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">A := HomalgFieldOfRationalsInSingular( ) * "x";</span>
+Q[x]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">I := LeftSubmodule( "x^2 - 2*x + 1", A );</span>
+&lt;A principal torsion-free ideal given by a cyclic generator&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">IsPrimaryZeroDim( I );</span>
+true
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">IsPrimeZeroDim( I );</span>
+false
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">A := HomalgFieldOfRationalsInSingular( ) * " x,y,z";</span>
+Q[x,y,z]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">I := LeftSubmodule( "x^3-x, y*x^2-y,y^2-x^2,z-x*y", A );</span>
+&lt;A torsion-free ideal given by 4 generators&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">IsPrimaryZeroDim( I );</span>
+false
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">IsBound( I!.AZeroDivisor );</span>
+true
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">I!.AZeroDivisor;</span>
+|[ x ]|
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">A := HomalgRingOfIntegersInSingular( 3, "t,s" ) * "x,y";</span>
+GF(3)(t,s)[x,y]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">I := LeftSubmodule( "x- s*t, y-s", A );</span>
+&lt;A torsion-free ideal given by 2 generators&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">IsPrimaryZeroDim( I^3 );</span>
+true
+</pre></div>
+
+<p><a id="X7C701DBF7BAE649A" name="X7C701DBF7BAE649A"></a></p>
+
+<h4>3.2 <span class="Heading">Attributes</span></h4>
+
+<p><a id="X87729CF58040A04D" name="X87729CF58040A04D"></a></p>
+
+<h5>3.2-1 PrimaryDecompositionZeroDim</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; PrimaryDecompositionZeroDim</code>( <var class="Arg">I</var> )</td><td class="tdright">(&nbsp;attribute&nbsp;)</td></tr></table></div>
+<p>Returns: a list</p>
+
+<p>Computes the primary decomposition of a zerodimensional ideal <var class="Arg">I</var>.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">LoadPackage( "PrimaryDecomposition" );</span>
+true
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Q := HomalgFieldOfRationalsInSingular( );</span>
+Q
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">A := Q["x,y,z"];</span>
+Q[x,y,z]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">I := LeftSubmodule( "y*z-x, x*z-y, y^2-z^2, x*y-z, x^2-z^2, z^3-z", A );</span>
+&lt;A torsion-free ideal given by 6 generators&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">decI := PrimaryDecompositionZeroDim( I );</span>
+[ &lt;A torsion-free ideal given by 3 generators&gt;,
+  &lt;A torsion-free ideal given by 3 generators&gt;,
+  &lt;A torsion-free ideal given by 3 generators&gt;,
+  &lt;A torsion-free ideal given by 3 generators&gt;,
+  &lt;A torsion-free ideal given by 3 generators&gt; ]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Perform( decI, Display );</span>
+z-1,
+y+1,
+x+1
+
+An ideal generated by the 3 entries of the above matrix
+z+1,
+y-1,
+x+1
+
+An ideal generated by the 3 entries of the above matrix
+z+1,
+y+1,
+x-1
+
+An ideal generated by the 3 entries of the above matrix
+z-1,
+y-1,
+x-1
+
+An ideal generated by the 3 entries of the above matrix
+z,
+y,
+x
+
+An ideal generated by the 3 entries of the above matrix
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">k := HomalgRingOfIntegersInSingular( 3, "t,r,s", Q );</span>
+GF(3)(t,r,s)
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">A := k["x,y"];</span>
+GF(3)(t,r,s)[x,y]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">I1 := LeftSubmodule( "x-t, y", A );</span>
+&lt;A torsion-free ideal given by 2 generators&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">I2 := LeftSubmodule( "x-s*t, y-s", A );</span>
+&lt;A torsion-free ideal given by 2 generators&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">I := Intersect( I1^2, I2 );</span>
+&lt;A torsion-free ideal given by 3 generators&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">decI := PrimaryDecompositionZeroDim( I );</span>
+[ &lt;A torsion-free ideal given by 3 generators&gt;,
+  &lt;A torsion-free ideal given by 2 generators&gt; ]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Perform( decI, Display );</span>
+y^2,
+x*y+(-t)*y,
+x^2+(t)*x+(t^2)
+
+An ideal generated by the 3 entries of the above matrix
+y+(-s),
+x+(-t*s)
+
+An ideal generated by the 2 entries of the above matrix
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Display( I1^2 );</span>
+x^2+(t)*x+(t^2),
+x*y+(-t)*y,     
+x*y+(-t)*y,     
+y^2             
+
+An ideal generated by the 4 entries of the above matrix
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">A := k["x,y,z"];</span>
+GF(3)(t,r,s)[x,y,z]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">I1 := LeftSubmodule( "x-t, y, z-s", A );</span>
+&lt;A torsion-free ideal given by 3 generators&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">I2 := LeftSubmodule( "x-s*t, y-s, z", A );</span>
+&lt;A torsion-free ideal given by 3 generators&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">I3 := LeftSubmodule( "x-s*t^2, y-t-s, z-s^2", A );</span>
+&lt;A torsion-free ideal given by 3 generators&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">I := Intersect( I1, I2^2, I3^2 );</span>
+&lt;A torsion-free ideal given by 6 generators&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">decI := PrimaryDecompositionZeroDim( I );</span>
+[ &lt;A torsion-free ideal given by 3 generators&gt;,
+  &lt;A torsion-free ideal given by 6 generators&gt;,
+  &lt;A torsion-free ideal given by 6 generators&gt; ]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Perform( decI, Display );</span>
+z+(-s),
+y,
+x+(-t)
+
+An ideal generated by the 3 entries of the above matrix
+z^2+(s^2)*z+(s^4),
+y*z+(-s^2)*y+(-t-s)*z+(t*s^2+s^3),
+x*z+(-s^2)*x+(-t^2*s)*z+(t^2*s^3),
+y^2+(t+s)*y+(t^2-t*s+s^2),
+x*y+(-t-s)*x+(-t^2*s)*y+(t^3*s+t^2*s^2),
+x^2+(t^2*s)*x+(t^4*s^2)
+
+An ideal generated by the 6 entries of the above matrix
+z^2,
+y*z+(-s)*z,
+x*z+(-t*s)*z,
+y^2+(s)*y+(s^2),
+x*y+(-s)*x+(-t*s)*y+(t*s^2),
+x^2+(t*s)*x+(t^2*s^2)
+
+An ideal generated by the 6 entries of the above matrix
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">I2^2 = decI[3];</span>
+true
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">I3^2 = decI[2];</span>
+true
+</pre></div>
+
+
+<div class="chlinkprevnextbot">&nbsp;<a href="chap0_mj.html">[Top of Book]</a>&nbsp;  <a href="chap0_mj.html#contents">[Contents]</a>&nbsp;  &nbsp;<a href="chap2_mj.html">[Previous Chapter]</a>&nbsp;  &nbsp;<a href="chap4_mj.html">[Next Chapter]</a>&nbsp;  </div>
+
+
+<div class="chlinkbot"><span class="chlink1">Goto Chapter: </span><a href="chap0_mj.html">Top</a>  <a href="chap1_mj.html">1</a>  <a href="chap2_mj.html">2</a>  <a href="chap3_mj.html">3</a>  <a href="chap4_mj.html">4</a>  <a href="chap5_mj.html">5</a>  <a href="chapBib_mj.html">Bib</a>  <a href="chapInd_mj.html">Ind</a>  </div>
+
+<hr />
+<p class="foot">generated by <a href="http://www.math.rwth-aachen.de/~Frank.Luebeck/GAPDoc">GAPDoc2HTML</a></p>
+</body>
+</html>

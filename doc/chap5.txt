@@ -1,0 +1,624 @@
+  
+  [1X5 [33X[0;0YTools[133X[101X
+  
+  
+  [1X5.1 [33X[0;0YAttributes[133X[101X
+  
+  [1X5.1-1 BasisOverCoefficientsRing[101X
+  
+  [33X[1;0Y[29X[2XBasisOverCoefficientsRing[102X( [3XR[103X ) [32X attribute[133X
+  [6XReturns:[106X  [33X[0;10Ya [5Xhomalg[105X matrix[133X
+  
+  [33X[0;0YComputes  a basis of the ring [3XR[103X, provided it is free of finite rank over its
+  coefficients ring.[133X
+  
+  [4X[32X  Example  [32X[104X
+    [4X[25Xgap>[125X [27XLoadPackage( "PrimaryDecomposition" );[127X[104X
+    [4X[28Xtrue[128X[104X
+    [4X[25Xgap>[125X [27XQ := HomalgFieldOfRationalsInSingular( );[127X[104X
+    [4X[28XQ[128X[104X
+    [4X[25Xgap>[125X [27XA := Q * "x,y,z";[127X[104X
+    [4X[28XQ[x,y,z][128X[104X
+    [4X[25Xgap>[125X [27XI := LeftSubmodule( "y*z-x, x*z-y, y^2-z^2, x*y-z, x^2-z^2, z^3-z", A );[127X[104X
+    [4X[28X<A torsion-free ideal given by 6 generators>[128X[104X
+    [4X[25Xgap>[125X [27XR := A / I;[127X[104X
+    [4X[28XQ[x,y,z]/( y*z-x, x*z-y, y^2-z^2, x*y-z, x^2-z^2, z^3-z )[128X[104X
+    [4X[25Xgap>[125X [27Xbas := BasisOverCoefficientsRing( R );[127X[104X
+    [4X[28X<A 5 x 1 matrix over a residue class ring>[128X[104X
+    [4X[25Xgap>[125X [27XDisplay( bas );[127X[104X
+    [4X[28X1, [128X[104X
+    [4X[28Xz, [128X[104X
+    [4X[28Xy, [128X[104X
+    [4X[28Xx, [128X[104X
+    [4X[28Xz^2[128X[104X
+    [4X[28X[128X[104X
+    [4X[28Xmodulo [ y*z-x, x*z-y, y^2-z^2, x*y-z, x^2-z^2, z^3-z ][128X[104X
+  [4X[32X[104X
+  
+  [1X5.1-2 RepresentationOverCoefficientsRing[101X
+  
+  [33X[1;0Y[29X[2XRepresentationOverCoefficientsRing[102X( [3Xr[103X ) [32X attribute[133X
+  [6XReturns:[106X  [33X[0;10Ya [5Xhomalg[105X matrix[133X
+  
+  [33X[0;0YComputes  a representation matrix of the ring element [3Xr[103X, with respect to the
+  basis  computed  by  BasisOverCoefficientsRing, provided the ring is free of
+  finite rank over its coefficients ring.[133X
+  
+  [4X[32X  Example  [32X[104X
+    [4X[25Xgap>[125X [27XLoadPackage( "PrimaryDecomposition" );[127X[104X
+    [4X[28Xtrue[128X[104X
+    [4X[25Xgap>[125X [27XQ := HomalgFieldOfRationalsInSingular( );[127X[104X
+    [4X[28XQ[128X[104X
+    [4X[25Xgap>[125X [27XA := Q * "x,y,z";[127X[104X
+    [4X[28XQ[x,y,z][128X[104X
+    [4X[25Xgap>[125X [27XI := LeftSubmodule( "y*z-x, x*z-y, y^2-z^2, x*y-z, x^2-z^2, z^3-z", A );[127X[104X
+    [4X[28X<A torsion-free ideal given by 6 generators>[128X[104X
+    [4X[25Xgap>[125X [27XR := A / I;[127X[104X
+    [4X[28XQ[x,y,z]/( y*z-x, x*z-y, y^2-z^2, x*y-z, x^2-z^2, z^3-z )[128X[104X
+    [4X[25Xgap>[125X [27Xr := HomalgRingElement( "x^2 +xy +z", R );[127X[104X
+    [4X[28X|[ x^2+x*y+z ]|[128X[104X
+    [4X[25Xgap>[125X [27Xrep := RepresentationOverCoefficientsRing( r );[127X[104X
+    [4X[28X<A 5 x 5 matrix over an external ring>[128X[104X
+    [4X[25Xgap>[125X [27XDisplay( rep );[127X[104X
+    [4X[28X0,2,0,0,1,[128X[104X
+    [4X[28X0,1,0,0,2,[128X[104X
+    [4X[28X0,0,1,2,0,[128X[104X
+    [4X[28X0,0,2,1,0,[128X[104X
+    [4X[28X0,2,0,0,1 [128X[104X
+  [4X[32X[104X
+  
+  [1X5.1-3 FGLMdata[101X
+  
+  [33X[1;0Y[29X[2XFGLMdata[102X( [3XR[103X ) [32X attribute[133X
+  [6XReturns:[106X  [33X[0;10Ya list[133X
+  
+  [33X[0;0YComputes  the  FGLM data of the ring [3XR[103X (see [Jam13]), provided it is free of
+  finite  rank  over  its  coefficients  ring.  The  FGLM  data of such a ring
+  consists  of the representation matrices of all indeterminates of [3XR[103X computed
+  by RepresentationOverCoefficientsRing.[133X
+  
+  [4X[32X  Example  [32X[104X
+    [4X[25Xgap>[125X [27XLoadPackage( "PrimaryDecomposition" );[127X[104X
+    [4X[28Xtrue[128X[104X
+    [4X[25Xgap>[125X [27XQ := HomalgFieldOfRationalsInSingular( );[127X[104X
+    [4X[28XQ[128X[104X
+    [4X[25Xgap>[125X [27XA := Q * "x,y,z";[127X[104X
+    [4X[28XQ[x,y,z][128X[104X
+    [4X[25Xgap>[125X [27XI := LeftSubmodule( "y*z-x, x*z-y, y^2-z^2, x*y-z, x^2-z^2, z^3-z", A );[127X[104X
+    [4X[28X<A torsion-free ideal given by 6 generators>[128X[104X
+    [4X[25Xgap>[125X [27XR := A / I;[127X[104X
+    [4X[28XQ[x,y,z]/( y*z-x, x*z-y, y^2-z^2, x*y-z, x^2-z^2, z^3-z )[128X[104X
+    [4X[25Xgap>[125X [27XF:= FGLMdata(R);[127X[104X
+    [4X[28X[ <A 5 x 5 matrix over an external ring>,[128X[104X
+    [4X[28X  <A 5 x 5 matrix over an external ring>,[128X[104X
+    [4X[28X  <A 5 x 5 matrix over an external ring> ][128X[104X
+    [4X[25Xgap>[125X [27XDisplay(F[1]);[127X[104X
+    [4X[28X0,0,0,1,0,[128X[104X
+    [4X[28X0,0,1,0,0,[128X[104X
+    [4X[28X0,1,0,0,0,[128X[104X
+    [4X[28X0,0,0,0,1,[128X[104X
+    [4X[28X0,0,0,1,0 [128X[104X
+    [4X[25Xgap>[125X [27XDisplay(F[2]);[127X[104X
+    [4X[28X0,0,1,0,0,[128X[104X
+    [4X[28X0,0,0,1,0,[128X[104X
+    [4X[28X0,0,0,0,1,[128X[104X
+    [4X[28X0,1,0,0,0,[128X[104X
+    [4X[28X0,0,1,0,0 [128X[104X
+    [4X[25Xgap>[125X [27XDisplay(F[3]);[127X[104X
+    [4X[28X0,1,0,0,0,[128X[104X
+    [4X[28X0,0,0,0,1,[128X[104X
+    [4X[28X0,0,0,1,0,[128X[104X
+    [4X[28X0,0,1,0,0,[128X[104X
+    [4X[28X0,1,0,0,0 [128X[104X
+  [4X[32X[104X
+  
+  [1X5.1-4 MinimalPolynomial[101X
+  
+  [33X[1;0Y[29X[2XMinimalPolynomial[102X( [3Xr[103X ) [32X attribute[133X
+  [33X[1;0Y[29X[2XMinimalPolynomial[102X( [3Xr[103X, [3Xstr[103X ) [32X operation[133X
+  [33X[1;0Y[29X[2XMinimalPolynomial[102X( [3Xr[103X, [3Xt[103X ) [32X operation[133X
+  [6XReturns:[106X  [33X[0;10Ya matrix[133X
+  
+  [33X[0;0YComputes  the minimal polynomial of the element [3Xr[103X of a ring [22XR[122X of finite rank
+  over its coefficients ring. The installed method computes the representation
+  matrix  [22XM[122X  of the ring element [3Xr[103X and finds the first linear dependency among
+  the vectors [22Xe, eM, eM^2, ...[122X, where [22Xe[122X is the identity of the ring.[133X
+  
+  [4X[32X  Example  [32X[104X
+    [4X[25Xgap>[125X [27XLoadPackage( "PrimaryDecomposition" );[127X[104X
+    [4X[28Xtrue[128X[104X
+    [4X[25Xgap>[125X [27XQ := HomalgFieldOfRationalsInSingular( );[127X[104X
+    [4X[28XQ[128X[104X
+    [4X[25Xgap>[125X [27XA := Q * "x,y,z";[127X[104X
+    [4X[28XQ[x,y,z][128X[104X
+    [4X[25Xgap>[125X [27XI := LeftSubmodule( "y*z-x, x*z-y, y^2-z^2, x*y-z, x^2-z^2, z^3-z", A );[127X[104X
+    [4X[28X<A torsion-free ideal given by 6 generators>[128X[104X
+    [4X[25Xgap>[125X [27XR := A / I;[127X[104X
+    [4X[28XQ[x,y,z]/( y*z-x, x*z-y, y^2-z^2, x*y-z, x^2-z^2, z^3-z )[128X[104X
+    [4X[25Xgap>[125X [27Xr := "x^2+x*y+z" / R;[127X[104X
+    [4X[28X|[ x^2+x*y+z ]|[128X[104X
+    [4X[25Xgap>[125X [27Xs := "x*y+z"/ R;[127X[104X
+    [4X[28X|[ x*y+z ]|[128X[104X
+    [4X[25Xgap>[125X [27Xmu_r := MinimalPolynomial( r );[127X[104X
+    [4X[28Xt^3-2*t^2-3*t[128X[104X
+    [4X[25Xgap>[125X [27Xmu_s := MinimalPolynomial( s );[127X[104X
+    [4X[28Xt^3-4*t[128X[104X
+    [4X[25Xgap>[125X [27Xmu_r + mu_s;[127X[104X
+    [4X[28X2*t^3-2*t^2-7*t[128X[104X
+    [4X[25Xgap>[125X [27Xkt := HomalgRing( mu_r );[127X[104X
+    [4X[28XQ[t][128X[104X
+    [4X[25Xgap>[125X [27Xt := Indeterminates( kt )[1];[127X[104X
+    [4X[28Xt[128X[104X
+    [4X[25Xgap>[125X [27Xmu := MinimalPolynomial( r, t );[127X[104X
+    [4X[28Xt^3-2*t^2-3*t[128X[104X
+    [4X[25Xgap>[125X [27Xmu = mu_r;[127X[104X
+    [4X[28Xtrue[128X[104X
+    [4X[25Xgap>[125X [27Xmu := MinimalPolynomial( r, "t" );[127X[104X
+    [4X[28Xt^3-2*t^2-3*t[128X[104X
+    [4X[25Xgap>[125X [27Xmu = mu_r;[127X[104X
+    [4X[28Xtrue[128X[104X
+    [4X[25Xgap>[125X [27Xmu := MinimalPolynomial( r, "a" );[127X[104X
+    [4X[28Xa^3-2*a^2-3*a[128X[104X
+  [4X[32X[104X
+  
+  [1X5.1-5 SquareFreeFactors[101X
+  
+  [33X[1;0Y[29X[2XSquareFreeFactors[102X( [3Xp[103X ) [32X attribute[133X
+  [6XReturns:[106X  [33X[0;10Ya list[133X
+  
+  [33X[0;0YComputes  the  irreducible factors of the square free part of the univariate
+  polynomial [3Xp[103X.[133X
+  
+  [4X[32X  Example  [32X[104X
+    [4X[25Xgap>[125X [27XLoadPackage( "PrimaryDecomposition" );[127X[104X
+    [4X[28Xtrue[128X[104X
+    [4X[25Xgap>[125X [27XA := HomalgFieldOfRationalsInSingular() * "t";[127X[104X
+    [4X[28XQ[t][128X[104X
+    [4X[25Xgap>[125X [27Xp := "t^3-2*t^2-3*t" / A;[127X[104X
+    [4X[28Xt^3-2*t^2-3*t[128X[104X
+    [4X[25Xgap>[125X [27Xs := SquareFreeFactors( p );[127X[104X
+    [4X[28X[ t, t+1, t-3 ][128X[104X
+    [4X[25Xgap>[125X [27XProduct( s );[127X[104X
+    [4X[28Xt^3-2*t^2-3*t[128X[104X
+  [4X[32X[104X
+  
+  [1X5.1-6 SeparablePart[101X
+  
+  [33X[1;0Y[29X[2XSeparablePart[102X( [3Xp[103X ) [32X attribute[133X
+  [6XReturns:[106X  [33X[0;10Ya ring element[133X
+  
+  [33X[0;0YComputes  the  separable  part of a univariate polynomial [3Xp[103X. For polynomials
+  over nonperfect rings the method uses an algorithm of Kemper (see [Kem91]).[133X
+  
+  [4X[32X  Example  [32X[104X
+    [4X[25Xgap>[125X [27XLoadPackage( "PrimaryDecomposition" );[127X[104X
+    [4X[28Xtrue[128X[104X
+    [4X[25Xgap>[125X [27XA := HomalgFieldOfRationalsInSingular() * "t";[127X[104X
+    [4X[28XQ[t][128X[104X
+    [4X[25Xgap>[125X [27Xr := "t^4-t^3-5*t^2-3*t" / A;[127X[104X
+    [4X[28Xt^4-t^3-5*t^2-3*t[128X[104X
+    [4X[25Xgap>[125X [27XSquareFreeFactors( r );[127X[104X
+    [4X[28X[ t, t+1, t-3 ][128X[104X
+    [4X[25Xgap>[125X [27XSeparablePart( r );[127X[104X
+    [4X[28Xt^3-2*t^2-3*t[128X[104X
+    [4X[25Xgap>[125X [27XA := HomalgRingOfIntegersInSingular( 3, "t,s")* "x";[127X[104X
+    [4X[28XGF(3)(t,s)[x][128X[104X
+    [4X[25Xgap>[125X [27Xr := "( x^3 - s ) * ( x^3 + t )" / A;[127X[104X
+    [4X[28Xx^6+(t-s)*x^3+(-t*s)[128X[104X
+    [4X[25Xgap>[125X [27XSeparablePart( r );[127X[104X
+    [4X[28Xx^2+(t-s)*x+(-t*s)[128X[104X
+  [4X[32X[104X
+  
+  [1X5.1-7 BasisCoefficientsOfRingElement[101X
+  
+  [33X[1;0Y[29X[2XBasisCoefficientsOfRingElement[102X( [3Xr[103X ) [32X attribute[133X
+  [6XReturns:[106X  [33X[0;10Ya matrix[133X
+  
+  [33X[0;0YComputes  the  coefficients  of  the basis representation of [3Xr[103X, provided the
+  ring is free of finite rank over its coefficients ring.[133X
+  
+  [4X[32X  Example  [32X[104X
+    [4X[25Xgap>[125X [27XLoadPackage( "PrimaryDecomposition" );[127X[104X
+    [4X[28Xtrue[128X[104X
+    [4X[25Xgap>[125X [27XA := HomalgFieldOfRationalsInSingular( ) * "x,y,z";[127X[104X
+    [4X[28XQ[x,y,z][128X[104X
+    [4X[25Xgap>[125X [27XI := LeftSubmodule( "y*z-x, x*z-y, y^2-z^2, x*y-z, x^2-z^2, z^3-z", A );[127X[104X
+    [4X[28X<A torsion-free ideal given by 6 generators>[128X[104X
+    [4X[25Xgap>[125X [27XR := A / I;[127X[104X
+    [4X[28XQ[x,y,z]/( y*z-x, x*z-y, y^2-z^2, x*y-z, x^2-z^2, z^3-z )[128X[104X
+    [4X[25Xgap>[125X [27Xr := "x^4 * y^2 + z*x" / R;[127X[104X
+    [4X[28X|[ x^4*y^2+x*z ]|[128X[104X
+    [4X[25Xgap>[125X [27Xcoeffs := BasisCoefficientsOfRingElement( r );[127X[104X
+    [4X[28X<A 1 x 5 matrix over an external ring>[128X[104X
+    [4X[25Xgap>[125X [27XDisplay( coeffs );[127X[104X
+    [4X[28X0,0,1,0,1[128X[104X
+    [4X[25Xgap>[125X [27Xbas := BasisOverCoefficientsRing( R );[127X[104X
+    [4X[28X<A 5 x 1 matrix over a residue class ring>[128X[104X
+    [4X[25Xgap>[125X [27XDisplay( bas );[127X[104X
+    [4X[28X1, [128X[104X
+    [4X[28Xz, [128X[104X
+    [4X[28Xy, [128X[104X
+    [4X[28Xx, [128X[104X
+    [4X[28Xz^2[128X[104X
+    [4X[28X[128X[104X
+    [4X[28Xmodulo [ y*z-x, x*z-y, y^2-z^2, x*y-z, x^2-z^2, z^3-z ][128X[104X
+    [4X[25Xgap>[125X [27Xs := R * coeffs * bas ;[127X[104X
+    [4X[28X<An unevaluated 1 x 1 matrix over a residue class ring>[128X[104X
+    [4X[25Xgap>[125X [27XDisplay( s );[127X[104X
+    [4X[28Xz^2+y[128X[104X
+    [4X[28X[128X[104X
+    [4X[28Xmodulo [ y*z-x, x*z-y, y^2-z^2, x*y-z, x^2-z^2, z^3-z ][128X[104X
+  [4X[32X[104X
+  
+  [1X5.1-8 IdealBasisOverCoefficientRing[101X
+  
+  [33X[1;0Y[29X[2XIdealBasisOverCoefficientRing[102X( [3XG[103X ) [32X operation[133X
+  [6XReturns:[106X  [33X[0;10Ya matrix[133X
+  
+  [33X[0;0YComputes a [22XK[122X-basis of an ideal generated by the entries of the matrix [3XG[103X over
+  [22XR[122X,  where  [22XK[122X  is  the coefficient ring of [22XR[122X, using an algorithm of Sebastian
+  Jambor (see [Jam13]).[133X
+  
+  [4X[32X  Example  [32X[104X
+    [4X[25Xgap>[125X [27XLoadPackage( "PrimaryDecomposition" );[127X[104X
+    [4X[28Xtrue[128X[104X
+    [4X[25Xgap>[125X [27XQ := HomalgFieldOfRationalsInSingular( );[127X[104X
+    [4X[28XQ[128X[104X
+    [4X[25Xgap>[125X [27XA := Q * "x,y,z";[127X[104X
+    [4X[28XQ[x,y,z][128X[104X
+    [4X[25Xgap>[125X [27XI := LeftSubmodule( "y*z-x, x*z-y, y^2-z^2, x*y-z, x^2-z^2, z^3-z", A );[127X[104X
+    [4X[28X<A torsion-free ideal given by 6 generators>[128X[104X
+    [4X[25Xgap>[125X [27XR := A / I;[127X[104X
+    [4X[28XQ[x,y,z]/( y*z-x, x*z-y, y^2-z^2, x*y-z, x^2-z^2, z^3-z )[128X[104X
+    [4X[25Xgap>[125X [27XG := HomalgMatrix( "[ z + 1, y - 1 ]", 1, 1, R );[127X[104X
+    [4X[28X<A 1 x 1 matrix over a residue class ring>[128X[104X
+    [4X[25Xgap>[125X [27XB := IdealBasisOverCoefficientRing( G );         [127X[104X
+    [4X[28X<An unevaluated 3 x 1 matrix over a residue class ring>[128X[104X
+    [4X[25Xgap>[125X [27XDisplay( B );[127X[104X
+    [4X[28Xz+1, [128X[104X
+    [4X[28Xx+y, [128X[104X
+    [4X[28Xz^2+z[128X[104X
+    [4X[28X[128X[104X
+    [4X[28Xmodulo [ y*z-x, x*z-y, y^2-z^2, x*y-z, x^2-z^2, z^3-z ][128X[104X
+  [4X[32X[104X
+  
+  [1X5.1-9 GapInternalIsomorphicField[101X
+  
+  [33X[1;0Y[29X[2XGapInternalIsomorphicField[102X( [3XK[103X ) [32X attribute[133X
+  [6XReturns:[106X  [33X[0;10Ya ring[133X
+  
+  [33X[0;0YComputes an isomorphic, GAP internal field, provided the field is perfect.[133X
+  
+  [1X5.1-10 IdealBasisToGroebner[101X
+  
+  [33X[1;0Y[29X[2XIdealBasisToGroebner[102X( [3XM[103X ) [32X attribute[133X
+  [6XReturns:[106X  [33X[0;10Ya list[133X
+  
+  [33X[0;0YComputes a Groebner basis of an ideal [22XI ⊴ R[122X defined by a [22XK[122X-basis of an ideal
+  [22XJ ⊴ R/tildeI[122X, where [22XK[122X is the coefficients ring and [22XtildeI[122X a zero dimensional
+  ideal.  The  basis elements are given in the rows of the matrix [3XM[103X in form of
+  coefficient vectors with respect to the basis of the ring, which is computed
+  by  BasisOverCoefficientsRing  and the matrix is defined over [22XR/tildeI[122X. This
+  method  works  only  for  perfect  coefficients  rings  [22XK[122X, since the reduced
+  echelon  form  only  accepts  GAP  internal rings. The method is based on an
+  algorithm of Sebastian Jambor (see [Jam13]).[133X
+  
+  [1X5.1-11 AppendToGroebnerBasisOfZeroDimensionalIdeal[101X
+  
+  [33X[1;0Y[29X[2XAppendToGroebnerBasisOfZeroDimensionalIdeal[102X( [3XG[103X ) [32X attribute[133X
+  [6XReturns:[106X  [33X[0;10Ya matrix[133X
+  
+  [33X[0;0YComputes  a  Groebner  Basis  of  the  ideal generated by the entries of the
+  matrix  [3XG[103X  and  the generators of the defining zero dimensional ideal of the
+  residue  class  ring  over which [3XG[103X is defined. If the coefficients ring [22XK[122X is
+  perfect,    the   method   uses   the   IdealBasisOverCoefficientsRing   and
+  IdealBasisToGroebner.  If  not,  the  method  uses  the usual Groebner basis
+  algorithms,  since  IdealBasisToGroebner  only works for perfect coefficient
+  rings.[133X
+  
+  [4X[32X  Example  [32X[104X
+    [4X[25Xgap>[125X [27XLoadPackage( "PrimaryDecomposition" );[127X[104X
+    [4X[28Xtrue[128X[104X
+    [4X[25Xgap>[125X [27XA := HomalgFieldOfRationalsInSingular( ) * "x,y,z";[127X[104X
+    [4X[28XQ[x,y,z][128X[104X
+    [4X[25Xgap>[125X [27XI := LeftSubmodule( "y*z-x, x*z-y, y^2-z^2, x*y-z, x^2-z^2, z^3-z", A );[127X[104X
+    [4X[28X<A torsion-free ideal given by 6 generators>[128X[104X
+    [4X[25Xgap>[125X [27XR := A/I;[127X[104X
+    [4X[28XQ[x,y,z]/( y*z-x, x*z-y, y^2-z^2, x*y-z, x^2-z^2, z^3-z )[128X[104X
+    [4X[25Xgap>[125X [27XJ := HomalgMatrix( "[z]", 1, 1, R );[127X[104X
+    [4X[28X<A 1 x 1 matrix over a residue class ring>[128X[104X
+    [4X[25Xgap>[125X [27Xmat := AppendToGroebnerBasisOfZeroDimensionalIdeal( J );[127X[104X
+    [4X[28X<An unevaluated 3 x 1 matrix over an external ring>[128X[104X
+    [4X[25Xgap>[125X [27XDisplay( mat );[127X[104X
+    [4X[28Xz,[128X[104X
+    [4X[28Xy,[128X[104X
+    [4X[28Xx[128X[104X
+  [4X[32X[104X
+  
+  [1X5.1-12 Derivative[101X
+  
+  [33X[1;0Y[29X[2XDerivative[102X( [3Xf[103X ) [32X attribute[133X
+  [6XReturns:[106X  [33X[0;10Ya ring element[133X
+  
+  [33X[0;0YComputes the derivative of the univariate polynomial [3Xf[103X.[133X
+  
+  [4X[32X  Example  [32X[104X
+    [4X[25Xgap>[125X [27XLoadPackage( "PrimaryDecomposition" );[127X[104X
+    [4X[28Xtrue[128X[104X
+    [4X[25Xgap>[125X [27XR := HomalgFieldOfRationalsInSingular() * "t";[127X[104X
+    [4X[28XQ[t][128X[104X
+    [4X[25Xgap>[125X [27Xr := "t^4-t^3-5*t^2-3*t" / R;[127X[104X
+    [4X[28Xt^4-t^3-5*t^2-3*t[128X[104X
+    [4X[25Xgap>[125X [27XDerivative( r );[127X[104X
+    [4X[28X4*t^3-3*t^2-10*t-3[128X[104X
+    [4X[25Xgap>[125X [27XS := HomalgRingOfIntegersInSingular( 3 ) * "t";[127X[104X
+    [4X[28XGF(3)[t][128X[104X
+    [4X[25Xgap>[125X [27Xr := "t^5 + 3*t^4 - t^3 + 2*t" / S;  [127X[104X
+    [4X[28Xt^5-t^3-t[128X[104X
+    [4X[25Xgap>[125X [27XDerivative( r );[127X[104X
+    [4X[28X-t^4-1[128X[104X
+  [4X[32X[104X
+  
+  [1X5.1-13 PolysOverTheSameRing[101X
+  
+  [33X[1;0Y[29X[2XPolysOverTheSameRing[102X( [3XL[103X ) [32X attribute[133X
+  [6XReturns:[106X  [33X[0;10Ya list[133X
+  
+  [33X[0;0YAccepts  a  list  [3XL[103X  of  polynomials which are defined over function fields,
+  whose  coefficients  rings are a root of the same function field. The method
+  computes  a polynomial ring over a function field and the representations of
+  the polynomials in [3XL[103X over this ring. For each polynomial ring [22XR_j[122X containing
+  [3XL_j[103X the number [22Xe_j = R_j[122X!.RootOfBaseField defines the embedding map [22XR ↪ R_j:
+  a ↦ a; t_i ↦ t_i^p^e_j}[122X where [22Xp[122X is the characteristic of the base field, [22Xa[122X a
+  field  element  and  [22Xt_i[122X  are  the rational parameters and [22XR[122X the common base
+  function  field.  The rings [22XR_j[122X and [22XR[122X have to be technically identical, such
+  that  even the variable names coincide. The common ring [22XS[122X the method defines
+  is  in  turn  a  copy of [22XR[122X with [22Xe_S = S[122X!.RootOfBaseField is the least common
+  multiply of the [22Xe_j[122X, excluding zero. The polynomials [3XL_j[103X will be represented
+  over [22XS[122X by taking the [23Xt_i[123X to the power of [22Xp^e_S-e_j[122X.[133X
+  
+  [4X[32X  Example  [32X[104X
+    [4X[25Xgap>[125X [27XLoadPackage( "PrimaryDecomposition" );[127X[104X
+    [4X[28Xtrue[128X[104X
+    [4X[25Xgap>[125X [27XR1 := HomalgRingOfIntegersInSingular( 3, "t,s" ) * "x";[127X[104X
+    [4X[28XGF(3)(t,s)[x][128X[104X
+    [4X[25Xgap>[125X [27XR1!.RootOfBaseField := 3;[127X[104X
+    [4X[28X3[128X[104X
+    [4X[25Xgap>[125X [27XR2 := HomalgRingOfIntegersInSingular( 3, "t,s" ) * "x";[127X[104X
+    [4X[28XGF(3)(t,s)[x][128X[104X
+    [4X[25Xgap>[125X [27XR2!.RootOfBaseField := 2;[127X[104X
+    [4X[28X2[128X[104X
+    [4X[25Xgap>[125X [27Xr1 := "(t*s)*x^3+(s^2)*x+(t)" / R1;[127X[104X
+    [4X[28X(t*s)*x^3+(s^2)*x+(t)[128X[104X
+    [4X[25Xgap>[125X [27Xr2 := "(t)*x^2+(s)" / R2;[127X[104X
+    [4X[28X(t)*x^2+(s)[128X[104X
+    [4X[25Xgap>[125X [27XPolysOverTheSameRing( [ r1, r2 ] );[127X[104X
+    [4X[28X[ (t^27*s^27)*x^3+(s^54)*x+(t^27), (t^81)*x^2+(s^81) ][128X[104X
+    [4X[25Xgap>[125X [27XR3 := HomalgRingOfIntegersInSingular( 3, "t,s" ) * "x";[127X[104X
+    [4X[28XGF(3)(t,s)[x][128X[104X
+    [4X[25Xgap>[125X [27XR3!.RootOfBaseField := 0;[127X[104X
+    [4X[28X0[128X[104X
+    [4X[25Xgap>[125X [27Xr3 := "(t)*x^2+(-s)*x"/ R3;[127X[104X
+    [4X[28X(t)*x^2+(-s)*x[128X[104X
+    [4X[25Xgap>[125X [27XPolysOverTheSameRing( [ r1, r2, r3 ] );[127X[104X
+    [4X[28X[ (t^27*s^27)*x^3+(s^54)*x+(t^27), (t^81)*x^2+(s^81), (t^729)*x^2+(-s^729)*x ][128X[104X
+  [4X[32X[104X
+  
+  
+  [1X5.2 [33X[0;0YOperations[133X[101X
+  
+  [1X5.2-1 IsNotContainedInAnyHyperplane[101X
+  
+  [33X[1;0Y[29X[2XIsNotContainedInAnyHyperplane[102X( [3Xlambda[103X, [3XL[103X ) [32X operation[133X
+  [6XReturns:[106X  [33X[0;10Ya matrix[133X
+  
+  [33X[0;0YDetermines  whether  [3Xlambda[103X  is  contained in any [22Xn - 1[122X dimensional subspace
+  spanned by the rows of [3XL[103X.[133X
+  
+  [4X[32X  Example  [32X[104X
+    [4X[25Xgap>[125X [27XLoadPackage( "PrimaryDecomposition" );[127X[104X
+    [4X[28Xtrue[128X[104X
+    [4X[25Xgap>[125X [27XQ := HomalgFieldOfRationalsInSingular( );[127X[104X
+    [4X[28XQ[128X[104X
+    [4X[25Xgap>[125X [27XL := HomalgIdentityMatrix( 5, Q );[127X[104X
+    [4X[28X<An unevaluated 5 x 5 identity matrix over an external ring>[128X[104X
+    [4X[25Xgap>[125X [27XDisplay( L );[127X[104X
+    [4X[28X1,0,0,0,0,[128X[104X
+    [4X[28X0,1,0,0,0,[128X[104X
+    [4X[28X0,0,1,0,0,[128X[104X
+    [4X[28X0,0,0,1,0,[128X[104X
+    [4X[28X0,0,0,0,1 [128X[104X
+    [4X[25Xgap>[125X [27Xlambda := HomalgMatrix( "[ 2,0,2,1,1]", 1, 5, Q );[127X[104X
+    [4X[28X<A 1 x 5 matrix over an external ring>[128X[104X
+    [4X[25Xgap>[125X [27XDisplay( lambda );[127X[104X
+    [4X[28X2,0,2,1,1[128X[104X
+    [4X[25Xgap>[125X [27XIsNotContainedInAnyHyperplane( lambda, L );[127X[104X
+    [4X[28Xfalse[128X[104X
+    [4X[25Xgap>[125X [27Xlambda2 := GeneratorOfAnElementNotContainedInAnyHyperplane( L );;[127X[104X
+    [4X[25Xgap>[125X [27XIsNotContainedInAnyHyperplane( lambda2, L );[127X[104X
+    [4X[28Xtrue[128X[104X
+  [4X[32X[104X
+  
+  [1X5.2-2 GeneratorOfAnElementNotContainedInAnyHyperplane[101X
+  
+  [33X[1;0Y[29X[2XGeneratorOfAnElementNotContainedInAnyHyperplane[102X( [3XL[103X ) [32X operation[133X
+  [33X[1;0Y[29X[2XGeneratorOfAnElementNotContainedInAnyHyperplane[102X( [3XL[103X, [3XC[103X ) [32X operation[133X
+  [6XReturns:[106X  [33X[0;10Ya value[133X
+  
+  [33X[0;0YGenerates an element of [22XK^n[122X, which is not contained in any [22Xn - 1[122X dimensional
+  subspace  of  the vector field [22XK^n[122X, respectively [22XC^n[122X, spanned by the rows of
+  [3XL[103X.  The  method  repeats generating a random vector [22Xλ ∈ K^n[122X until the method
+  IsNotContainedInAnyHyperplan of [22Xλ[122X and [3XL[103X returns [10Xtrue[110X.[133X
+  
+  [4X[32X  Example  [32X[104X
+    [4X[25Xgap>[125X [27XLoadPackage( "PrimaryDecomposition" );[127X[104X
+    [4X[28Xtrue[128X[104X
+    [4X[25Xgap>[125X [27XQ := HomalgFieldOfRationalsInSingular( );[127X[104X
+    [4X[28XQ[128X[104X
+    [4X[25Xgap>[125X [27Xe := CertainRows( HomalgIdentityMatrix( 5, Q ), [ 1 .. 3 ] );[127X[104X
+    [4X[28X<An unevaluated diagonal right invertible sub-identity 3 x 5 matrix[128X[104X
+    [4X[28X over an external ring>[128X[104X
+    [4X[25Xgap>[125X [27Xlambda := GeneratorOfAnElementNotContainedInAnyHyperplane( e );[127X[104X
+    [4X[28X<A non-zero left regular 1 x 5 matrix over an external ring>[128X[104X
+    [4X[25Xgap>[125X [27Xl := UnionOfRows( e, lambda );[127X[104X
+    [4X[28X<An unevaluated non-zero 4 x 5 matrix over an external ring>[128X[104X
+    [4X[25Xgap>[125X [27Xlambda := GeneratorOfAnElementNotContainedInAnyHyperplane( l );[127X[104X
+    [4X[28X<A non-zero left regular 1 x 5 matrix over an external ring>[128X[104X
+    [4X[25Xgap>[125X [27XA := HomalgRingOfIntegersInSingular( 3, "t" );[127X[104X
+    [4X[28XGF(3)(t)[128X[104X
+    [4X[25Xgap>[125X [27XS := HomalgRingOfIntegersInSingular( 3, "t" );[127X[104X
+    [4X[28XGF(3)(t)[128X[104X
+    [4X[25Xgap>[125X [27XS!.RootOfBaseField:= 1;                       [127X[104X
+    [4X[28X1[128X[104X
+    [4X[25Xgap>[125X [27XL := HomalgMatrix( "[ 2, t, 0, t, 0, 1 ]", 2, 3, A );[127X[104X
+    [4X[28X<A 2 x 3 matrix over an external ring>[128X[104X
+    [4X[25Xgap>[125X [27XGeneratorOfAnElementNotContainedInAnyHyperplane( L, S );[127X[104X
+    [4X[28X<A 1 x 3 matrix over an external ring>[128X[104X
+  [4X[32X[104X
+  
+  [1X5.2-3 FGLMToGroebner[101X
+  
+  [33X[1;0Y[29X[2XFGLMToGroebner[102X( [3XM[103X, [3Xe[103X ) [32X operation[133X
+  [33X[1;0Y[29X[2XFGLMToGroebner[102X( [3XM[103X, [3Xe[103X, [3Xl[103X ) [32X operation[133X
+  [6XReturns:[106X  [33X[0;10Ytwo lists[133X
+  
+  [33X[0;0YComputes  a  basis  of  the  residue  class ring and a Groebner Basis of the
+  defining  ideal, both defined by the FGLM data [3XM[103X and the identity element [3Xe[103X.
+  The method uses an algorithm of Sebastian Jambor (see [Jam13]).[133X
+  
+  [4X[32X  Example  [32X[104X
+    [4X[25Xgap>[125X [27XLoadPackage( "PrimaryDecomposition" );[127X[104X
+    [4X[28Xtrue[128X[104X
+    [4X[25Xgap>[125X [27XA := HomalgFieldOfRationalsInSingular( ) * "x1,x2,x3";[127X[104X
+    [4X[28XQ[x1,x2,x3][128X[104X
+    [4X[25Xgap>[125X [27XI := LeftSubmodule( "x2*x3-x1, x1*x3-x2, x2^2-x3^2, x1*x2-x3, \[127X[104X
+    [4X[25X>[125X [27X                     x1^2-x3^2, x3^3-x3", A );[127X[104X
+    [4X[28X<A torsion-free ideal given by 6 generators>[128X[104X
+    [4X[25Xgap>[125X [27XR := A / I;[127X[104X
+    [4X[28XQ[x1,x2,x3]/( x2*x3-x1, x1*x3-x2, x2^2-x3^2, x1*x2-x3, x1^2-x3^2, x3^3-x3 )[128X[104X
+    [4X[25Xgap>[125X [27XM := FGLMdata( R );[127X[104X
+    [4X[28X[ <A 5 x 5 matrix over an external ring>, [128X[104X
+    [4X[28X  <A 5 x 5 matrix over an external ring>, [128X[104X
+    [4X[28X  <A 5 x 5 matrix over an external ring> ][128X[104X
+    [4X[25Xgap>[125X [27Xe := CertainRows([127X[104X
+    [4X[25X>[125X [27X     HomalgIdentityMatrix( NrRows( M[1] ), HomalgRing( M[1] ) ), [1] );[127X[104X
+    [4X[28X<An unevaluated diagonal right invertible sub-identity 1 x 5 matrix[128X[104X
+    [4X[28X over an external ring>[128X[104X
+    [4X[25Xgap>[125X [27XFGLMToGroebner( M, e );[127X[104X
+    [4X[28X[ [ 1, x3, x2, x1, x3^2 ], [128X[104X
+    [4X[28X  [ -x2*x3+x1, -x2^2+x3^2, -x1*x3+x2, -x1*x2+x3, -x1^2+x3^2, -x3^3+x3 ] ][128X[104X
+    [4X[25Xgap>[125X [27Xbas := BasisOverCoefficientsRing( R );[127X[104X
+    [4X[28X<A 5 x 1 matrix over a residue class ring>[128X[104X
+    [4X[25Xgap>[125X [27XDisplay( bas );[127X[104X
+    [4X[28X1,  [128X[104X
+    [4X[28Xx3, [128X[104X
+    [4X[28Xx2, [128X[104X
+    [4X[28Xx1, [128X[104X
+    [4X[28Xx3^2[128X[104X
+    [4X[28X[128X[104X
+    [4X[28Xmodulo [ x2*x3-x1, x1*x3-x2, x2^2-x3^2, x1*x2-x3, x1^2-x3^2, x3^3-x3 ][128X[104X
+  [4X[32X[104X
+  
+  [1X5.2-4 MatrixEmbedding[101X
+  
+  [33X[1;0Y[29X[2XMatrixEmbedding[102X( [3XM[103X, [3Xf[103X ) [32X operation[133X
+  [6XReturns:[106X  [33X[0;10Ya matrix[133X
+  
+  [33X[0;0YComputes  the  image  of  the  matrix [22X[3XM[103X∈ K(α)^r × c)[122X where [22XK(α)[122X with minimal
+  polynomial  [3Xf[103X,  under  the  extension  field  [22XK(α)[122X with minimal polynomial [3Xf[103X
+  embedding  [22XK(α)^r  ×  c  ↪  K^r  deg([3Xf[103X)  ×  c  deg([3Xf[103X)[122X which is a the natural
+  extension  of  [22XK(α  )↪  K^deg([3Xf[103X)×  deg([3Xf[103X): α ↦ textttCompanionMatrix(α)[122X. The
+  method  provides that the generator of the field extension [22Xα[122X coincides withe
+  the negativ of the constant coefficients of the minimal polynomial.[133X
+  
+  [4X[32X  Example  [32X[104X
+    [4X[25Xgap>[125X [27XLoadPackage( "PrimaryDecomposition" );[127X[104X
+    [4X[28Xtrue[128X[104X
+    [4X[25Xgap>[125X [27XR := HomalgRingOfIntegersInSingular( 3, "t,s" ) * "x";[127X[104X
+    [4X[28XGF(3)(t,s)[x][128X[104X
+    [4X[25Xgap>[125X [27XR!.RootOfBaseField:=1;[127X[104X
+    [4X[28X1[128X[104X
+    [4X[25Xgap>[125X [27Xf := "x^3 - t" / R;[127X[104X
+    [4X[28Xx^3+(-t)[128X[104X
+    [4X[25Xgap>[125X [27Xp := "x^3 - s" / R;[127X[104X
+    [4X[28Xx^3+(-s)[128X[104X
+    [4X[25Xgap>[125X [27XA := CoefficientsRing( R );[127X[104X
+    [4X[28XGF(3)(t,s)[128X[104X
+    [4X[25Xgap>[125X [27XM := HomalgMatrix( "[t*s - s, 1, 0, s]", 2, 2, A );[127X[104X
+    [4X[28X<A 2 x 2 matrix over an external ring>[128X[104X
+    [4X[25Xgap>[125X [27XDisplay( M );[127X[104X
+    [4X[28X(t*s-s),1, [128X[104X
+    [4X[28X0,      (s)[128X[104X
+    [4X[25Xgap>[125X [27XN := MatrixEmbedding( M, f );[127X[104X
+    [4X[28X<An unevaluated non-zero 6 x 6 matrix over an external ring>[128X[104X
+    [4X[25Xgap>[125X [27XDisplay( N );[127X[104X
+    [4X[28X(-s),0,   (t*s),1,  0,  0, [128X[104X
+    [4X[28X(s), (-s),0,    0,  1,  0, [128X[104X
+    [4X[28X0,   (s), (-s), 0,  0,  1, [128X[104X
+    [4X[28X0,   0,   0,    (s),0,  0, [128X[104X
+    [4X[28X0,   0,   0,    0,  (s),0, [128X[104X
+    [4X[28X0,   0,   0,    0,  0,  (s)[128X[104X
+    [4X[25Xgap>[125X [27XS := HomalgRingOfIntegersInSingular( 3, "t" ) * "x";[127X[104X
+    [4X[28XGF(3)(t)[x][128X[104X
+    [4X[25Xgap>[125X [27XS!.RootOfBaseRing := 3;[127X[104X
+    [4X[28X3[128X[104X
+    [4X[25Xgap>[125X [27XI := LeftSubmodule( "x^2 - t^3", S );[127X[104X
+    [4X[28X<A principal torsion-free ideal given by a cyclic generator>[128X[104X
+    [4X[25Xgap>[125X [27XL := S / I;[127X[104X
+    [4X[28XGF(3)(t)[x]/( x^2+(-t^3) )[128X[104X
+    [4X[25Xgap>[125X [27XFGLM := FGLMdata( L );[127X[104X
+    [4X[28X[ <A 2 x 2 matrix over an external ring> ][128X[104X
+    [4X[25Xgap>[125X [27XDisplay( FGLM[1] );[127X[104X
+    [4X[28X0,    1,[128X[104X
+    [4X[28X(t^3),0[128X[104X
+    [4X[25Xgap>[125X [27Xf := "x^3 - t" / S;[127X[104X
+    [4X[28Xx^3+(-t)[128X[104X
+    [4X[25Xgap>[125X [27XM := MatrixEmbedding( FGLM[1] , f );[127X[104X
+    [4X[28X<An unevaluated non-zero 6 x 6 matrix over an external ring>[128X[104X
+    [4X[25Xgap>[125X [27XDisplay( M );[127X[104X
+    [4X[28X0,  0,  0,  1,0,0,[128X[104X
+    [4X[28X0,  0,  0,  0,1,0,[128X[104X
+    [4X[28X0,  0,  0,  0,0,1,[128X[104X
+    [4X[28X(t),0,  0,  0,0,0,[128X[104X
+    [4X[28X0,  (t),0,  0,0,0,[128X[104X
+    [4X[28X0,  0,  (t),0,0,0 [128X[104X
+    [4X[25Xgap>[125X [27XT := HomalgRing( M );[127X[104X
+    [4X[28XGF(3)(t)[128X[104X
+    [4X[25Xgap>[125X [27Xe := CertainRows( HomalgIdentityMatrix( NrRows( M ), T ), [1] );[127X[104X
+    [4X[28X<An unevaluated diagonal right invertible sub-identity 1 x 6 matrix[128X[104X
+    [4X[28X over an external ring>[128X[104X
+    [4X[25Xgap>[125X [27XFGLMToGroebner( [ M ], e );[127X[104X
+    [4X[28X[ [ 1, x ], [ -x^2+(t) ] ][128X[104X
+  [4X[32X[104X
+  
+  [1X5.2-5 CoefficientsTransformation[101X
+  
+  [33X[1;0Y[29X[2XCoefficientsTransformation[102X( [3XM[103X, [3Xdeg[103X ) [32X operation[133X
+  [6XReturns:[106X  [33X[0;10Ya matrix[133X
+  
+  [33X[0;0YRaises  the  rational  parameters  to  the power [22Xp[122X^[3Xdeg[103X in the entries of the
+  matrix [3XM[103X, where p is the characteristic of the base field.[133X
+  
+  [4X[32X  Example  [32X[104X
+    [4X[25Xgap>[125X [27XLoadPackage( "PrimaryDecomposition" );[127X[104X
+    [4X[28Xtrue[128X[104X
+    [4X[25Xgap>[125X [27XC := HomalgRingOfIntegersInSingular( 3, "t,s" );[127X[104X
+    [4X[28XGF(3)(t,s)[128X[104X
+    [4X[25Xgap>[125X [27Xdeg := 2;[127X[104X
+    [4X[28X2[128X[104X
+    [4X[25Xgap>[125X [27XM := HomalgMatrix( "[ t, s*t, s^2, 1 ]", 4, 1, C );[127X[104X
+    [4X[28X<A 4 x 1 matrix over an external ring>[128X[104X
+    [4X[25Xgap>[125X [27XDisplay( M );[127X[104X
+    [4X[28X(t),  [128X[104X
+    [4X[28X(t*s),[128X[104X
+    [4X[28X(s^2),[128X[104X
+    [4X[28X1     [128X[104X
+    [4X[25Xgap>[125X [27Xcoeffs := CoefficientsTransformation( M, deg );[127X[104X
+    [4X[28X<A 4 x 1 matrix over an external ring>[128X[104X
+    [4X[25Xgap>[125X [27XDisplay( coeffs );[127X[104X
+    [4X[28X(t^9),[128X[104X
+    [4X[28X(t^9*s^9),[128X[104X
+    [4X[28X(s^18),[128X[104X
+    [4X[28X1         [128X[104X
+  [4X[32X[104X
+  
