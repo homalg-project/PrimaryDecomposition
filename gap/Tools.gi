@@ -572,7 +572,7 @@ InstallMethod( MinimalPolynomial,
     e := HomalgRing( t ) * e;
     e := EntriesOfHomalgMatrix( e );
     
-    return Sum( Reversed( [ 1 .. Length( e ) ] ), i -> e[i] * t^(i - 1) );
+    return -Sum( Reversed( [ 1 .. Length( e ) ] ), i -> e[i] * t^(i - 1) );
     
 end );
 

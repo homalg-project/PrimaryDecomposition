@@ -19,7 +19,7 @@ e := CertainRows(
 #!  over an external ring>
 FGLMToGroebner( M, e );
 #! [ [ 1, x3, x2, x1, x3^2 ], 
-#!   [ x2*x3-x1, x2^2-x3^2, x1*x3-x2, x1*x2-x3, x1^2-x3^2, x3^3-x3 ] ]
+#!   [ -x2*x3+x1, -x2^2+x3^2, -x1*x3+x2, -x1*x2+x3, -x1^2+x3^2, -x3^3+x3 ] ]
 bas := BasisOverCoefficientsRing( R );
 #! <A 5 x 1 matrix over a residue class ring>
 Display( bas );

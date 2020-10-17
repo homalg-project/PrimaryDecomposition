@@ -11,7 +11,7 @@ SetPackageInfo( rec(
 PackageName := "PrimaryDecomposition",
 Subtitle := "Tools for primary decomposition",
 Version := Maximum( [
-                   "2020.01.01", ## Mohamed's version
+                   "2020.04.17", ## Mohamed's version
                    ## this line prevents merge conflicts
                    "2013.11.02", ## Eva Maria's version
                    ] ),
@@ -92,7 +92,7 @@ Dependencies := rec(
   GAP := ">= 4.9.1",
   NeededOtherPackages := [
                    [ "AutoDoc", ">= 2013.11.06" ],
-                   [ "RingsForHomalg", ">= 2013.08.22" ],
+                   [ "RingsForHomalg", ">= 2020.04.17" ],
                    [ "GaussForHomalg", ">= 2013.06.26" ],
                    [ "MatricesForHomalg", ">= 2019.09.01" ],
                    [ "Modules", ">= 2019.09.01" ],
