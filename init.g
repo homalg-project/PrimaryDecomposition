@@ -1,13 +1,8 @@
-#############################################################################
-##
-##  init.g                                      PrimaryDecomposition package
-##
-##  Copyright 2013,      Mohamed Barakat, University of Kaiserslautern
-##                  Eva Maria Hemmerling, University of Kaiserslautern
-##
-##  Reading the declaration part of the PrimaryDecomposition package.
-##
-#############################################################################
+# SPDX-License-Identifier: GPL-2.0-or-later
+# PrimaryDecomposition: Tools for primary decomposition
+#
+# Reading the declaration part of the package.
+#
 
 ReadPackage( "PrimaryDecomposition", "gap/Tools.gd" );
 ReadPackage( "PrimaryDecomposition", "gap/RadicalComputation.gd" );

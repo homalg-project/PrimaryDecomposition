@@ -1,13 +1,9 @@
-#############################################################################
-##
-##  Tools.gi                                    PrimaryDecomposition package
-##
-##  Copyright 2013,      Mohamed Barakat, University of Kaiserslautern
-##                  Eva Maria Hemmerling, University of Kaiserslautern
-##
-##  Implementation of some tools.
-##
-#############################################################################
+# SPDX-License-Identifier: GPL-2.0-or-later
+# PrimaryDecomposition: Tools for primary decomposition
+#
+# Implementations
+#
+
 
 InstallValue( PRIMARY_DECOMPOSITION,
         rec(
@@ -446,8 +442,8 @@ InstallMethod( IdealBasisToGroebner,
         
     od;
     
-    ## Here we assume that the Gršbner basis oracle
-    ## does not rely on its own sorting of a Gršbner basis.
+    ## Here we assume that the Groebner basis oracle
+    ## does not rely on its own sorting of a Groebner basis.
     Assert( 6, BasisOfRows( GJ ) = GJ );
     
     SetIsBasisOfRowsMatrix( GJ, true );

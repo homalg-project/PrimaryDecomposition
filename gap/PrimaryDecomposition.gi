@@ -1,13 +1,8 @@
-#############################################################################
-##
-##  PrimaryDecomposition.gi                     PrimaryDecomposition package
-##
-##  Copyright 2013,      Mohamed Barakat, University of Kaiserslautern
-##                  Eva Maria Hemmerling, University of Kaiserslautern
-##
-##  Implementation of some functions for primary decomposition.
-##
-#############################################################################
+# SPDX-License-Identifier: GPL-2.0-or-later
+# PrimaryDecomposition: Tools for primary decomposition
+#
+# Implementations
+#
 
 ####################################
 #

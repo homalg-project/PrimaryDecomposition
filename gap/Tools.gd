@@ -1,13 +1,8 @@
-#############################################################################
-##
-##  Tools.gd                                    PrimaryDecomposition package
-##
-##  Copyright 2013,      Mohamed Barakat, University of Kaiserslautern
-##                  Eva Maria Hemmerling, University of Kaiserslautern
-##
-##  Declaration of some tools.
-##
-#############################################################################
+# SPDX-License-Identifier: GPL-2.0-or-later
+# PrimaryDecomposition: Tools for primary decomposition
+#
+# Declarations
+#
 
 DeclareGlobalVariable( "PRIMARY_DECOMPOSITION" );
 
