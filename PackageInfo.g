@@ -59,7 +59,7 @@ SourceRepository := rec(
     URL := "https://github.com/homalg-project/PrimaryDecomposition",
 ),
 IssueTrackerURL := Concatenation( ~.SourceRepository.URL, "/issues" ),
-PackageWWWHome  := "https://homalg-project.github.io/PrimaryDecomposition",
+PackageWWWHome  := "https://homalg-project.github.io/pkg/PrimaryDecomposition",
 PackageInfoURL  := "https://homalg-project.github.io/PrimaryDecomposition/PackageInfo.g",
 README_URL      := "https://homalg-project.github.io/PrimaryDecomposition/README.md",
 ArchiveURL      := Concatenation( "https://github.com/homalg-project/PrimaryDecomposition/releases/download/v", ~.Version, "/PrimaryDecomposition-", ~.Version ),
