@@ -11,10 +11,6 @@ options := rec(
     ),
 );
 
-LoadPackage( "PrimaryDecomposition" );
-HOMALG.SuppressParityInViewObjForCommutativeStructureObjects := true;
-PRIMARY_DECOMPOSITION.RandomSource := RandomSource( IsMersenneTwister );
-
 TestDirectory( DirectoriesPackageLibrary( "PrimaryDecomposition", "tst" ), options );
 
 FORCE_QUIT_GAP( 1 ); # if we ever get here, there was an error
