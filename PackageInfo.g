@@ -10,14 +10,10 @@ SetPackageInfo( rec(
 
 PackageName := "PrimaryDecomposition",
 Subtitle := "Tools for primary decomposition",
-Version := Maximum( [
-                   "2020.04.17", ## Mohamed's version
-                   ## this line prevents merge conflicts
-                   "2013.11.02", ## Eva Maria's version
-                   ] ),
+Version := "2022.04-01",
 
-Date := "17/10/2020",
-Date := "17/10/2020",
+Date := "26/04/2022",
+Date := "26/04/2022",
 License := "GPL-2.0-or-later",
 
 Persons := [
@@ -59,7 +55,7 @@ SourceRepository := rec(
     URL := "https://github.com/homalg-project/PrimaryDecomposition",
 ),
 IssueTrackerURL := Concatenation( ~.SourceRepository.URL, "/issues" ),
-PackageWWWHome  := "https://homalg-project.github.io/PrimaryDecomposition",
+PackageWWWHome  := "https://homalg-project.github.io/pkg/PrimaryDecomposition",
 PackageInfoURL  := "https://homalg-project.github.io/PrimaryDecomposition/PackageInfo.g",
 README_URL      := "https://homalg-project.github.io/PrimaryDecomposition/README.md",
 ArchiveURL      := Concatenation( "https://github.com/homalg-project/PrimaryDecomposition/releases/download/v", ~.Version, "/PrimaryDecomposition-", ~.Version ),
@@ -89,7 +85,7 @@ PackageDoc := rec(
 ),
 
 Dependencies := rec(
-  GAP := ">= 4.9.1",
+  GAP := ">= 4.11.1",
   NeededOtherPackages := [
                    [ "AutoDoc", ">= 2013.11.06" ],
                    [ "RingsForHomalg", ">= 2020.04.17" ],
