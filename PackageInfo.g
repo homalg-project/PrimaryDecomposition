@@ -10,11 +10,7 @@ SetPackageInfo( rec(
 
 PackageName := "PrimaryDecomposition",
 Subtitle := "Tools for primary decomposition",
-Version := Maximum( [
-                   "2020.04.17", ## Mohamed's version
-                   ## this line prevents merge conflicts
-                   "2013.11.02", ## Eva Maria's version
-                   ] ),
+Version := "2022.04-01",
 
 Date := ~.Version{[ 1 .. 10 ]},
 Date := Concatenation( "01/", ~.Version{[ 6, 7 ]}, "/", ~.Version{[ 1 .. 4 ]} ),
@@ -89,7 +85,7 @@ PackageDoc := rec(
 ),
 
 Dependencies := rec(
-  GAP := ">= 4.9.1",
+  GAP := ">= 4.11.1",
   NeededOtherPackages := [
                    [ "AutoDoc", ">= 2013.11.06" ],
                    [ "RingsForHomalg", ">= 2020.04.17" ],
