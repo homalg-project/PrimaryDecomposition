@@ -7,7 +7,7 @@
   [1X5.1-1 BasisOverCoefficientsRing[101X
   
   [33X[1;0Y[29X[2XBasisOverCoefficientsRing[102X( [3XR[103X ) [32X attribute[133X
-  [6XReturns:[106X  [33X[0;10Ya [5Xhomalg[105X matrix[133X
+  [6XReturns:[106X  [33X[0;10Ya homalg matrix[133X
   
   [33X[0;0YComputes  a basis of the ring [3XR[103X, provided it is free of finite rank over its
   coefficients ring.[133X
@@ -38,7 +38,7 @@
   [1X5.1-2 RepresentationOverCoefficientsRing[101X
   
   [33X[1;0Y[29X[2XRepresentationOverCoefficientsRing[102X( [3Xr[103X ) [32X attribute[133X
-  [6XReturns:[106X  [33X[0;10Ya [5Xhomalg[105X matrix[133X
+  [6XReturns:[106X  [33X[0;10Ya homalg matrix[133X
   
   [33X[0;0YComputes  a representation matrix of the ring element [3Xr[103X, with respect to the
   basis  computed  by  BasisOverCoefficientsRing, provided the ring is free of

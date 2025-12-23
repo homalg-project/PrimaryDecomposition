@@ -10,10 +10,10 @@ SetPackageInfo( rec(
 
 PackageName := "PrimaryDecomposition",
 Subtitle := "Tools for primary decomposition",
-Version := "2022.04-01",
+Version := "2025.12-01",
 
-Date := "26/04/2022",
-Date := "26/04/2022",
+Date := "2025-12-23",
+Date := "2025-12-23",
 License := "GPL-2.0-or-later",
 
 Persons := [
@@ -85,9 +85,8 @@ PackageDoc := rec(
 ),
 
 Dependencies := rec(
-  GAP := ">= 4.11.1",
+  GAP := ">= 4.13.0",
   NeededOtherPackages := [
-                   [ "AutoDoc", ">= 2013.11.06" ],
                    [ "RingsForHomalg", ">= 2020.04.17" ],
                    [ "GaussForHomalg", ">= 2013.06.26" ],
                    [ "MatricesForHomalg", ">= 2019.09.01" ],

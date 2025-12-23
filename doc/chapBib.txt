@@ -3,7 +3,7 @@
   [1XReferences[101X
   
   [[20XJam13[120X] [16XJambor, S.[116X, [17XEfficient algorithms for zero-dimensional ideals[117X (2013),
-  ((unpublished)).
+  (unpublished).
   
   [[20XKem91[120X]   [16XKemper,   G.[116X,  [17XThe  Calculation  of  radical  ideals  in  positive
   characteristic[117X, [18XJ.Symbolic Computation[118X (1991).
