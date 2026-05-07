@@ -10,10 +10,10 @@ SetPackageInfo( rec(
 
 PackageName := "PrimaryDecomposition",
 Subtitle := "Tools for primary decomposition",
-Version := "2025.12-01",
+Version := "2026.05-01",
 
-Date := "2025-12-23",
-Date := "2025-12-23",
+Date := "2026-05-07",
+Date := "2026-05-07",
 License := "GPL-2.0-or-later",
 
 Persons := [
